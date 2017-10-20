@@ -1,0 +1,22 @@
+{
+  "name": "arriven",
+  "version": "1.0.0",
+  "description": "We make sure you'll be arriven at your destination.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reitermarkus/web-services.git"
+  },
+  "keywords": [
+    "travel"
+  ],
+  "author": "Michael Kaltschmid, Dominik Kuen, Markus Reiter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reitermarkus/web-services/issues"
+  },
+  "homepage": "https://github.com/reitermarkus/web-services#readme"
+}
