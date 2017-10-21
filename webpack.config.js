@@ -9,19 +9,33 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 const path = require('path')
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   entry: [
     'react-hot-loader/patch',
     './client/index.js'
   ],
   output: {
-    path: path.resolve('dist'),
-    filename: 'index_bundle.js'
+    filename: 'arriven.bundle.js',
+    path: path.resolve(__dirname, 'dist')
   },
   devServer: {
     overlay: {
       warnings: false,
       errors: true
+    },
+    stats: {
+      assets: false,
+      children: false,
+      chunks: false,
+      hash: false,
+      modules: false,
+      publicPath: false,
+      timings: false,
+      version: false,
+      warnings: true,
+      colors: {
+        green: '\u001b[32m'
+      }
     }
   },
   module: {
