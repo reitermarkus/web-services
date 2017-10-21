@@ -1,0 +1,38 @@
+@import 'vars';
+@import 'forms';
+@import 'header';
+@import 'footer';
+//@import 'fonts';
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: $font, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+    margin: 0;
+    background: $background;
+}
+
+main {
+    flex: 1;
+    padding: 16px;
+}
+
+h1 {
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+a {
+    display: inline-block;
+    color: $highlight;
+    cursor: pointer;
+}

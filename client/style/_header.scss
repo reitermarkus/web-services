@@ -1,0 +1,15 @@
+body > header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    padding: 16px;
+    background: $lightblue;
+
+    ul {
+        display: flex;
+        flex-flow: row;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+}
