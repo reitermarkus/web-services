@@ -13,14 +13,17 @@ html {
 }
 
 body {
+    margin: 0;
+}
+
+#root > div {
     display: flex;
     flex-flow: column;
     min-height: 100vh;
-    margin: 0;
     background: $background;
 }
 
-main {
+#root > div > main {
     flex: 1;
     padding: 16px;
 }
