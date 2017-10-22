@@ -1,3 +1,4 @@
+const baseConfig = require('./webpack.config.base.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -6,19 +7,13 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 })
 
-const path = require('path')
-
-module.exports = {
+module.exports = baseConfig.merge({
   devtool: 'inline-source-map',
   entry: [
     'react-hot-loader/patch',
     'react-dev-utils/webpackHotDevClient',
     './client/index.js'
   ],
-  output: {
-    filename: 'arriven.bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
   devServer: {
     overlay: {
       warnings: false,
@@ -39,24 +34,6 @@ module.exports = {
       },
     },
   },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-    ],
-  },
 
-  plugins: [HtmlWebpackPluginConfig],
-}
+  plugins: [HtmlWebpackPluginConfig]
+})

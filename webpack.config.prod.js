@@ -1,32 +1,9 @@
-const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const baseConfig = require('./webpack.config.base.js')
 
-module.exports = {
+module.exports = baseConfig.merge({
   devtool: 'cheap-module-source-map',
-  entry: './client/index.js',
-  output: {
-    filename: 'arriven.bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader'
-      },
-      {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader']
-      }
-    ]
-  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -52,4 +29,4 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('production')
     })
   ]
-}
+})
