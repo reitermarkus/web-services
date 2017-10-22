@@ -7,7 +7,8 @@
     "markdownlint": "markdownlint ReadMe.md",
     "eslint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --hot --inline"
+    "start": "webpack-dev-server --config=webpack.config.dev --hot --inline",
+    "build": "webpack --config=webpack.config.prod"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "eslint": "^4.9.0",
     "eslint-loader": "^1.9.0",
