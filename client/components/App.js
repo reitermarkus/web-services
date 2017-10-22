@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import '../style/App.scss';
+import React, { Component } from 'react'
+import '../style/App.scss'
 
 export default class App extends Component {
   render() {

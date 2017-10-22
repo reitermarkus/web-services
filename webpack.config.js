@@ -40,10 +40,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      { 
-        test: /\.js$/, 
-        loader: 'babel-loader', 
-        exclude: /node_modules/ 
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.js$/,
@@ -52,7 +52,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style-loader","css-loader","sass-loader"]
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
