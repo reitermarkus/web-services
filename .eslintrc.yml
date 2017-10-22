@@ -1,6 +1,7 @@
 parser: babel-eslint
 
 plugins:
+  - no-loops
   - react
 
 env:
@@ -47,6 +48,7 @@ rules:
     - error
     - always
   no-else-return: error
+  no-loops/no-loops: 2
   no-magic-numbers: error
   no-multiple-empty-lines:
     - error
