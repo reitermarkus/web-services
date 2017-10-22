@@ -4,7 +4,7 @@
   "description": "We make sure you'll be arriven at your destination.",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint client",
+    "eslint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --hot --inline"
   },

@@ -13,6 +13,10 @@ extends:
   - plugin:react/recommended
 
 rules:
+  comma-spacing:
+    - error
+    - after: true
+      before: false
   indent:
     - 2
     - 2
