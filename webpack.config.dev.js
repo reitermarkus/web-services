@@ -12,7 +12,8 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: [
     'react-hot-loader/patch',
-    './client/index.js',
+    'react-dev-utils/webpackHotDevClient',
+    './client/index.js'
   ],
   output: {
     filename: 'arriven.bundle.js',
