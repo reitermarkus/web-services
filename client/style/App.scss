@@ -1,4 +1,6 @@
 @import 'vars';
+@import 'mixins';
+@import 'col';
 @import 'forms';
 @import 'header';
 @import 'footer';
@@ -25,8 +27,23 @@ body {
 
 #root > div > main {
   flex: 1;
-  padding: 16px;
   text-align: center;
+
+  @include xs-only {
+    padding: 16px;
+  }
+
+  @include sm-only {
+    padding: 16px;
+  }
+
+  @include md-only {
+    padding: 16px 5vw;
+  }
+
+  @include lg-only {
+    padding: 16px 15vw;
+  }
 }
 
 h1 {

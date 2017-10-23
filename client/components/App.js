@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header'
 import SearchForm from './SearchForm'
 import Footer from './Footer'
-import '../style/app.scss';
+import '../style/App.scss';
 
 export default class App extends Component {
   render() {

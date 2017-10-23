@@ -1,0 +1,47 @@
+$cols: 12;
+
+.col {
+    display: grid;
+    grid-template-columns: repeat($cols, 1fr);
+    grid-gap: 1rem;
+}
+
+// xs
+@include xs-only {
+  [class^="col-"] {
+    grid-column: auto / span 12;
+  }
+
+  @for $i from 1 through $cols {
+    .col-xs-#{$i} {
+      grid-column: auto / span #{$i};
+    }
+  }
+}
+
+// sm
+@include sm-up {
+  @for $i from 1 through $cols {
+    .col-sm-#{$i} {
+      grid-column: auto / span #{$i};
+    }
+  }
+}
+
+// md
+@include md-up {
+  @for $i from 1 through $cols {
+    .col-md-#{$i} {
+      grid-column: auto / span #{$i};
+    }
+  }
+}
+
+// lg
+@include lg-up {
+  @for $i from 1 through $cols {
+    .col-lg-#{$i} {
+      grid-column: auto / span #{$i};
+    }
+  }
+}
