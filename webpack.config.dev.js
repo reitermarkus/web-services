@@ -1,18 +1,11 @@
 const baseConfig = require('./webpack.config.base.js')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './client/index.html',
-  filename: 'index.html',
-  inject: 'body',
-})
 
 module.exports = baseConfig.merge({
   devtool: 'inline-source-map',
   entry: [
     'react-hot-loader/patch',
     'react-dev-utils/webpackHotDevClient',
-    './client/index.js'
+    './client/index.js',
   ],
   devServer: {
     overlay: {
@@ -34,6 +27,4 @@ module.exports = baseConfig.merge({
       },
     },
   },
-
-  plugins: [HtmlWebpackPluginConfig]
 })
