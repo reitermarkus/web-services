@@ -20,7 +20,9 @@ rules:
     - always
   camelcase: error
   capitalized-comments: error
-  comma-dangle: error
+  comma-dangle:
+    - error
+    - always-multiline
   comma-spacing:
     - error
     - after: true
