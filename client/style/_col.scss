@@ -1,9 +1,9 @@
 $cols: 12;
 
 .col {
-    display: grid;
-    grid-template-columns: repeat($cols, 1fr);
-    grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  grid-gap: 1rem;
 }
 
 // xs
