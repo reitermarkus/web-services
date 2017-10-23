@@ -1,14 +1,14 @@
 // responsive-design variables
-$xs-min: 0;
-$xs-max: $xs-min + 320px;
+$xs-min: 0px;
+$xs-max: 320px;
 
-$sm-min: $xs-max + 1px;
-$sm-max: $sm-min + 105px;
+$sm-min: 321px;
+$sm-max: 425px;
 
-$md-min: $sm-max + 1px;
-$md-max: $md-min + 343px;
+$md-min: 426px;
+$md-max: 768px;
 
-$lg-min: $md-max + 1px;
+$lg-min: 769px;
 $lg-max: 999999px;
 
 // colors

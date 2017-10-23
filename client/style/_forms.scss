@@ -10,13 +10,7 @@ select {
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
 
-  &[type="text"] {
-    appearance: none;
-    -webkit-appearance: none;
-  }
-
-  &:hover,
-  &:focus {
+  &:hover, &:focus {
     border: 1px solid $blue;
   }
 
@@ -25,3 +19,9 @@ select {
   }
 }
 
+input {
+  &[type="text"] {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+}
