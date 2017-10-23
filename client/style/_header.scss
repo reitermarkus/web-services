@@ -1,10 +1,16 @@
-#root > div > header {
+$logo-height: 2rem;
+
+.site-header {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
-  padding: 16px;
-  background: $lightblue;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  padding: 1em;
+  background: #fff;
+  border-bottom: 1px solid $grey;
+
+  .logo {
+    height: $logo-height;
+  }
 
   ul {
     display: flex;
@@ -13,8 +19,13 @@
     padding: 0;
     list-style-type: none;
 
+    li {
+      font-size: $logo-height * 2/3;
+      line-height: $logo-height;
+    }
+
     li + li {
-      margin-left: 16px;
+      margin-left: 1em;
     }
   }
 }
