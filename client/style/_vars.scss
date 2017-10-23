@@ -1,0 +1,30 @@
+// responsive-design variables
+$xs-min: 0px;
+$xs-max: $xs-min + 320px;
+
+$sm-min: $xs-max + 1px;
+$sm-max: $sm-min + 105px;
+
+$md-min: $sm-max + 1px;
+$md-max: $md-min + 343px;
+
+$lg-min: $md-max + 1px;
+$lg-max: 999999px;
+
+// colors
+$background: #fafafa;
+$darkgrey: #333;
+$grey: #ccc;
+$highlight: orange;
+$blue: hsl(195, 100%, 50%);
+$lightblue: hsl(195, 100%, 80%);
+$darkblue: hsl(195, 100%, 35%);
+
+// input-tag-variables
+$inputpadding: 8px;
+$inputrounding: 4px;
+$inputfontsize: 12px;
+$inputfontfamily: Nunito;
+
+// fonts
+$font: Nunito;

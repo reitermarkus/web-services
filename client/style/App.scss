@@ -1,0 +1,59 @@
+@import 'vars';
+@import 'mixins';
+@import 'col';
+@import 'forms';
+@import 'header';
+@import 'footer';
+@import 'fonts';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: $font, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+#root > div {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  background: $background;
+}
+
+#root > div > main {
+  flex: 1;
+  text-align: center;
+
+  @include xs-only {
+    padding: 16px;
+  }
+
+  @include sm-only {
+    padding: 16px;
+  }
+
+  @include md-only {
+    padding: 16px 5vw;
+  }
+
+  @include lg-only {
+    padding: 16px 15vw;
+  }
+}
+
+h1 {
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+a {
+  display: inline-block;
+  color: $highlight;
+  cursor: pointer;
+}

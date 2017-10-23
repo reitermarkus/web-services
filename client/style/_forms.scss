@@ -1,0 +1,25 @@
+input, select {
+  padding: $inputpadding;
+  background: white;
+  color: $darkgrey;
+  border: 1px solid $grey;
+  border-radius: $inputrounding;
+  font-size: $inputfontsize;
+  font-family: $inputfontfamily;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+
+  &[type="text"] {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  &:hover, &:focus {
+    border: 1px solid $blue;
+  }
+
+  &:focus {
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.75);
+  }
+}
+
