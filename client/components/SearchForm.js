@@ -9,21 +9,22 @@ export default class SearchForm extends Component {
   inputChange = (event) => {
     event.preventDefault()
 
-    // update value in state
+    // Update value in state
     this.setState({value: event.target.value})
 
-    // reset timeout if one is ongoing
+    // Reset timeout if one is ongoing
     if (this.state.timeout) {
       clearTimeout(this.state.timeout)
     }
 
     // (re)start timeout
+    let delay = 1000
     let t = setTimeout(function() {
       this.setState({timeout: null})
       this.searchTargets()
-    }.bind(this), 1000)
+    }.bind(this), delay)
 
-    // store timeout in state
+    // Store timeout in state
     this.setState({timeout: t})
   }
 
@@ -39,7 +40,7 @@ export default class SearchForm extends Component {
   render() {
     return (
       <form className={'col'} onSubmit={this.inputSubmit}>
-        <input type="text" className={'col-sm-12'} placeholder="How should your holidays look like?" value={this.state.value} onChange={this.inputChange}/>
+        <input type='text' className={'col-sm-12'} placeholder='How should your holidays look like?' value={this.state.value} onChange={this.inputChange}/>
       </form>
     )
   }

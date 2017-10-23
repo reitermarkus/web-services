@@ -4,8 +4,8 @@ export default class Footer extends Component {
   render() {
     return (
       <footer>
-        <div id="copy">&copy; by arriven 2017</div>
-        <div id="help">
+        <div id='copy'>&copy; by arriven 2017</div>
+        <div id='help'>
           <ul>
             <li>Help</li>
             <li>About</li>
