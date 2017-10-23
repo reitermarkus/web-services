@@ -1,19 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Logo from '../../arriven-logo.svg'
+import HeaderMenu from './HeaderMenu'
 
-export default class Header extends Component {
-  render() {
-    return (
-      <header>
-        <Logo height='2em'/>
-        <nav id='menu'>
-          <ul>
-            <li>...</li>
-            <li>...</li>
-            <li>...</li>
-          </ul>
-        </nav>
-      </header>
-    )
-  }
-}
+const Header = () => (
+  <header className='site-header'>
+    <Logo className='logo'/>
+    <HeaderMenu/>
+  </header>
+)
+
+export default Header
