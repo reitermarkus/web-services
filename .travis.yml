@@ -4,5 +4,5 @@ node_js:
   - 'node'
 
 script:
-  - npm run markdownlint
-  - npm run eslint
+  - yarn run markdownlint
+  - yarn run eslint
