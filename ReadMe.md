@@ -10,6 +10,20 @@
 
 <br/>
 
+## Install dependencies
+
 ```shell
-yarn install && yarn start
+yarn install
+```
+
+## Run development server
+
+```shell
+yarn start
+```
+
+## Build website
+
+```shell
+yarn run build
 ```
