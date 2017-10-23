@@ -11,12 +11,24 @@ const defaultConfig = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true,
+            },
+          },
+        ],
       },
     ],
   },
