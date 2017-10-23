@@ -18,7 +18,9 @@ rules:
   block-spacing:
     - error
     - always
-  camelcase: error
+  camelcase:
+    - error
+    - properties: never
   capitalized-comments: error
   comma-dangle:
     - error
