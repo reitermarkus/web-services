@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+
+
 import Header from './Header'
 import SearchForm from './SearchForm'
 import Footer from './Footer'
+
 import '../style/App.scss'
 
 export default class App extends Component {
