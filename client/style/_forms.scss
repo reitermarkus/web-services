@@ -10,7 +10,8 @@ select {
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     border: 1px solid $blue;
   }
 

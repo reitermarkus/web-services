@@ -8,21 +8,22 @@ export default class SearchForm extends Component {
   }
 
   inputChange = (event) => {
-    if (event.target.value) {
-      this.value = event.target.value
+    this.value = event.target.value
 
-      // Reset timeout if one is ongoing
-      if (this.timeout) {
-        clearTimeout(this.timeout)
-      }
-      // (re)start timeout
-      const delay = 1000
-
-      this.timeout = setTimeout(() => {
-        this.timeout = null
-        this.searchTargets(this.value)
-      }, delay)
+    // Reset timeout if one is ongoing
+    if (this.timeout) {
+      clearTimeout(this.timeout)
     }
+    // (re)start timeout
+    const delay = 1000
+
+    this.timeout = setTimeout(() => {
+      this.timeout = null
+
+      if (this.value) {
+        this.searchTargets(this.value)
+      }
+    }, delay)
   }
 
   searchTargets = (value) => {
