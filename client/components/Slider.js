@@ -31,12 +31,12 @@ export default class Slider extends Component {
           </div>
           <div className={'circ-container'}>
             {[...Array(this.state.images.length)].map((x, i) => {
-              return <div key={i}>{(i) === this.state.pos ? '\u2689' : '\u26ac'}</div>
+              return <div key={i} onClick={() => { this.setState({pos: i}) }}>{(i) === this.state.pos ? '\u2689' : '\u26ac'}</div>
             })}
           </div>
           <div className={'btn-container'}>
             <div className={'left-btn'} onClick={() =>
-            { this.state.pos >= this.consts.ZERO ? this.setState(
+            { this.state.pos > this.consts.ZERO ? this.setState(
               (prevState) => ({ pos: prevState.pos - this.consts.ONE })) : null }}>&larr;</div>
             <div className={'right-btn'} onClick={() =>
             { this.state.pos < this.state.images.length - this.consts.ONE ?
