@@ -37,8 +37,8 @@ export default class SearchForm extends Component {
 
   render() {
     return (
-      <form className={'col'} onSubmit={this.inputSubmit}>
-        <input type='text' className={'col-sm-12'} placeholder='How should your holidays look like?' onChange={(e) => { this.inputChange(e) }}/>
+      <form className='col' onSubmit={this.inputSubmit}>
+        <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={(e) => { this.inputChange(e) }}/>
       </form>
     )
   }
