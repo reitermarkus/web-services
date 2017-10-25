@@ -4,6 +4,7 @@
   "description": "We make sure you'll be arriven at your destination.",
   "main": "index.js",
   "scripts": {
+    "lint": "yarn run markdownlint && yarn run eslint && yarn run stylelint",
     "markdownlint": "markdownlint ReadMe.md",
     "eslint": "eslint .",
     "stylelint": "stylelint '**/*.scss' --cache --cache-location node_modules/.cache/stylelint",
