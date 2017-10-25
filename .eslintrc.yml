@@ -51,6 +51,8 @@ rules:
   newline-after-var:
     - error
     - always
+  no-alert: error
+  no-debugger: error
   no-else-return: error
   no-loops/no-loops: 2
   no-magic-numbers: error
