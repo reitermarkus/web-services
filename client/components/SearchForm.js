@@ -3,43 +3,51 @@ import React, { Component } from 'react'
 export default class SearchForm extends Component {
   constructor(props) {
     super(props)
-    this.timeout = null
-    this.value = ''
-  }
 
-  inputChange = (event) => {
-    this.value = event.target.value
-
-    // Reset timeout if one is ongoing
-    if (this.timeout) {
-      clearTimeout(this.timeout)
+    this.state = {
+      timeout: null,
+      value: '',
+      output: '',
     }
-    // (re)start timeout
-    const delay = 1000
-
-    this.timeout = setTimeout(() => {
-      this.timeout = null
-
-      if (this.value) {
-        this.searchTargets(this.value)
-      }
-    }, delay)
   }
 
-  searchTargets = (value) => {
-    alert(value)
+  handleChange = event => {
+    this.setState({value: event.target.value})
+    this.clearTimeout()
+
+    const triggerDelay = 1000
+
+    this.setState({
+      timeout: setTimeout(() => {
+        this.clearTimeout()
+        this.searchTargets(this.state.value)
+      }, triggerDelay),
+    })
   }
 
-  inputSubmit = (event) => {
-    alert(event.target.value)
+  clearTimeout = () => {
+    if (this.state.timeout) {
+      clearTimeout(this.state.timeout)
+      this.setState({timeout: null})
+    }
+  }
+
+  searchTargets = value => {
+    this.setState({output: value})
+  }
+
+  handleSubmit = event => {
     event.preventDefault()
+    this.clearTimeout()
+    this.searchTargets(this.state.value)
   }
 
   render() {
-    return (
-      <form className='col' onSubmit={this.inputSubmit}>
-        <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={(e) => { this.inputChange(e) }}/>
-      </form>
-    )
+    return [
+      <form key={0} className='col' onSubmit={this.handleSubmit}>
+        <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange}/>
+      </form>,
+      <div key={1}>{this.state.output}</div>,
+    ]
   }
 }
