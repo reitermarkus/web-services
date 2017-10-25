@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import LeftArrow from 'react-icons/lib/fa/arrow-left'
+import RightArrow from 'react-icons/lib/fa/arrow-right'
+import CircleOutlined from 'react-icons/lib/fa/circle-thin'
+import CircleFilled from 'react-icons/lib/fa/circle'
 
 const Circle = (props) => {
-  const EMPTY_CIRCLE  = '\u26ac'
-  const FILLED_CIRCLE = '\u2689'
+  const EMPTY_CIRCLE  = <CircleOutlined />
+  const FILLED_CIRCLE = <CircleFilled />
 
   const { filled, ...other } = props
 
@@ -51,8 +55,8 @@ export default class Slider extends Component {
             )}
           </div>
           <div className={'btn-container'}>
-            <div className={'left-btn'} onClick={this.left}>&larr;</div>
-            <div className={'right-btn'} onClick={this.right}>&rarr;</div>
+            <div className={'left-btn'} onClick={this.left}><LeftArrow /></div>
+            <div className={'right-btn'} onClick={this.right}><RightArrow /></div>
           </div>
         </div>
       </div>
