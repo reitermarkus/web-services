@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+const Circle = (props) => {
+  const EMPTY_CIRCLE  = '\u26ac'
+  const FILLED_CIRCLE = '\u2689'
+
+  const { filled, ...other } = props
+
+  return <div {...other}>{filled ? FILLED_CIRCLE : EMPTY_CIRCLE}</div>
+}
+
+Circle.propTypes = {
+  filled: PropTypes.bool,
+}
+
+Circle.defaultProps = {
+  filled: false,
+}
+
 export default class Slider extends Component {
   constructor(props) {
     super(props)
@@ -11,13 +28,13 @@ export default class Slider extends Component {
 
   left = () => {
     if (this.state.pos.positive) {
-      this.setState((prevState) => ({ pos: prevState.pos.decrement }))
+      this.setState(prevState => ({pos: prevState.pos.decrement}))
     }
   }
 
   right = () => {
     if (this.state.pos < this.props.images.length.decrement) {
-      this.setState((prevState) => ({ pos: prevState.pos.increment }))
+      this.setState(prevState => ({pos: prevState.pos.increment}))
     }
   }
 
@@ -26,14 +43,12 @@ export default class Slider extends Component {
       <div className={'slider'}>
         <div className={'slider-container'}>
           <div className={'img-container'} style={{transform: `translateX(-${this.state.pos}00%)`}}>
-            {this.props.images.map((img, i) => {
-              return <div key={i} style={{backgroundImage: `url(${img})`}}></div>
-            })}
+            {this.props.images.map((img, i) => <div key={i} style={{backgroundImage: `url(${img})`}}/>)}
           </div>
           <div className={'circ-container'}>
-            {[...Array(this.props.images.length)].map((x, i) => {
-              return <div key={i} onClick={() => { this.setState({pos: i}) }}>{(i) === this.state.pos ? '\u2689' : '\u26ac'}</div>
-            })}
+            {[...Array(this.props.images.length)].map(
+              (_, i) => <Circle key={i} onClick={() => this.setState({pos: i})} filled={this.state.pos === i}/>
+            )}
           </div>
           <div className={'btn-container'}>
             <div className={'left-btn'} onClick={this.left}>&larr;</div>
