@@ -3,18 +3,31 @@ import Header from './Header'
 import SearchForm from './SearchForm'
 import Article from './Article'
 import Footer from './Footer'
-
+import { Route } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import '../style/App.scss'
 
 const App = () => (
   <div>
-    <Header />
-    <main>
-      <h4>We make sure you&#39;ll be arriven at your destination.</h4>
-      <SearchForm />
-      <Article />
-    </main>
-    <Footer />
+    <Helmet
+      htmlAttributes={{lang: 'en', amp: undefined}}
+      title='arriven'
+      titleAttributes={{itemprop: 'name', lang: 'en'}}
+      meta={[
+        {name: 'description', content: 'We make sure you&#39;ll be arridven at your destination.'},
+        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      ]}
+    />
+    <Route exact path='/' render={() =>
+      <div>
+        <Header />
+        <main>
+          <h4>We make sure you&#39;ll be arriven at your destination.</h4>
+          <SearchForm />
+        </main>
+        <Footer />
+      </div>
+    } />
   </div>
 )
 
