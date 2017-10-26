@@ -20,14 +20,14 @@ body {
   margin: 0;
 }
 
-#root > div {
+#root div > div {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
   background: $background;
 }
 
-#root > div > main {
+main {
   flex: 1;
   text-align: center;
 

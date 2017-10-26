@@ -1,10 +1,21 @@
+const baseConfig = require('./webpack.config.base.js')
 const path = require('path')
 
-const defaultConfig = {
-  entry: './client/index.js',
+module.exports = baseConfig.merge({
+  name: 'server',
+  target: 'node',
+  devtool: 'source-map',
+  entry: './server/server.js',
   output: {
-    filename: 'arriven.bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'server.js',
+    libraryTarget: 'commonjs2',
+    publicPath: 'http://localhost:3000/dist/',
+  },
+  resolve: {
+    alias: {
+      react: path.resolve('./node_modules/react'),
+    },
   },
   module: {
     loaders: [
@@ -17,7 +28,7 @@ const defaultConfig = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: 'isomorphic-style-loader',
           },
           {
             loader: 'css-loader',
@@ -41,8 +52,5 @@ const defaultConfig = {
       },
     ],
   },
-}
-
-module.exports.merge = (config) => {
-  return {...defaultConfig, ...config}
-}
+  plugins: [],
+})
