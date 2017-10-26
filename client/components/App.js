@@ -9,15 +9,11 @@ import '../style/App.scss'
 
 const App = () => (
   <div>
-    <Helmet
-      htmlAttributes={{lang: 'en', amp: undefined}}
-      title='arriven'
-      titleAttributes={{itemprop: 'name', lang: 'en'}}
-      meta={[
-        {name: 'description', content: 'We make sure you&#39;ll be arridven at your destination.'},
-        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      ]}
-    />
+    <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
+      <meta name='description' content='We make sure you&#39;ll be arriven at your destination.'/>
+      <meta name='viewport' content='width=device-width, initial-scale=1'/>
+      <title itemProp='name' lang='en'>arriven</title>
+    </Helmet>
     <Route exact path='/' render={() =>
       <div>
         <Header />
