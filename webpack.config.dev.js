@@ -14,7 +14,7 @@ module.exports = baseConfig.merge({
   output: {
     filename: 'arriven.bundle.js',
     path: __dirname,
-    publicPath: 'http://localhost:3000',
+    publicPath: 'http://localhost:3000/',
   },
   devServer: {
     overlay: {

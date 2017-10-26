@@ -10,8 +10,7 @@ const compiler = webpack([clientConfig, serverConfig])
 const PORT = 3000
 
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: serverConfig.output.publicPath,
-  headers: { 'Access-Control-Allow-Origin': '*' },
+  serverSideRender: true,
 }))
 
 app.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'client')))

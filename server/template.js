@@ -8,6 +8,6 @@ export default ({ markup, helmet }) =>
     </head>
     <body>
       <div id="root">${markup}</div>
-      <script type="text/javascript" src="/dist/arriven.bundle.js" async></script>
+      <script type="text/javascript" src="/arriven.bundle.js" async></script>
     </body>
   </html>`
