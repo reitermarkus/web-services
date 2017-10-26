@@ -10,7 +10,7 @@ module.exports = baseConfig.merge({
     path: path.resolve(__dirname, 'dist'),
     filename: 'server.js',
     libraryTarget: 'commonjs2',
-    publicPath: 'http://localhost:3000/dist/',
+    publicPath: 'http://localhost:3000/',
   },
   resolve: {
     alias: {
