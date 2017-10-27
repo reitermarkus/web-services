@@ -3,7 +3,7 @@ import Logo from '../../arriven-logo.svg'
 import HeaderMenu from './HeaderMenu'
 
 const Header = () => (
-  <header className='site-header'>
+  <header>
     <Logo className='logo'/>
     <HeaderMenu/>
   </header>

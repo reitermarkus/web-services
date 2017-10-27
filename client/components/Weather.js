@@ -11,9 +11,8 @@ export default class Weather extends Component {
     this.state = {
       id: props.id,
     }
-
+/*
     let url = `http://api.openweathermap.org/data/2.5/forecast?id=${props.id}&units=metric&APPID=d60a62434499d77e7dcaf5906f92e102`
-//    let url = `http://www.reddit.com/r/programming.json`
 
     axios.get(url).then(
       res => {
@@ -62,11 +61,12 @@ export default class Weather extends Component {
         console.log(this.state.forecast)
       }
     )
+*/
   }
 
   render() {
     return (
-      <div>test</div>
+      <div className='weather'></div>
     )
   }
 }
