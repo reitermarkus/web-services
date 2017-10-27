@@ -15,4 +15,10 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'client')))
 app.use(webpackHotServerMiddleware(compiler))
 
-app.listen(PORT)
+app.listen(PORT, (error) => {
+  if (error) {
+    console.error(error) // eslint-disable-line no-console
+  } else {
+    console.info(`Server started at http://127.0.0.1:${PORT}/`) // eslint-disable-line no-console
+  }
+})
