@@ -1,22 +1,9 @@
 const baseConfig = require('./webpack.config.base.js')
-const webpack = require('webpack')
 
-module.exports = baseConfig.merge({
-  name: 'client',
-  target: 'web',
-  devtool: 'inline-source-map',
-  entry: [
-    'react-hot-loader/patch',
-    'react-dev-utils/webpackHotDevClient',
-    'webpack-hot-middleware/client',
-    'webpack/hot/dev-server',
-    './client/index.js',
-  ],
-  output: {
-    filename: 'arriven.bundle.js',
-    path: __dirname,
-    publicPath: 'http://localhost:3000/',
-  },
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+
+module.exports = merge.smart(baseConfig, {
   devServer: {
     overlay: {
       warnings: false,
@@ -38,6 +25,9 @@ module.exports = baseConfig.merge({
     },
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
     new webpack.HotModuleReplacementPlugin(),
   ],
 })
