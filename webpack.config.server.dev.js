@@ -1,5 +1,6 @@
 const baseConfig = require('./webpack.config.base.js')
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = baseConfig.merge({
   name: 'server',
@@ -52,5 +53,9 @@ module.exports = baseConfig.merge({
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
+  ],
 })

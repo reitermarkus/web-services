@@ -3,20 +3,38 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import App from '../client/components/App'
-
-const SUCCESS = 200
+import HttpStatus from 'http-status-codes'
 
 const serverRenderer = () => {
   return (req, res) => {
+    if (process.env.NODE_ENV === 'development') {
+      const whitelist = [
+        /^\/sockjs-node\//,
+      ]
+
+      if (whitelist.some(regex => req.path.match(regex))) {
+        return
+      }
+    }
+
+    let context = {}
+
     const markup = ReactDOMServer.renderToStaticMarkup(
-      <StaticRouter location={ req.url } context={ {} }>
+      <StaticRouter location={req.url} context={context}>
         <App />
       </StaticRouter>
     )
 
+    if (context.url) {
+      res.writeHead(context.status || HttpStatus.TEMPORARY_REDIRECT, {
+        Location: context.url,
+      })
+      res.end()
+    }
+
     const helmet = Helmet.renderStatic()
 
-    res.status(SUCCESS).send(
+    res.status(context.status || HttpStatus.OK).send(
       ReactDOMServer.renderToStaticMarkup(
         <html {...helmet.htmlAttributes.toComponent()}>
           <head>

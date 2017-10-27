@@ -7,6 +7,7 @@ module.exports = baseConfig.merge({
   devtool: 'inline-source-map',
   entry: [
     'react-hot-loader/patch',
+    'react-dev-utils/webpackHotDevClient',
     'webpack-hot-middleware/client',
     'webpack/hot/dev-server',
     './client/index.js',
