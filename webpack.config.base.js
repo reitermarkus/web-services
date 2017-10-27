@@ -1,6 +1,8 @@
 const path = require('path')
 const merge = require('webpack-merge')
 
+const Dotenv = require('dotenv-webpack')
+
 const baseConfig = {
   module: {
     loaders: [
@@ -30,6 +32,9 @@ const baseConfig = {
       },
     ],
   },
+  plugins: [
+    new Dotenv(),
+  ],
 }
 
 module.exports = {
