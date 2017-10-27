@@ -13,7 +13,7 @@ const App = () => (
   <div>
     <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
       <meta name='description' content='We make sure you&#39;ll be arriven at your destination.'/>
-      <meta name='viewport' content='width=device-width, initial-scale=1'/>
+      <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
       <title itemProp='name' lang='en'>arriven</title>
     </Helmet>
     <Switch>
