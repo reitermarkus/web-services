@@ -3,7 +3,7 @@ const baseConfig = require('./webpack.config.base.js')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 
-module.exports = merge.smart(baseConfig, {
+const devConfig = {
   devServer: {
     overlay: {
       warnings: false,
@@ -30,4 +30,32 @@ module.exports = merge.smart(baseConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
+}
+
+const config = merge.smart(baseConfig, {
+  client: merge.smart(devConfig, {
+    devtool: 'inline-source-map',
+    entry: [
+      'react-hot-loader/patch',
+      'react-dev-utils/webpackHotDevClient',
+      'webpack-hot-middleware/client',
+      'webpack/hot/dev-server',
+      './client/index.js',
+    ],
+    module: {
+      loaders: [
+        {
+          test: /\.scss$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            'sass-loader',
+          ],
+        },
+      ],
+    },
+  }),
+  server: devConfig,
 })
+
+module.exports = [config.client, config.server]

@@ -9,7 +9,7 @@
     "eslint": "eslint .",
     "stylelint": "stylelint '**/*.scss' --cache --cache-location node_modules/.cache/stylelint",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config=webpack.config.dev.client --hot --inline",
+    "start": "webpack-dev-server --config=webpack.config.prod --hot --inline",
     "build": "webpack --config=webpack.config.prod",
     "server": "node ./server/server.dev.js"
   },
