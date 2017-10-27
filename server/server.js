@@ -43,6 +43,7 @@ const serverRenderer = () => {
             {helmet.link.toComponent()}
             {helmet.script.toComponent()}
             {helmet.style.toComponent()}
+            {process.env.NODE_ENV === 'production' ? <link rel='stylesheet' href='/style.css' /> : null}
           </head>
           <body {...helmet.bodyAttributes.toComponent()}>
             <div id='root' dangerouslySetInnerHTML={{__html: markup}}/>

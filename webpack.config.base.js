@@ -1,6 +1,6 @@
 const path = require('path')
 
-const defaultConfig = {
+module.exports = {
   entry: './client/index.js',
   output: {
     filename: 'arriven.bundle.js',
@@ -16,15 +16,8 @@ const defaultConfig = {
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
+          'css-loader',
+          'sass-loader',
         ],
       },
       {
@@ -41,8 +34,4 @@ const defaultConfig = {
       },
     ],
   },
-}
-
-module.exports.merge = (config) => {
-  return {...defaultConfig, ...config}
 }
