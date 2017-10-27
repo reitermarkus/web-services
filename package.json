@@ -67,6 +67,7 @@
     "eslint": "^4.9.0",
     "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-react-functional-set-state": "^1.2.1",
     "markdownlint-cli": "^0.3.1",
     "react-hot-loader": "^3.1.1",
     "sass-loader": "^6.0.6",

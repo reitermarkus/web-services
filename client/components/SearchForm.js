@@ -17,12 +17,12 @@ export default class SearchForm extends Component {
 
     const triggerDelay = 1000
 
-    this.setState({
+    this.setState(prevState => ({
       timeout: setTimeout(() => {
         this.clearTimeout()
-        this.searchTargets(this.state.value)
+        this.searchTargets(prevState.value)
       }, triggerDelay),
-    })
+    }))
   }
 
   clearTimeout = () => {
