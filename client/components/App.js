@@ -3,8 +3,10 @@ import Header from './Header'
 import SearchForm from './SearchForm'
 import Article from './Article'
 import Footer from './Footer'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import HttpStatus from 'http-status-codes'
+import Status from './Status'
 import '../style/App.scss'
 
 const App = () => (
@@ -14,16 +16,28 @@ const App = () => (
       <meta name='viewport' content='width=device-width, initial-scale=1'/>
       <title itemProp='name' lang='en'>arriven</title>
     </Helmet>
-    <Route exact path='/' render={() =>
-      <div>
-        <Header />
-        <main>
-          <h4>We make sure you&#39;ll be arriven at your destination.</h4>
-          <SearchForm />
-        </main>
-        <Footer />
-      </div>
-    } />
+    <Switch>
+      <Route exact path='/' render={() =>
+        <div>
+          <Header />
+          <main>
+            <h4>We make sure you&#39;ll be arriveddn at your destination.</h4>
+            <SearchForm />
+            <Article/>
+          </main>
+          <Footer />
+        </div>
+      } />
+      <Route render={() => {
+        const status = HttpStatus.NOT_FOUND
+
+        return (
+          <Status code={status}>
+            {status} {HttpStatus.getStatusText(status)}
+          </Status>
+        )
+      }}/>
+    </Switch>
   </div>
 )
 
