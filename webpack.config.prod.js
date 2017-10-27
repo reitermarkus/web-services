@@ -16,7 +16,7 @@ fs.copy(path.resolve(__dirname, 'client', 'assets'), path.resolve(rootBuildPath)
   }
 })
 
-module.exports = merge.smart(baseConfig, {
+const prodConfig = {
   devtool: 'cheap-module-source-map',
   module: {
     loaders: [
@@ -65,4 +65,11 @@ module.exports = merge.smart(baseConfig, {
       inject: 'body',
     }),
   ],
-})
+}
+
+const config = {
+  client: merge.smart(baseConfig.client, prodConfig),
+  server: merge.smart(baseConfig.server, prodConfig),
+}
+
+module.exports = [config.client, config.server]

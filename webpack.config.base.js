@@ -1,11 +1,7 @@
 const path = require('path')
+const merge = require('webpack-merge')
 
-module.exports = {
-  entry: './client/index.js',
-  output: {
-    filename: 'arriven.bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+const baseConfig = {
   module: {
     loaders: [
       {
@@ -34,4 +30,26 @@ module.exports = {
       },
     ],
   },
+}
+
+module.exports = {
+  client: merge.smart(baseConfig, {
+    name: 'client',
+    target: 'web',
+    entry: './client/index.js',
+    output: {
+      filename: 'arriven.bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  }),
+  server: merge.smart(baseConfig, {
+    name: 'server',
+    target: 'node',
+    entry: './server/server.js',
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: 'server.js',
+      libraryTarget: 'commonjs2',
+    },
+  }),
 }
