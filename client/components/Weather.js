@@ -10,10 +10,14 @@ export default class Weather extends Component {
 
     this.state = {
       id: props.id,
+      city: {},
+      forecast: {},
     }
-/*
-    let url = `http://api.openweathermap.org/data/2.5/forecast?id=${props.id}&units=metric&APPID=d60a62434499d77e7dcaf5906f92e102`
+  }
 
+  componentDidMount() {
+    const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=d60a62434499d77e7dcaf5906f92e102`
+    
     axios.get(url).then(
       res => {
         // restructure forecast-data
@@ -47,7 +51,7 @@ export default class Weather extends Component {
           gfc[date][hour] = e
         });
 
-        this.state = {
+        this.setState({
           city: {
             id: res.data.city.id,
             name: res.data.city.name,
@@ -56,17 +60,17 @@ export default class Weather extends Component {
             lon: res.data.city.coord.lon,
           },
           forecast: gfc,
-        }
-
-        console.log(this.state.forecast)
+        }, () => {
+          console.log(this.state.forecast)
+        })
       }
     )
-*/
+    
   }
 
   render() {
     return (
-      <div className='weather'></div>
+      null
     )
   }
 }
