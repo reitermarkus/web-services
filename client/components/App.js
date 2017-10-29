@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './Header'
 import SearchForm from './SearchForm'
 import Article from './Article'
+import Weather from './Weather'
 import Footer from './Footer'
 import { Route, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -27,7 +28,7 @@ const App = () =>
             OPENWEATHERMAP_API_KEY: {process.env.OPENWEATHERMAP_API_KEY}
             <h4>We make sure you&#39;ll be arriven at your destination.</h4>
             <SearchForm />
-            <Article/>
+            <Weather id='2775220'/>
           </main>
           <Footer />
         </fragment>

@@ -1,0 +1,102 @@
+.weather {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  padding: 16px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+
+  &::before {
+    content: 'Weather';
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    color: $blue;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+    padding: 8px;
+    justify-items: center;
+
+    &:not(:nth-of-type(3n)) {
+      border-right: 1px solid $lightblue;
+    }
+
+    &:nth-of-type(1),
+    &:nth-of-type(2),
+    &:nth-of-type(3) {
+      border-bottom: 1px solid $lightblue;
+    }
+
+    > div {
+      text-align: left;
+    }
+
+    .date {
+      grid-column: 1 / span 2;
+    }
+
+    .icon {
+      font-size: 2em;
+    }
+
+    .icon,
+    .temp {
+      align-self: center;
+    }
+
+    .temp,
+    .rain,
+    .snow,
+    .wind,
+    .clouds {
+      &::before {
+        display: block;
+        color: $grey;
+        font-size: 0.75em;
+      }
+    }
+
+    .icon {
+      color: $blue;
+    }
+
+    .temp {
+      font-weight: bold;
+
+      &::before {
+        content: 'temp:';
+        font-weight: 100;
+      }
+    }
+
+    .rain {
+      &::before {
+        content: 'rain:';
+      }
+    }
+
+    .snow {
+      &::before {
+        content: 'snow:';
+      }
+    }
+
+    .wind {
+      &::before {
+        content: 'wind:';
+      }
+    }
+
+    .clouds {
+      &::before {
+        content: 'clouds:';
+      }
+    }
+  }
+}

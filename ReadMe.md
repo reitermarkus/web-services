@@ -18,7 +18,7 @@ yarn install
 ## Run development server
 
 ```shell
-yarn start
+yarn server
 ```
 
 ## Build website
