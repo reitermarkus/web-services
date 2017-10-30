@@ -50,10 +50,10 @@ module.exports = {
   server: merge.smart(baseConfig, {
     name: 'server',
     target: 'node',
-    entry: './server/server.js',
+    entry: './server/serverRenderer.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'server.js',
+      filename: 'serverRenderer.js',
       libraryTarget: 'commonjs2',
     },
   }),
