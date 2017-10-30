@@ -118,7 +118,7 @@ export default class Weather extends Component {
     <div className='weather'>
       {
         Object.entries(this.state.forecast).map(([date, f], i) =>
-          <div key={i}>
+          <div className='weather-item' key={i}>
             <div className='date'>{date}</div>
             <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
             <div className='temp' data-description='temp'>{f.temp} °C</div>
