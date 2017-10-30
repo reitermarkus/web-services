@@ -121,11 +121,11 @@ export default class Weather extends Component {
           <div key={i}>
             <div className='date'>{date}</div>
             <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
-            <div className='temp'>{f.temp} °C</div>
-            <div className='rain'>{f.rain} mm</div>
-            <div className='snow'>{f.snow} mm</div>
-            <div className='wind'>{f.wind} km/h</div>
-            <div className='clouds'>{f.clouds} %</div>
+            <div className='temp' data-description='temp'>{f.temp} °C</div>
+            <div className='rain' data-description='rain'>{f.rain} mm</div>
+            <div className='snow' data-description='snow'>{f.snow} mm</div>
+            <div className='wind' data-description='wind'>{f.wind} km/h</div>
+            <div className='clouds' data-description='clouds'>{f.clouds} %</div>
           </div>
         )
       }
