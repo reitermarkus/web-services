@@ -14,6 +14,9 @@ const App = () => (
     <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
       <meta name='description' content='We make sure you&#39;ll be arriven at your destination.'/>
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
+      <meta name='theme-color' content='#000000'/>
+      <link rel='manifest' href='/manifest.json'/>
+      <link rel='shortcut icon' href='/favicon.ico'/>
       <title itemProp='name' lang='en'>arriven</title>
     </Helmet>
     <Switch>
