@@ -80,7 +80,7 @@ export default class Weather extends Component {
           f.icon = e.icon
         })
 
-        Object.entries(averageForecast).forEach(([_, f]) => {
+        Object.values(averageForecast).forEach((f) => {
           let cnt = f.count
 
           delete f.count
