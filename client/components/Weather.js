@@ -1,14 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import Sun from 'react-icons/lib/ti/weather-sunny'
-import Wind from 'react-icons/lib/ti/weather-windy'
-import Cloudy from 'react-icons/lib/ti/weather-partly-sunny'
-import Cloud from 'react-icons/lib/ti/weather-cloudy'
-import CloudWind from 'react-icons/lib/ti/weather-windy-cloudy'
-import Rain from 'react-icons/lib/ti/weather-shower'
-import Storm from 'react-icons/lib/ti/weather-stormy'
-import Snow from 'react-icons/lib/ti/weather-snow'
 
 const WeatherIcon = ({ id, forceDay }) => {
   const iconName = forceDay ? id.replace(/n$/, 'd') : id
@@ -27,8 +19,14 @@ export default class Weather extends Component {
     }
   }
 
+  // Check if given hour is at night or not (18:00 - 09:00)
+  isNightTime(h) {
+    return h < 9 || h > 18
+  }
+
   componentDidMount() {
     const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${process.env.OPENWEATHERMAP_API_KEY}`
+    const factorMPStoKMPH = 3.6
 
     axios.get(url).then(
       res => {
@@ -39,23 +37,21 @@ export default class Weather extends Component {
             time: ent.dt_txt.split(' ')[1],
             weather: ent.weather[0].description,
             temp: ent.main.temp,
-            // Mintemp: ent.main.temp_min,
-            // Maxtemp: ent.main.temp_max,
             clouds: ent.clouds.all,
             rain: Object.values(ent.rain || {})[0] || 0,
             snow: Object.values(ent.snow || {})[0] || 0,
-            wind: ent.wind.speed * 3.6,
+            wind: ent.wind.speed * factorMPStoKMPH,
             icon: ent.weather[0].icon,
           }
         })
 
-        // Calculate average weather from 09:00 to 18:00
+        // Calculate average weather for day-time
         let averageForecast = {}
 
         forecast.forEach((e) => {
           let hour = parseFloat(e.time.split(':')[0])
 
-          if (hour < 9 || hour > 18) {
+          if (this.isNightTime(hour)) {
             return
           }
 
@@ -71,8 +67,6 @@ export default class Weather extends Component {
           f.weather.push(e.weather)
 
           f.temp = (f.temp || 0) + e.temp
-          // F.mintemp = (f.mintemp || 0) + e.mintemp
-          // F.maxtemp = (f.maxtemp || 0) + e.maxtemp
           f.clouds = (f.clouds || 0) + e.clouds
           f.rain = (f.rain || 0) + e.rain
           f.snow = (f.snow || 0) + e.snow
@@ -81,21 +75,19 @@ export default class Weather extends Component {
           f.icon = e.icon
         })
 
-        for (let i in averageForecast) {
-          let f = averageForecast[i]
-
+        Object.entries(averageForecast).forEach(([i, f]) => {
           let cnt = f.count
 
           delete f.count
 
           f.weather = f.weather[Math.floor(f.weather.length / 2)]
 
-          for (let k in f) {
-            if (!isNaN(f[k])) {
-              f[k] = Math.round(f[k] / cnt)
+          Object.entries(f).forEach(([k, e]) => {
+            if (!isNaN(e)) {
+              f[k] = Math.round(e / cnt)
             }
-          }
-        }
+          })
+        })
 
         this.setState({
           city: {
@@ -106,29 +98,29 @@ export default class Weather extends Component {
             lon: res.data.city.coord.lon,
           },
           forecast: averageForecast,
-        }, () => {
-          console.log(this.state.forecast)
         })
       }
     )
-
   }
 
   render = () =>
     <div className='weather'>
-      {
-        Object.entries(this.state.forecast).map(([date, f], i) =>
-          <div className='weather-item' key={i}>
-            <div className='date'>{date}</div>
-            <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
-            <div className='temp' data-description='temp'>{f.temp} °C</div>
-            <div className='rain' data-description='rain'>{f.rain} mm</div>
-            <div className='snow' data-description='snow'>{f.snow} mm</div>
-            <div className='wind' data-description='wind'>{f.wind} km/h</div>
-            <div className='clouds' data-description='clouds'>{f.clouds} %</div>
-          </div>
-        )
-      }
+      <div className='title'>Weather at <b>{this.state.city.name}</b> ({this.state.city.country})</div>
+      <div className='grid'>
+        {
+          Object.entries(this.state.forecast).map(([date, f], i) =>
+            <div className='weather-item' key={i}>
+              <div className='date'>{date}</div>
+              <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
+              <div className='temp' data-description='temp'>{f.temp} °C</div>
+              <div className='rain' data-description='rain'>{f.rain} mm</div>
+              <div className='snow' data-description='snow'>{f.snow} mm</div>
+              <div className='wind' data-description='wind'>{f.wind} km/h</div>
+              <div className='clouds' data-description='clouds'>{f.clouds} %</div>
+            </div>
+          )
+        }
+      </div>
     </div>
 }
 
