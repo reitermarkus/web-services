@@ -9,26 +9,10 @@ import Rain from 'react-icons/lib/ti/weather-shower'
 import Storm from 'react-icons/lib/ti/weather-stormy'
 import Snow from 'react-icons/lib/ti/weather-snow'
 
-const WeatherIcon = (props) => {
-  if (props.data.snow > 1) {
-    return <Snow/>
-  } else if (props.data.rain >= 10) {
-    return <Storm/>
-  } else if (props.data.rain >= 1) {
-    return <Rain/>
-  } else if (props.data.clouds >= 50) {
-    if (props.data.wind >= 30) {
-      return <CloudWind/>
-    } else {
-      return <Cloud/>
-    }
-  } else if (props.data.clouds >= 20) {
-    return <Cloudy/>
-  } else if (props.data.wind >= 30) {
-    return <Wind/>
-  } else {
-    return <Sun/>
-  }
+const WeatherIcon = ({ id, forceDay }) => {
+  const iconName = forceDay ? id.replace(/n$/, 'd') : id
+
+  return <img src={`http://openweathermap.org/img/w/${iconName}.png`}/>
 }
 
 export default class Weather extends Component {
@@ -47,24 +31,26 @@ export default class Weather extends Component {
 
     axios.get(url).then(
       res => {
-        // restructure forecast-data
+        // Restructure forecast-data
         let forecast = res.data.list.map(ent => {
           return {
             date: ent.dt_txt.split(' ')[0],
             time: ent.dt_txt.split(' ')[1],
             weather: ent.weather[0].description,
             temp: ent.main.temp,
-            //mintemp: ent.main.temp_min,
-            //maxtemp: ent.main.temp_max,
+            // Mintemp: ent.main.temp_min,
+            // Maxtemp: ent.main.temp_max,
             clouds: ent.clouds.all,
             rain: Object.values(ent.rain || {})[0] || 0,
             snow: Object.values(ent.snow || {})[0] || 0,
             wind: ent.wind.speed * 3.6,
+            icon: ent.weather[0].icon,
           }
         })
 
         // Calculate average weather from 09:00 to 18:00
         let averageForecast = {}
+
         forecast.forEach((e) => {
           let hour = parseFloat(e.time.split(':')[0])
 
@@ -84,19 +70,21 @@ export default class Weather extends Component {
           f.weather.push(e.weather)
 
           f.temp = (f.temp || 0) + e.temp
-          //f.mintemp = (f.mintemp || 0) + e.mintemp
-          //f.maxtemp = (f.maxtemp || 0) + e.maxtemp
+          // F.mintemp = (f.mintemp || 0) + e.mintemp
+          // F.maxtemp = (f.maxtemp || 0) + e.maxtemp
           f.clouds = (f.clouds || 0) + e.clouds
           f.rain = (f.rain || 0) + e.rain
           f.snow = (f.snow || 0) + e.snow
           f.wind = (f.wind || 0) + e.wind
           f.count = (f.count || 0) + 1
+          f.icon = e.icon
         })
 
         for (let i in averageForecast) {
           let f = averageForecast[i]
 
           let cnt = f.count
+
           delete f.count
 
           f.weather = f.weather[Math.floor(f.weather.length / 2)]
@@ -135,7 +123,7 @@ export default class Weather extends Component {
             return (
               <div key={i}>
                 <div className='date'>{date}</div>
-                <div className='icon'><WeatherIcon data={f}/></div>
+                <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
                 <div className='temp'>{f.temp} °C</div>
                 <div className='rain'>{f.rain} mm</div>
                 <div className='snow'>{f.snow} mm</div>
