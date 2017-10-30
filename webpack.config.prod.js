@@ -4,7 +4,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const baseConfig = require('./webpack.config.base.js')
 const fs = require('fs-extra')
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const rootBuildPath = path.resolve(__dirname, 'dist')
 
@@ -59,11 +58,6 @@ const prodConfig = {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'client', 'template', 'index.html'),
-      filename: 'index.html',
-      inject: 'body',
-    }),
   ],
 }
 
