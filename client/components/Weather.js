@@ -8,6 +8,11 @@ const WeatherIcon = ({ id, forceDay }) => {
   return <img src={`http://openweathermap.org/img/w/${iconName}.png`}/>
 }
 
+WeatherIcon.propTypes = {
+  id: PropTypes.string,
+  forceDay: PropTypes.bool,
+}
+
 export default class Weather extends Component {
   constructor(props) {
     super(props)
@@ -75,7 +80,7 @@ export default class Weather extends Component {
           f.icon = e.icon
         })
 
-        Object.entries(averageForecast).forEach(([i, f]) => {
+        Object.entries(averageForecast).forEach(([_, f]) => {
           let cnt = f.count
 
           delete f.count
@@ -126,5 +131,4 @@ export default class Weather extends Component {
 
 Weather.propTypes = {
   id: PropTypes.string,
-
 }
