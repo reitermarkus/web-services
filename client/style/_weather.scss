@@ -1,19 +1,25 @@
 .weather {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto auto;
   padding: 16px;
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 
-  &::before {
-    content: 'Weather';
+  .title {
     grid-column: 1 / span 3;
     grid-row: 1;
+    padding-bottom: 16px;
     color: $blue;
     font-size: 32px;
-    font-weight: bold;
+
+    b {
+      font-weight: bold;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
   }
 
   .weather-item {
