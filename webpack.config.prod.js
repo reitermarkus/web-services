@@ -26,6 +26,13 @@ const prodConfig = {
           use: [
             'css-loader',
             'sass-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: () => [require('autoprefixer')()],
+              },
+            },
           ],
         }),
       },
