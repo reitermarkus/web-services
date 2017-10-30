@@ -9,7 +9,7 @@ const rootBuildPath = path.resolve(__dirname, 'dist')
 
 fs.existsSync(rootBuildPath) || fs.mkdirSync(rootBuildPath)
 
-fs.copy(path.resolve(__dirname, 'client', 'assets'), path.resolve(rootBuildPath), (err) => {
+fs.copy(path.resolve(__dirname, 'server', 'serve'), path.resolve(rootBuildPath), (err) => {
   if (err) {
     throw err
   }
