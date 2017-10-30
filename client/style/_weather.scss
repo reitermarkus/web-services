@@ -33,10 +33,6 @@
       border-bottom: 1px solid $lightblue;
     }
 
-    > div {
-      text-align: left;
-    }
-
     .date {
       grid-column: 1 / span 2;
     }
@@ -59,6 +55,8 @@
         display: block;
         color: $grey;
         font-size: 0.75em;
+        content: attr(data-description);
+        font-weight: 100;
       }
     }
 
@@ -68,35 +66,6 @@
 
     .temp {
       font-weight: bold;
-
-      &::before {
-        content: 'temp:';
-        font-weight: 100;
-      }
-    }
-
-    .rain {
-      &::before {
-        content: 'rain:';
-      }
-    }
-
-    .snow {
-      &::before {
-        content: 'snow:';
-      }
-    }
-
-    .wind {
-      &::before {
-        content: 'wind:';
-      }
-    }
-
-    .clouds {
-      &::before {
-        content: 'clouds:';
-      }
     }
   }
 }
