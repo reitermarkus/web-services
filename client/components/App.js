@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from './Header'
 import SearchForm from './SearchForm'
-import Article from './Article'
 import Weather from './Weather'
 import Footer from './Footer'
 import { Route, Switch } from 'react-router-dom'
