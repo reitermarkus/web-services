@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import Sun from 'react-icons/lib/ti/weather-sunny'
 import Wind from 'react-icons/lib/ti/weather-windy'
@@ -116,23 +117,22 @@ export default class Weather extends Component {
   render = () =>
     <div className='weather'>
       {
-        Object.keys(this.state.forecast).map(
-          (date, i) => {
-            let f = this.state.forecast[date]
-
-            return (
-              <div key={i}>
-                <div className='date'>{date}</div>
-                <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
-                <div className='temp'>{f.temp} °C</div>
-                <div className='rain'>{f.rain} mm</div>
-                <div className='snow'>{f.snow} mm</div>
-                <div className='wind'>{f.wind} km/h</div>
-                <div className='clouds'>{f.clouds} %</div>
-              </div>
-            )
-          }
+        Object.entries(this.state.forecast).map(([date, f], i) =>
+          <div key={i}>
+            <div className='date'>{date}</div>
+            <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
+            <div className='temp'>{f.temp} °C</div>
+            <div className='rain'>{f.rain} mm</div>
+            <div className='snow'>{f.snow} mm</div>
+            <div className='wind'>{f.wind} km/h</div>
+            <div className='clouds'>{f.clouds} %</div>
+          </div>
         )
       }
     </div>
+}
+
+Weather.propTypes = {
+  id: PropTypes.string,
+
 }
