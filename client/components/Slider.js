@@ -32,13 +32,13 @@ export default class Slider extends Component {
 
   left = () => {
     if (this.state.pos.positive) {
-      this.setState(prevState => ({pos: prevState.pos.decrement}))
+      this.setState(prevState => ({pos: prevState.pos - 1}))
     }
   }
 
   right = () => {
     if (this.state.pos < this.props.images.length.decrement) {
-      this.setState(prevState => ({pos: prevState.pos.increment}))
+      this.setState(prevState => ({pos: prevState.pos + 1}))
     }
   }
 

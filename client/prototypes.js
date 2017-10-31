@@ -27,15 +27,3 @@ Object.defineProperty(Number.prototype, 'zero', {
     return this === 0 /* eslint no-magic-numbers: 0 */
   },
 })
-
-Object.defineProperty(Number.prototype, 'increment', {
-  get: function increment() {
-    return this + 1 /* eslint no-magic-numbers: 0 */
-  },
-})
-
-Object.defineProperty(Number.prototype, 'decrement', {
-  get: function decrement() {
-    return this - 1 /* eslint no-magic-numbers: 0 */
-  },
-})
