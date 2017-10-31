@@ -1,9 +1,27 @@
 language: node_js
 
-node_js:
-  - 'node'
+node_js: 8
+
+cache: yarn
+
+addons:
+  apt:
+    sources:
+      - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+        key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    packages:
+      - yarn
+
+before_install:
+  - mkdir -p "$HOME/.bin"
+  - ln -s /usr/bin/yarn "$HOME/.bin/yarn"
+  - export PATH="$HOME/.bin:$PATH"
 
 script:
   - yarn run markdownlint
   - yarn run eslint
   - yarn run stylelint
+  - yarn run spec --coverage
+
+after_success:
+  - yarn run coveralls
