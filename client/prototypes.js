@@ -43,3 +43,17 @@ Object.defineProperty(Number.prototype, 'decrement', {
 Number.prototype.clamp = function(min, max) {
   return this <= min ? min : this >= max ? max : this
 }
+
+Object.defineProperty(Array.prototype, 'first', {
+  get: function first() {
+    return this[0] // eslint-disable-line no-magic-numbers
+  },
+  enumerable: false,
+})
+
+Object.defineProperty(Array.prototype, 'last', {
+  get: function last() {
+    return this[this.length - 1] // eslint-disable-line no-magic-numbers
+  },
+  enumerable: false,
+})
