@@ -51,48 +51,35 @@ export default class Weather extends Component {
         })
 
         // Calculate average weather for day-time
-        let averageForecast = {}
+        const {date, ...rest} = forecast.first
 
-        forecast.forEach((e) => {
-          let hour = parseFloat(e.time.split(':').first)
+        const averageForecast = forecast.reduce((acc, val) => {
+          let hour = parseFloat(val.time.split(':').first)
 
-          if (this.isNightTime(hour)) {
-            return
-          }
+          if (!this.isNightTime(hour)) {
+            const {date, ...rest} = val
+            const {updates, day} = this.props
 
-          if (!averageForecast[e.date]) {
-            averageForecast[e.date] = {}
-          }
+            if (acc[date]) {
+              const newObj = {
+                [date]: {
+                  temp: hour === day.end ? Math.round(((acc[date].temp || 0) + val.temp) / updates) : (acc[date].temp || 0) + val.temp,
+                  clouds: hour === day.end ? Math.round(((acc[date].clouds || 0) + val.clouds) / updates) : (acc[date].clouds || 0) + val.clouds,
+                  rain: hour === day.end ? Math.round(((acc[date].rain || 0) + val.rain) / updates) : (acc[date].rain || 0) + val.rain,
+                  snow: hour === day.end ? Math.round(((acc[date].snow || 0) + val.snow) / updates) : (acc[date].snow || 0) + val.snow,
+                  wind: hour === day.end ? Math.round(((acc[date].wind || 0) + val.wind) / updates) : (acc[date].wind || 0) + val.wind,
+                  icon: val.icon,
+                },
+              }
 
-          let f = averageForecast[e.date]
-
-          if (!f.weather) {
-            f.weather = []
-          }
-          f.weather.push(e.weather)
-
-          f.temp = (f.temp || 0) + e.temp
-          f.clouds = (f.clouds || 0) + e.clouds
-          f.rain = (f.rain || 0) + e.rain
-          f.snow = (f.snow || 0) + e.snow
-          f.wind = (f.wind || 0) + e.wind
-          f.count = (f.count || 0) + 1
-          f.icon = e.icon
-        })
-
-        Object.values(averageForecast).forEach((f) => {
-          let cnt = f.count
-
-          delete f.count
-
-          f.weather = f.weather[Math.floor(f.weather.length / 2)]
-
-          Object.entries(f).forEach(([k, e]) => {
-            if (!isNaN(e)) {
-              f[k] = Math.round(e / cnt)
+              return {...acc, [date]: {...acc[date], ...newObj[date]}}
             }
-          })
-        })
+
+            return {...acc, [date]: rest}
+          }
+
+          return acc
+        }, {[date]: rest})
 
         this.setState({
           city: {
@@ -139,7 +126,8 @@ Weather.propTypes = {
 
 Weather.defaultProps = {
   day: {
-    start: 8,
+    start: 9,
     end: 18,
   },
+  updates: 4,
 }
