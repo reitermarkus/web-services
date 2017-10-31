@@ -57,3 +57,10 @@ Object.defineProperty(Array.prototype, 'last', {
   },
   enumerable: false,
 })
+
+Object.defineProperty(Array.prototype, 'tail', {
+  get: function tail() {
+    return this.slice(1) // eslint-disable-line no-magic-numbers
+  },
+  enumerable: false,
+})
