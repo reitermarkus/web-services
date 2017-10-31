@@ -18,15 +18,13 @@ export default class Weather extends Component {
     super(props)
 
     this.state = {
-      id: props.id,
       city: {},
       forecast: {},
     }
   }
 
-  // Check if given hour is at night or not (18:00 - 09:00)
-  isNightTime(h) {
-    return h < 9 || h > 18
+  isNightTime(hour) {
+    return hour < this.props.day.start || hour > this.props.day.end
   }
 
   componentDidMount() {
@@ -37,16 +35,18 @@ export default class Weather extends Component {
       res => {
         // Restructure forecast-data
         let forecast = res.data.list.map(ent => {
+          const [date, time] = ent.dt_txt.split(' ')
+
           return {
-            date: ent.dt_txt.split(' ')[0],
-            time: ent.dt_txt.split(' ')[1],
-            weather: ent.weather[0].description,
+            date: date,
+            time: time,
+            weather: ent.weather.first.description,
             temp: ent.main.temp,
             clouds: ent.clouds.all,
-            rain: Object.values(ent.rain || {})[0] || 0,
-            snow: Object.values(ent.snow || {})[0] || 0,
+            rain: Object.values(ent.rain || {}).first || 0,
+            snow: Object.values(ent.snow || {}).first || 0,
             wind: ent.wind.speed * factorMPStoKMPH,
-            icon: ent.weather[0].icon,
+            icon: ent.weather.first.icon,
           }
         })
 
@@ -54,7 +54,7 @@ export default class Weather extends Component {
         let averageForecast = {}
 
         forecast.forEach((e) => {
-          let hour = parseFloat(e.time.split(':')[0])
+          let hour = parseFloat(e.time.split(':').first)
 
           if (this.isNightTime(hour)) {
             return
@@ -130,5 +130,16 @@ export default class Weather extends Component {
 }
 
 Weather.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  day:  PropTypes.shape({
+    start: PropTypes.number,
+    end: PropTypes.number,
+  }),
+}
+
+Weather.defaultProps = {
+  day: {
+    start: 8,
+    end: 18,
+  },
 }
