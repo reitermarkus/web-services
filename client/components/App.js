@@ -24,10 +24,9 @@ const App = () =>
         <fragment>
           <Header />
           <main>
-            OPENWEATHERMAP_API_KEY: {process.env.OPENWEATHERMAP_API_KEY}
             <h4>We make sure you&#39;ll be arriven at your destination.</h4>
             <SearchForm />
-            <Weather id='2775220'/>
+            <Weather id='2775220' apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
           </main>
           <Footer />
         </fragment>
