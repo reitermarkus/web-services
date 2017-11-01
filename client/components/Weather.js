@@ -28,7 +28,7 @@ export default class Weather extends Component {
   }
 
   componentDidMount() {
-    const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${process.env.OPENWEATHERMAP_API_KEY}`
+    const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${this.props.apiKey}`
     const factorMPStoKMPH = 3.6
 
     axios.get(url).then(
@@ -104,6 +104,7 @@ export default class Weather extends Component {
 }
 
 Weather.propTypes = {
+  apiKey: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   day:  PropTypes.shape({
     start: PropTypes.number,
