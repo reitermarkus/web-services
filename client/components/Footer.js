@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer = () => (
+const Footer = () =>
   <footer>
     <div id='copy'>&copy; by arriven 2017</div>
     <div id='help'>
@@ -10,6 +10,5 @@ const Footer = () => (
       </ul>
     </div>
   </footer>
-)
 
 export default Footer

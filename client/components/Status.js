@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-const Status = ({ code, children }) => (
+const Status = ({ code, children }) =>
   <Route render={({ staticContext }) => {
     if (staticContext) {
       staticContext.status = code
@@ -10,7 +10,6 @@ const Status = ({ code, children }) => (
 
     return children
   }}/>
-)
 
 Status.propTypes = {
   code: PropTypes.number,

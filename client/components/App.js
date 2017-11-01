@@ -9,8 +9,8 @@ import HttpStatus from 'http-status-codes'
 import Status from './Status'
 import '../style/App.scss'
 
-const App = () => (
-  <div>
+const App = () =>
+  <fragment>
     <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
       <meta name='description' content='We make sure you&#39;ll be arriven at your destination.'/>
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
@@ -21,7 +21,7 @@ const App = () => (
     </Helmet>
     <Switch>
       <Route exact path='/' render={() =>
-        <div>
+        <fragment>
           <Header />
           <main>
             OPENWEATHERMAP_API_KEY: {process.env.OPENWEATHERMAP_API_KEY}
@@ -30,7 +30,7 @@ const App = () => (
             <Article/>
           </main>
           <Footer />
-        </div>
+        </fragment>
       } />
       <Route render={() => {
         const status = HttpStatus.NOT_FOUND
@@ -42,7 +42,6 @@ const App = () => (
         )
       }}/>
     </Switch>
-  </div>
-)
+  </fragment>
 
 export default App

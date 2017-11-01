@@ -44,13 +44,13 @@ export default class SearchForm extends Component {
     this.searchTargets(this.state.value)
   }
 
-  render() {
-    return [
-      <IPLocation key={3}/>,
-      <form key={0} className='col' onSubmit={this.handleSubmit}>
+  render = () => (
+    <fragment>
+      <IPLocation/>
+      <form className='col' onSubmit={this.handleSubmit}>
         <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange}/>
-      </form>,
-      <div key={1}>{this.state.output}</div>,
-    ]
-  }
+      </form>
+      <div>{this.state.output}</div>
+    </fragment>
+  )
 }
