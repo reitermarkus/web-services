@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ipLocator from 'ip-locator'
 
 export default class IPLocation extends Component {
   constructor(props) {
@@ -24,16 +23,10 @@ export default class IPLocation extends Component {
     }
   }
 
-  componentWillMount() {
-    ipLocator.getDomainOrIPDetails(this.props.ip, 'json', (err, data) => {
-      if (err && process.env.NODE_ENV === 'development') {
-        console.error(err) // eslint-disable-line no-console
-      }
-
-      if (data) {
-        this.setState(data)
-      }
-    })
+  componentDidMount() {
+    fetch(`http://ip-api.com/json/${this.props.ip}`)
+      .then(res => res.json())
+      .then(res => this.setState(res))
   }
 
   render = () =>

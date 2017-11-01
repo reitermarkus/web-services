@@ -42,7 +42,7 @@ export default class Weather extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${process.env.OPENWEATHERMAP_API_KEY}`
 
     axios.get(url).then(
