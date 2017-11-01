@@ -68,11 +68,5 @@ export default class Weather extends Component {
 
   }
 
-  render() {
-    return (
-      <div>
-      {this.state.city.name} ({this.state.city.country})
-      </div>
-    )
-  }
+  render = () => `${this.state.city.name} (${this.state.city.country})`
 }

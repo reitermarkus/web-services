@@ -1,6 +1,6 @@
 import React from 'react'
 
-const HeaderMenu = () => (
+const HeaderMenu = () =>
   <nav>
     <ul>
       <li>Menu Item 1</li>
@@ -8,6 +8,5 @@ const HeaderMenu = () => (
       <li>Menu Item 3</li>
     </ul>
   </nav>
-)
 
 export default HeaderMenu

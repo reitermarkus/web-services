@@ -42,26 +42,23 @@ export default class Slider extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className='slider'>
-        <div className='slider-container'>
-          <div className='img-container' style={{transform: `translateX(-${this.state.pos}00%)`}}>
-            {this.props.images.map((img, i) => <div key={i} style={{backgroundImage: `url(${img})`}}/>)}
-          </div>
-          <div className='circ-container'>
-            {[...Array(this.props.images.length)].map(
-              (_, i) => <Circle key={i} onClick={() => this.setState({pos: i})} filled={this.state.pos === i}/>
-            )}
-          </div>
-          <div className='btn-container'>
-            <div className='left-btn' onClick={this.left}><LeftArrow /></div>
-            <div className='right-btn' onClick={this.right}><RightArrow /></div>
-          </div>
+  render = () =>
+    <div className='slider'>
+      <div className='slider-container'>
+        <div className='img-container' style={{transform: `translateX(-${this.state.pos}00%)`}}>
+          {this.props.images.map((img, i) => <div key={i} style={{backgroundImage: `url(${img})`}}/>)}
+        </div>
+        <div className='circ-container'>
+          {[...Array(this.props.images.length)].map(
+            (_, i) => <Circle key={i} onClick={() => this.setState({pos: i})} filled={this.state.pos === i}/>
+          )}
+        </div>
+        <div className='btn-container'>
+          <div className='left-btn' onClick={this.left}><LeftArrow /></div>
+          <div className='right-btn' onClick={this.right}><RightArrow /></div>
         </div>
       </div>
-    )
-  }
+    </div>
 }
 
 Slider.propTypes = {

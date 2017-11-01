@@ -36,13 +36,8 @@ export default class IPLocation extends Component {
     })
   }
 
-  render() {
-    return (
-      <div>
-        You are here: {this.state.city} ({this.state.country}) [{this.state.lat}, {this.state.lon}]
-      </div>
-    )
-  }
+  render = () =>
+    `You are here: ${this.state.city} (${this.state.country}) [${this.state.lat}, ${this.state.lon}]`
 }
 
 IPLocation.propTypes = {

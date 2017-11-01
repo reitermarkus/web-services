@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from './Slider'
 import Weather from './Weather'
 
-const Article = () => (
+const Article = () =>
   <article>
     <Weather id='2775220'/>
     <Slider images={[
@@ -12,6 +12,5 @@ const Article = () => (
       'https://static.pexels.com/photos/414369/pexels-photo-414369.jpeg',
     ]} />
   </article>
-)
 
 export default Article
