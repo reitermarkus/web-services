@@ -23,8 +23,8 @@ export default class Weather extends Component {
     }
   }
 
-  isNightTime(hour) {
-    return hour < this.props.day.start || hour > this.props.day.end
+  isDayTime(hour) {
+    return hour >= this.props.day.start && hour <= this.props.day.end
   }
 
   componentDidMount() {
@@ -50,36 +50,23 @@ export default class Weather extends Component {
           }
         })
 
-        // Calculate average weather for day-time
-        const {date, ...rest} = forecast.first
+        const dayTimeForecast = forecast
+          .filter(f => this.isDayTime(Number(f.time.split(':').first)))
+          .reduce((acc, { date, ...obj }) => (
+            {...acc, [date]: [...(acc[date] || []), obj]}
+          ), {})
 
-        const averageForecast = forecast.reduce((acc, val) => {
-          let hour = parseFloat(val.time.split(':').first)
-
-          if (!this.isNightTime(hour)) {
-            const {date, ...rest} = val
-            const {updates, day} = this.props
-
-            if (acc[date]) {
-              const newObj = {
-                [date]: {
-                  temp: hour === day.end ? Math.round(((acc[date].temp || 0) + val.temp) / updates) : (acc[date].temp || 0) + val.temp,
-                  clouds: hour === day.end ? Math.round(((acc[date].clouds || 0) + val.clouds) / updates) : (acc[date].clouds || 0) + val.clouds,
-                  rain: hour === day.end ? Math.round(((acc[date].rain || 0) + val.rain) / updates) : (acc[date].rain || 0) + val.rain,
-                  snow: hour === day.end ? Math.round(((acc[date].snow || 0) + val.snow) / updates) : (acc[date].snow || 0) + val.snow,
-                  wind: hour === day.end ? Math.round(((acc[date].wind || 0) + val.wind) / updates) : (acc[date].wind || 0) + val.wind,
-                  icon: val.icon,
-                },
-              }
-
-              return {...acc, [date]: {...acc[date], ...newObj[date]}}
-            }
-
-            return {...acc, [date]: rest}
-          }
-
-          return acc
-        }, {[date]: rest})
+        let averageForecast = Object.entries(dayTimeForecast)
+          .reduce((acc, [date, val]) => (
+            {...acc, [date]: {
+              temp:   val.reduce((acc, { temp })   => acc + temp,   0) / val.length,
+              clouds: val.reduce((acc, { clouds }) => acc + clouds, 0) / val.length,
+              rain:   val.reduce((acc, { rain })   => acc + rain,   0) / val.length,
+              snow:   val.reduce((acc, { snow })   => acc + snow,   0) / val.length,
+              wind:   val.reduce((acc, { wind })   => acc + wind,   0) / val.length,
+              icon:   val.middle.icon,
+            }}
+          ), {})
 
         this.setState({
           city: {
@@ -104,11 +91,11 @@ export default class Weather extends Component {
             <div className='weather-item' key={i}>
               <div className='date'>{date}</div>
               <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
-              <div className='temp' data-description='temp'>{f.temp} °C</div>
-              <div className='rain' data-description='rain'>{f.rain} mm</div>
-              <div className='snow' data-description='snow'>{f.snow} mm</div>
-              <div className='wind' data-description='wind'>{f.wind} km/h</div>
-              <div className='clouds' data-description='clouds'>{f.clouds} %</div>
+              <div className='temp' data-description='temp'>{Math.round(f.temp)} °C</div>
+              <div className='rain' data-description='rain'>{Math.round(f.rain)} mm</div>
+              <div className='snow' data-description='snow'>{Math.round(f.snow)} mm</div>
+              <div className='wind' data-description='wind'>{Math.round(f.wind)} km/h</div>
+              <div className='clouds' data-description='clouds'>{Math.round(f.clouds)} %</div>
             </div>
           )
         }
@@ -129,5 +116,4 @@ Weather.defaultProps = {
     start: 9,
     end: 18,
   },
-  updates: 4,
 }
