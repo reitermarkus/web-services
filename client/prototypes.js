@@ -58,6 +58,13 @@ Object.defineProperty(Array.prototype, 'last', {
   enumerable: false,
 })
 
+Object.defineProperty(Array.prototype, 'middle', {
+  get: function middle() {
+    return this[[Math.floor((this.length - 1) / 2)]] // eslint-disable-line no-magic-numbers
+  },
+  enumerable: false,
+})
+
 Object.defineProperty(Array.prototype, 'tail', {
   get: function tail() {
     return this.slice(1) // eslint-disable-line no-magic-numbers
