@@ -102,6 +102,14 @@ describe('Array.prototype.last', () => {
   })
 })
 
+describe('Array.prototype.middle', () => {
+  it('returns the middle element of an array', () => {
+    expect([1].middle).toBe(1)
+    expect([1, 2].middle).toBe(1)
+    expect([1, 2, 3].middle).toBe(2)
+  })
+})
+
 describe('Array.prototype.tail', () => {
   it('returns a new array without the first element', () => {
     expect([1, 2, 3].tail).toEqual([2, 3])
