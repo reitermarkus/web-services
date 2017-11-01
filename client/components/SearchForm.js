@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import IPLocation from './IPLocation'
+
 export default class SearchForm extends Component {
   constructor(props) {
     super(props)
@@ -44,6 +46,7 @@ export default class SearchForm extends Component {
 
   render() {
     return [
+      <IPLocation key={3}/>,
       <form key={0} className='col' onSubmit={this.handleSubmit}>
         <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange}/>
       </form>,
