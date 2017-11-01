@@ -15,9 +15,9 @@ export default class Weather extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=d60a62434499d77e7dcaf5906f92e102`
-    
+
     axios.get(url).then(
       res => {
         // restructure forecast-data
@@ -65,12 +65,14 @@ export default class Weather extends Component {
         })
       }
     )
-    
+
   }
 
   render() {
     return (
-      null
+      <div>
+      {this.state.city.name} ({this.state.city.country})
+      </div>
     )
   }
 }
