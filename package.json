@@ -42,6 +42,7 @@
     "not ie < 11"
   ],
   "dependencies": {
+    "axios": "^0.17.0",
     "dotenv-webpack": "^1.5.4",
     "extract-text-webpack-plugin": "^3.0.2",
     "fs-extra": "^4.0.2",

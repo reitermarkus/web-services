@@ -1,8 +1,10 @@
 import React from 'react'
 import Slider from './Slider'
+import Weather from './Weather'
 
 const Article = () => (
   <article>
+    <Weather id='2775220'/>
     <Slider images={[
       'https://static.pexels.com/photos/414459/pexels-photo-414459.jpeg',
       'https://static.pexels.com/photos/355241/pexels-photo-355241.jpeg',
