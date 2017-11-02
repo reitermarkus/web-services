@@ -25,3 +25,13 @@ export default class Map extends Component {
       <a href={this.state.lurl} target='_blank'>bigger</a>
     </div>
 }
+
+Map.propTypes = {
+  lat: PropTypes.string.isRequired,
+  lon: PropTypes.string.isRequired,
+  zoom: PropTypes.string,
+}
+
+Map.defaultProps = {
+  zoom: 100,
+}
