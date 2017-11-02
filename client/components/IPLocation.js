@@ -13,7 +13,7 @@ export default class IPLocation extends Component {
   }
 
   componentDidMount() {
-    fetch('https://geoip-db.com/json')
+    fetch('https://geoip-db.com/json/')
       .then(res => res.json())
       .then(res => {
         if (!this.state.initialized) {
