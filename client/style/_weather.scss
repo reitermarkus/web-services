@@ -19,7 +19,14 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto auto;
+
+    @include xs-only {
+      grid-template-columns: 1fr;
+    }
+
+    @include sm-only {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   .weather-item {
@@ -29,14 +36,35 @@
     padding: 8px;
     justify-items: center;
 
-    &:not(:nth-child(3n)) {
-      border-right: 1px solid $lightblue;
+    @include xs-only {
+      &:not(:last-child) {
+        border-bottom: 1px solid $lightblue;
+      }
     }
 
-    &:nth-child(1),
-    &:nth-child(2),
-    &:nth-child(3) {
-      border-bottom: 1px solid $lightblue;
+    @include sm-only {
+      &:not(:nth-child(2n)) {
+        border-right: 1px solid $lightblue;
+      }
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        border-bottom: 1px solid $lightblue;
+      }
+    }
+
+    @include md-up {
+      &:not(:nth-child(3n)) {
+        border-right: 1px solid $lightblue;
+      }
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        border-bottom: 1px solid $lightblue;
+      }
     }
   }
 
