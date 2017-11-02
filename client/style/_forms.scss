@@ -8,6 +8,8 @@ select {
   font-size: $inputfontsize;
   font-family: $inputfontfamily;
   outline: none;
+  appearance: none;
+  -webkit-appearance: none;
   transition: border 0.2s, box-shadow 0.2s;
 
   &:hover,
@@ -20,9 +22,10 @@ select {
   }
 }
 
-input {
-  &[type="text"] {
-    appearance: none;
-    -webkit-appearance: none;
-  }
+select {
+  padding-right: 24px;
+  background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/242277-200.png);
+  background-repeat: no-repeat;
+  background-position: top 50% right 8px;
+  background-size: 8px 8px;
 }
