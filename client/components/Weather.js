@@ -92,8 +92,8 @@ export default class Weather extends Component {
               <div className='date'>{date}</div>
               <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
               <div className='temp' data-description='temp'>{Math.round(f.temp)} °C</div>
-              <div className='rain' data-description='rain'>{Math.round(f.rain)} mm</div>
-              <div className='snow' data-description='snow'>{Math.round(f.snow)} mm</div>
+              <div className='rain' data-description='rain'>{Math.round(f.rain * 10) / 10} mm</div>
+              <div className='snow' data-description='snow'>{Math.round(f.snow * 10) / 10} mm</div>
               <div className='wind' data-description='wind'>{Math.round(f.wind)} km/h</div>
               <div className='clouds' data-description='clouds'>{Math.round(f.clouds)} %</div>
             </div>
