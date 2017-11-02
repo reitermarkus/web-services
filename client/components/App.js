@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import SearchForm from './SearchForm'
+import Map from './Map'
 import Weather from './Weather'
 import Footer from './Footer'
 import { Route, Switch } from 'react-router-dom'
@@ -26,6 +27,7 @@ const App = () =>
           <main>
             <h4>We make sure you&#39;ll be arriven at your destination.</h4>
             <SearchForm />
+            <Map lat='47.2627' lon='11.3945' zoom='100'/>
             <Weather id='2775220' apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
           </main>
           <Footer />
