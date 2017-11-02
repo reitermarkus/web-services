@@ -5,7 +5,7 @@
 
   &::before {
     display: block;
-    content: "";
+    content: '';
     width: 100%;
     padding-top: (9 / 16) * 100%; // 16:9 aspect ratio
   }
