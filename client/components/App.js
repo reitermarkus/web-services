@@ -3,6 +3,7 @@ import Header from './Header'
 import SearchForm from './SearchForm'
 import Map from './Map'
 import Weather from './Weather'
+import Exchange from './Exchange'
 import Footer from './Footer'
 import { Route, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -29,6 +30,7 @@ const App = () =>
             <SearchForm />
             <Map lat='47.2627' lon='11.3945' zoom='100'/>
             <Weather id='2775220' apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
+            <Exchange from='EUR' to='USD'/>
           </main>
           <Footer />
         </fragment>
