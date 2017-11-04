@@ -41,6 +41,7 @@ export default class Exchange extends Component {
   render = () =>
     <div className='exchange'>
       <h2>Exchange rate</h2>
+      <h3>Request exchange-rate for given currency ...</h3>
       1&nbsp;
       <select onChange={this.currencyFromChanged} defaultValue={this.props.from}>
         <option value='AUD'>Australia Dollar (AUD)</option>
@@ -77,7 +78,7 @@ export default class Exchange extends Component {
         <option value='ZAR'>South Africa Rand (ZAR)</option>
       </select>
       &nbsp;=&nbsp;
-      <span className='result'>{(this.state || {}).rate}</span>
+      <b className='result'>{(this.state || {}).rate}</b>
       &nbsp;{this.props.to}
     </div>
 }

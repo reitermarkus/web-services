@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class IPLocation extends Component {
@@ -51,7 +51,11 @@ export default class IPLocation extends Component {
   }
 
   render = () =>
-    `You are here: (${this.state.lat}, ${this.state.lon})`
+    <div className='iplocation'>
+      <h2>IP location</h2>
+      <h3>We track every step you're going ...</h3>
+      You are here: ({this.state.lat}, {this.state.lon})
+    </div>
 }
 
 IPLocation.propTypes = {

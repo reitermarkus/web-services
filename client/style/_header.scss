@@ -1,16 +1,37 @@
-$logo-height: 2rem;
-
 header {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+  display: grid;
   align-items: center;
-  padding: 1em;
+  color: $header-color;
   background: #fff;
-  border-bottom: 1px solid $grey;
+  border-bottom: 1px solid $darkgreen;
+
+  @include xs-only {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px auto;
+    justify-items: center;
+  }
+
+  @include sm-up {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    padding-left: 16px;
+  }
 
   .logo {
-    height: $logo-height;
+    height: 20px;
+    grid-row: 1;
+  }
+
+  nav {
+    @include xs-only {
+      width: 100vw;
+      grid-row: 2;
+      background: $lightgreen;
+    }
+
+    @include sm-up {
+      grid-row: 1;
+    }
   }
 
   ul {
@@ -20,13 +41,32 @@ header {
     padding: 0;
     list-style-type: none;
 
-    li {
-      font-size: $logo-height / 2;
-      line-height: $logo-height;
+    @include xs-only {
+      overflow-x: auto;
     }
 
-    li + li {
-      margin-left: 1em;
+    li {
+      font-size: 16px;
+      line-height: 1;
+      white-space: nowrap;
+      user-select: none;
+
+      @include xs-only {
+        padding: 8px;
+      }
+
+      @include sm-up {
+        padding: 16px;
+      }
+
+      @include hover-only {
+        transition: background 0.2s;
+        cursor: pointer;
+
+        &:hover {
+          background: $lightgreen;
+        }
+      }
     }
   }
 }

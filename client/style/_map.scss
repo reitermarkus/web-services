@@ -1,14 +1,10 @@
 .openstreetmap {
-  position: relative;
-  margin-bottom: 16px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  @include box;
 
-  &::before {
-    display: block;
-    content: '';
-    width: 100%;
-    padding-top: (9 / 16) * 100%; // 16:9 aspect ratio
-  }
+  margin-bottom: 16px;
+  overflow: hidden;
+
+  @include aspect-ratio(16, 9);
 
   iframe {
     position: absolute;
@@ -19,5 +15,17 @@
     width: 100%;
     height: 100%;
     border: none;
+  }
+
+  a {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #fff;
+    background: $green;
+    font-size: 12px;
+    z-index: 1;
   }
 }

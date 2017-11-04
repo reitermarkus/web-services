@@ -8,6 +8,7 @@
 @import 'map';
 @import 'weather';
 @import 'exchange';
+@import 'iplocation';
 @import 'footer';
 
 * {
@@ -32,7 +33,6 @@ body {
 
 main {
   flex: 1;
-  text-align: center;
 
   @include xs-only {
     padding: 16px;
@@ -51,14 +51,36 @@ main {
   }
 }
 
+h1, h2, h3 {
+  line-height: 1;
+}
+
 h1 {
   &:first-child {
     margin-top: 0;
   }
 }
 
+h2 {
+  margin: 0 0 4px 0;
+  color: $green;
+  font-weight: normal;
+}
+
+h3 {
+  margin: 0 0 16px 0;
+  color: $grey;
+  font-weight: 100;
+  font-size: 12px;
+}
+
 a {
   display: inline-block;
   color: $highlight;
+  text-decoration: none;
   cursor: pointer;
+}
+
+b {
+  font-weight: 400;
 }

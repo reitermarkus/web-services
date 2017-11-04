@@ -21,7 +21,6 @@ export default class Map extends Component {
   render = () =>
     <div className='openstreetmap'>
       <iframe src={this.state.url}></iframe>
-      <br/>
       <a href={this.state.lurl} target='_blank'>bigger</a>
     </div>
 }

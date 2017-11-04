@@ -1,12 +1,13 @@
 input,
 select {
-  padding: $inputpadding;
+  padding: 8px;
   background: white;
   color: $darkgrey;
   border: 1px solid $grey;
-  border-radius: $inputrounding;
-  font-size: $inputfontsize;
-  font-family: $inputfontfamily;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: Nunito;
+  line-height: 1;
   outline: none;
   appearance: none;
   -webkit-appearance: none;
@@ -14,18 +15,18 @@ select {
 
   &:hover,
   &:focus {
-    border: 1px solid $blue;
+    border: 1px solid $green;
   }
 
   &:focus {
-    box-shadow: 0 0 0 2px $lightblue;
+    box-shadow: 0 0 0 2px rgba(0, 204, 153, 0.5);
   }
 }
 
 select {
   padding-right: 24px;
-  background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/242277-200.png);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 1 8 8"><polygon points="0,0 4,6 8,0" fill="none" stroke="#333"/></svg>');
   background-repeat: no-repeat;
-  background-position: top 50% right 8px;
+  background-position: top calc(50% + 2px) right 8px;
   background-size: 8px 8px;
 }
