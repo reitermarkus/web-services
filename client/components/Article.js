@@ -1,6 +1,5 @@
 import React from 'react'
 import Slider from './Slider'
-// I import Weather from './Weather'
 
 const Article = () =>
   <article>

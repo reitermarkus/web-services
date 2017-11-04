@@ -1,14 +1,11 @@
 .slider {
-  position: relative;
-  border-radius: 4px;
+  @include box;
+
+  margin-bottom: 16px;
+  padding: 0;
   overflow: hidden;
 
-  &::before {
-    display: block;
-    content: '';
-    width: 100%;
-    padding-top: (9 / 16) * 100%; // 16:9 aspect ratio
-  }
+  @include aspect-ratio(16, 9);
 
   &:hover {
     .btn-container {
@@ -50,7 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 4rem;
+      width: 64px;
       color: white;
       border-radius: 4px;
       user-select: none;
@@ -77,16 +74,16 @@
     display: flex;
     flex-flow: row;
     justify-content: center;
-    padding: 1.5em;
+    padding: 8px;
     color: white;
-    font-size: 0.5em;
+    font-size: 8px;
 
     > div {
       cursor: pointer;
     }
 
     > div + div {
-      margin-left: 0.5rem;
+      margin-left: 8px;
     }
   }
 }

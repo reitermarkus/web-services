@@ -13,20 +13,18 @@ $lg-max: 999999px;
 
 // colors
 $background: #fafafa;
-$darkgrey: #333;
-$grey: #ccc;
-$lightgrey: #eee;
-$highlight: orange;
-$blue: hsl(195, 100%, 50%);
-$lightblue: hsl(195, 100%, 80%);
-$darkblue: hsl(195, 100%, 35%);
-$green: hsl(165, 100%, 40%);
 
-// input-tag-variables
-$inputpadding: 8px;
-$inputrounding: 4px;
-$inputfontsize: 12px;
-$inputfontfamily: Nunito;
+$grey: #ccc;
+$darkergrey: #444;
+$darkgrey: #333;
+$lightergrey: #aaa;
+$lightgrey: #eee;
+
+$highlight: hsl(165, 100%, 40%);
+
+$green: hsl(165, 100%, 40%);
+$lightgreen: hsl(165, 100%, 42.5%);
+$darkgreen: hsl(165, 100%, 30%);
 
 // fonts
 $font: Nunito;

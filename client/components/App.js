@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from './Header'
 import SearchForm from './SearchForm'
+import IPLocation from './IPLocation'
+import Article from './Article'
 import Map from './Map'
 import Weather from './Weather'
 import Exchange from './Exchange'
@@ -26,8 +28,10 @@ const App = () =>
         <fragment>
           <Header />
           <main>
-            <h4>We make sure you&#39;ll be arriven at your destination.</h4>
+            <h4>We make sure you'll be arriven at your destination.</h4>
             <SearchForm />
+            <IPLocation/>
+            <Article/>
             <Map lat='47.2627' lon='11.3945' zoom='100'/>
             <Weather id='2775220' apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
             <Exchange from='EUR' to='USD'/>
