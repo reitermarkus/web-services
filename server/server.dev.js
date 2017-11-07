@@ -6,7 +6,22 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware')
 const config = require('../webpack.config.dev')
 const compiler = webpack(config)
+const routes = require('./express-routes')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const PORT = 3000
+
+mongoose.connect('mongodb://localhost/arriven')
+const db = mongoose.connection
+
+db.once('open', () => {
+  console.log('connected to db: arriven') // eslint-disable-line no-console
+})
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use('/', routes)
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
