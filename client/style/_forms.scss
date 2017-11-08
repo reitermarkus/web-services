@@ -43,7 +43,7 @@ input {
     background: transparent;
     border: 1px solid $blue;
     cursor: pointer;
-    transition: color .2s, background .2s;
+    transition: color 0.2s, background 0.2s;
 
     &:hover {
       color: #fff;

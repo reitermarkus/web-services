@@ -69,13 +69,13 @@ Object.defineProperty(Array.prototype, 'tail', {
 })
 
 Object.defineProperty(String.prototype, 'join', {
-  value: function(s) {
+  value: function() {
     return this // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(String.prototype, 'startsWith', {
   value: function(s) {
-    return (this.substring(0, s.length) == s) // eslint-disable-line no-magic-numbers
+    return (this.substring(0, s.length) === s) // eslint-disable-line no-magic-numbers
   },
 })

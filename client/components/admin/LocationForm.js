@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import axios from 'axios'
 import '../../style/admin.scss'
 
@@ -49,8 +48,8 @@ export default class LocationForm extends Component {
   addLocation = event => {
     event.preventDefault()
 
-    axios.post('/api/location/add', this.state).catch(function (error) {
-      console.error(error);
+    axios.post('/api/location/add', this.state).catch(function(error) {
+      console.error(error) // eslint-disable-line no-console
     })
 
     this.setState({
