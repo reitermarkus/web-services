@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import axios from 'axios'
 import Trash from 'react-icons/lib/fa/trash'
 import '../../style/admin.scss'
@@ -35,13 +34,13 @@ export default class AdminLocationList extends Component {
 
     axios.post('/api/location/del', {
       name: name,
-    }).catch(function (error) {
-      console.error(error);
+    }).catch(function(error) {
+      console.error(error) // eslint-disable-line no-console
     })
   }
 
   render = () =>
-    <div className="admin-location-list">
+    <div className='admin-location-list'>
       {this.state.list.map((e, i) =>
         <div key={i}>
           {Object.entries(e).map(([k, v], i) => {

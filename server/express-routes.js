@@ -67,7 +67,7 @@ router.post('/api/location/add', (req, res, next) => {
   res.status(httpStatus.OK).send('ok')
 })
 
-router.post('/api/location/del', (req, res, next) => {
+router.post('/api/location/del', (req, res) => {
   location.find({name: req.body.name}).remove().exec()
 
   res.status(httpStatus.OK).send('ok')
