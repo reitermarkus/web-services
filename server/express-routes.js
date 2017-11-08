@@ -33,14 +33,13 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.get('/viewloc', (req, res) => {
+router.get('/api/location/list', (req, res) => {
   location.find({}, (err, locations) => {
     res.status(httpStatus.OK).send(JSON.stringify(locations))
   })
 })
 
-router.post('/findloc', (req, res) => {
-  console.log(req.body)
+router.post('/api/location/find', (req, res) => {
   location.find({
     keywords: {
       '$in': req.body.keywords.split(' '),
@@ -50,17 +49,13 @@ router.post('/findloc', (req, res) => {
   })
 })
 
-router.get('/addloc', (req, res) => {
-  res.sendFile(__dirname + '/template/addloc.html')
-})
-
-router.post('/writeloc', (req, res, next) => {
+router.post('/api/location/add', (req, res, next) => {
   const locationData = {
     name: req.body.name,
-    keywords: req.body.keywords.split('\r\n'),
+    keywords: req.body.keywords.split('\n'),
     lat: req.body.lat,
     lon: req.body.lon,
-    imgs: req.body.imgs.split('\r\n'),
+    imgs: req.body.imgs.split('\n'),
   }
 
   location.create(locationData, (err) => {
@@ -68,6 +63,12 @@ router.post('/writeloc', (req, res, next) => {
       return next(err)
     }
   })
+
+  res.status(httpStatus.OK).send('ok')
+})
+
+router.post('/api/location/del', (req, res, next) => {
+  location.find({name: req.body.name}).remove().exec()
 
   res.status(httpStatus.OK).send('ok')
 })
