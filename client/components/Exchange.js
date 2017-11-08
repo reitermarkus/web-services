@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
-// using fixer.io API: http://fixer.io/
+// Using fixer.io API: http://fixer.io/
 export default class Exchange extends Component {
   constructor(props) {
     super(props)
