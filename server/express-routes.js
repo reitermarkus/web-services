@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const user = require('./schema/user')
+const httpStatus = require('http-status-codes')
 
 router.post('/user', (req, res, next) => {
   if (req.body.password === req.body.passwordConf) {
@@ -18,15 +19,15 @@ router.post('/user', (req, res, next) => {
     })
   }
 
-  res.status(500).send('passwords do not match')
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).send('passwords do not match')
 })
 
 router.post('/login', (req, res) => {
   user.login(req.body.email, req.body.password, (err, user) => {
-    if(err || !user) {
-      res.status(500).send('wrong email or password')
+    if (err || !user) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('wrong email or password')
     } else {
-      res.status(200).send('login successfull')
+      res.status(httpStatus.OK).send('login successfull')
     }
   })
 })
