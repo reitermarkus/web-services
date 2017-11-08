@@ -7,6 +7,8 @@ import Map from './Map'
 import Weather from './Weather'
 import Exchange from './Exchange'
 import Footer from './Footer'
+import AdminLocationList from './admin/LocationList'
+import AdminLocationForm from './admin/LocationForm'
 import { Route, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import HttpStatus from 'http-status-codes'
@@ -39,6 +41,26 @@ const App = () =>
           <Footer />
         </fragment>
       } />
+      <Route exact path='/admin/location/list' render={() =>
+        <fragment>
+          <Header />
+          <main>
+            <h1>Admin: Location list</h1>
+            <AdminLocationList />
+          </main>
+          <Footer />
+        </fragment>
+      }/>
+      <Route exact path='/admin/location/add' render={() =>
+        <fragment>
+          <Header />
+          <main>
+            <h1>Admin: Add location</h1>
+            <AdminLocationForm />
+          </main>
+          <Footer />
+        </fragment>
+      }/>
       <Route render={() => {
         const status = HttpStatus.NOT_FOUND
 

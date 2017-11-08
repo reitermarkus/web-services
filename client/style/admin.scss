@@ -1,0 +1,40 @@
+@import 'vars';
+
+.admin-location-list {
+  background: $lightgrey;
+  border-radius: 4px;
+  text-align: left;
+
+  > div {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 16px;
+    border-bottom: 1px solid $grey;
+
+    > div {
+      &:nth-of-type(4),
+      &:nth-of-type(5) {
+        grid-column: 1 / span 3;
+      }
+    }
+
+    > div:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+
+  .trash {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: $red;
+    cursor: pointer;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    color: $grey;
+  }
+}

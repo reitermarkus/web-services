@@ -34,7 +34,7 @@ export default class SearchForm extends Component {
   }
 
   searchTargets = value => {
-    axios.post('/findloc', {
+    axios.post('/api/location/find', {
       keywords: value,
     }).then((res) => {
       this.setState({output: JSON.stringify(res.data)})
