@@ -1,41 +1,41 @@
 Object.defineProperty(Number.prototype, 'positive', {
-  get: function positive() {
+  value: function() {
     return this > 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'positiveOrZero', {
-  get: function positiveOrZero() {
+  value: function() {
     return this >= 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'negative', {
-  get: function negative() {
+  value: function() {
     return this < 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'negativeOrZero', {
-  get: function negativeOrZero() {
+  value: function() {
     return this <= 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'zero', {
-  get: function zero() {
+  value: function() {
     return this === 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'increment', {
-  get: function increment() {
+  value: function() {
     return this + 1 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'decrement', {
-  get: function decrement() {
+  value: function() {
     return this - 1 // eslint-disable-line no-magic-numbers
   },
 })
@@ -45,29 +45,37 @@ Number.prototype.clamp = function(min, max) {
 }
 
 Object.defineProperty(Array.prototype, 'first', {
-  get: function first() {
+  value: function() {
     return this[0] // eslint-disable-line no-magic-numbers
   },
-  enumerable: false,
 })
 
 Object.defineProperty(Array.prototype, 'last', {
-  get: function last() {
+  value: function() {
     return this[this.length - 1] // eslint-disable-line no-magic-numbers
   },
-  enumerable: false,
 })
 
 Object.defineProperty(Array.prototype, 'middle', {
-  get: function middle() {
+  value: function() {
     return this[[Math.floor((this.length - 1) / 2)]] // eslint-disable-line no-magic-numbers
   },
-  enumerable: false,
 })
 
 Object.defineProperty(Array.prototype, 'tail', {
-  get: function tail() {
+  value: function() {
     return this.slice(1) // eslint-disable-line no-magic-numbers
   },
-  enumerable: false,
+})
+
+Object.defineProperty(String.prototype, 'join', {
+  value: function(s) {
+    return this // eslint-disable-line no-magic-numbers
+  },
+})
+
+Object.defineProperty(String.prototype, 'startsWith', {
+  value: function(s) {
+    return (this.substring(0, s.length) == s) // eslint-disable-line no-magic-numbers
+  },
 })
