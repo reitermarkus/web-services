@@ -3,19 +3,31 @@ const router = express.Router()
 const user = require('./schema/user')
 
 router.post('/user', (req, res, next) => {
-  const userData = {
-    email: req.body.email,
-    username: req.body.username,
-    password: req.body.password,
-    passwordConf: req.body.passwordConf,
-  }
-
-  user.create(userData, (error, user) => {
-    if (error) {
-      return next(error)
+  if (req.body.password === req.body.passwordConf) {
+    const userData = {
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password,
+      passwordConf: req.body.passwordConf,
     }
 
-    console.log(`created user ${user}`)
+    user.create(userData, (err) => {
+      if (err) {
+        return next(err)
+      }
+    })
+  }
+
+  res.status(500).send('passwords do not match')
+})
+
+router.post('/login', (req, res) => {
+  user.login(req.body.email, req.body.password, (err, user) => {
+    if(err || !user) {
+      res.status(500).send('wrong email or password')
+    } else {
+      res.status(200).send('login successfull')
+    }
   })
 })
 
