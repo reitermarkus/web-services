@@ -1,5 +1,6 @@
 input,
-select {
+select,
+textarea {
   padding: 8px;
   background: white;
   color: $darkgrey;
@@ -29,4 +30,24 @@ select {
   background-repeat: no-repeat;
   background-position: top calc(50% + 2px) right 8px;
   background-size: 8px 8px;
+}
+
+input {
+  appearance: none;
+  -webkit-appearance: none;
+
+  &[type='submit'],
+  &[type='button'] {
+    padding: 8px 16px;
+    color: $blue;
+    background: transparent;
+    border: 1px solid $blue;
+    cursor: pointer;
+    transition: color .2s, background .2s;
+
+    &:hover {
+      color: #fff;
+      background: $blue;
+    }
+  }
 }
