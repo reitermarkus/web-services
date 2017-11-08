@@ -53,7 +53,7 @@ export default class IPLocation extends Component {
   render = () =>
     <div className='iplocation'>
       <h2>IP location</h2>
-      <h3>We track every step you're going ...</h3>
+      <h3>We track every step you&#39;re going ...</h3>
       You are here: ({this.state.lat}, {this.state.lon})
     </div>
 }
