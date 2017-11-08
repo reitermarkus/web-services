@@ -1,8 +1,8 @@
 header {
   display: grid;
   align-items: center;
-  color: $header-color;
-  background: #fff;
+  color: #fff;
+  background: $green;
   border-bottom: 1px solid $darkgreen;
 
   @include xs-only {
