@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class SearchForm extends Component {
   constructor(props) {
@@ -33,7 +34,11 @@ export default class SearchForm extends Component {
   }
 
   searchTargets = value => {
-    this.setState({output: value})
+    axios.post('/findloc', {
+      keywords: value,
+    }).then((res) => {
+      this.setState({output: JSON.stringify(res.data)})
+    })
   }
 
   handleSubmit = event => {

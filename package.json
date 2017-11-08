@@ -12,6 +12,7 @@
     "coveralls": "coveralls < ./coverage/lcov.info",
     "start": "webpack-dev-server --config=webpack.config.prod --hot --inline",
     "build": "webpack --config=webpack.config.prod --progress --profile --colors",
+    "mongodb": "mongod --dbpath ./db",
     "server": "node ./server/server.dev.js"
   },
   "repository": {
