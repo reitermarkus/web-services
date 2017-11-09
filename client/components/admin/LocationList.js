@@ -9,11 +9,12 @@ export default class LocationList extends Component {
     super(props)
 
     this.state = {
+      mode: 'list',
       list: [],
     }
   }
 
-  componentDidMount() {
+  fetchLocationList() {
     fetch('/api/location/list')
       .then(res => res.json())
       .then(res => {
@@ -23,12 +24,24 @@ export default class LocationList extends Component {
       })
   }
 
+  componentDidMount() {
+    this.fetchLocationList()
+  }
+
   addLocation() {
-    this.props.setMode.call(this.props.view, 'add')
+    this.setState({
+      mode: 'add',
+    })
+
+    this.props.setMode('add', this.props.emptyData)
   }
 
   editIndex(i) {
-    this.props.setMode.call(this.props.view, 'edit', this.state.list[i])
+    this.setState({
+      mode: 'update',
+    })
+
+    this.props.setMode('update', this.state.list[i])
   }
 
   removeIndex(i) {
@@ -48,33 +61,50 @@ export default class LocationList extends Component {
     })
   }
 
-  render = () =>
-    <div className='admin-location-list'>
-      {this.state.list.map((e, i) =>
-        <div key={i}>
-          {Object.entries(e).map(([k, v], i) => {
-            if (k.startsWith('_')) {
-              return
-            }
+  componentWillReceiveProps(props) {
+    this.setState({
+      mode: props.mode,
+    })
 
-            return (
-              <div key={i}>
-                <label>{k}</label>
-                {v.join(', ')}
+    this.fetchLocationList()
+  }
+
+  render = () => {
+    if (this.state.mode === 'list') {
+      return (
+        <div className='admin-location-list'>
+          {this.state.list.map((e, i) =>
+            <div key={i}>
+              {Object.entries(e).map(([k, v], i) => {
+                if (k.startsWith('_')) {
+                  return
+                }
+
+                return (
+                  <div key={i}>
+                    <label>{k}</label>
+                    {v.join(', ')}
+                  </div>
+                )
+              })}
+              <div className='tools'>
+                <Edit className='edit' onClick={() => this.editIndex(i)} />
+                <Trash className='trash' onClick={() => this.removeIndex(i)} />
               </div>
-            )
-          })}
-          <div className='tools'>
-            <Edit className='edit' onClick={() => this.editIndex(i)} />
-            <Trash className='trash' onClick={() => this.removeIndex(i)} />
-          </div>
+            </div>
+          )}
+          <input type='button' value='add location' onClick={() => this.addLocation()} />
         </div>
-      )}
-      <input type='button' value='add location' onClick={() => this.addLocation()} />
-    </div>
+      )
+    }
+
+    return (<fragment></fragment>)
+  }
 }
 
 LocationList.propTypes = {
+  mode: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  emptyData: PropTypes.object.isRequired,
   setMode: PropTypes.func.isRequired,
-  view: PropTypes.object.isRequired,
 }

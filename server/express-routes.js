@@ -76,7 +76,7 @@ router.post('/api/location/update', (req, res) => {
     imgs: req.body.imgs.split('\n'),
   }
 
-  location.update({_id: req.body.id}, {
+  location.update({_id: req.body._id}, {
     '$set': locationData,
   }, (err, stats) => {
     if (stats.n === 1) {
