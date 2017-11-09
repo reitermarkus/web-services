@@ -1,41 +1,41 @@
 Object.defineProperty(Number.prototype, 'positive', {
-  value: function() {
+  get: function() {
     return this > 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'positiveOrZero', {
-  value: function() {
+  get: function() {
     return this >= 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'negative', {
-  value: function() {
+  get: function() {
     return this < 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'negativeOrZero', {
-  value: function() {
+  get: function() {
     return this <= 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'zero', {
-  value: function() {
+  get: function() {
     return this === 0 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'increment', {
-  value: function() {
+  get: function() {
     return this + 1 // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Number.prototype, 'decrement', {
-  value: function() {
+  get: function() {
     return this - 1 // eslint-disable-line no-magic-numbers
   },
 })
@@ -45,25 +45,25 @@ Number.prototype.clamp = function(min, max) {
 }
 
 Object.defineProperty(Array.prototype, 'first', {
-  value: function() {
+  get: function() {
     return this[0] // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Array.prototype, 'last', {
-  value: function() {
+  get: function() {
     return this[this.length - 1] // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Array.prototype, 'middle', {
-  value: function() {
+  get: function() {
     return this[[Math.floor((this.length - 1) / 2)]] // eslint-disable-line no-magic-numbers
   },
 })
 
 Object.defineProperty(Array.prototype, 'tail', {
-  value: function() {
+  get: function() {
     return this.slice(1) // eslint-disable-line no-magic-numbers
   },
 })
