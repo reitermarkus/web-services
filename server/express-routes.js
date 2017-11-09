@@ -49,7 +49,7 @@ router.post('/api/location/find', (req, res) => {
   })
 })
 
-router.post('/api/location/add', (req, res, next) => {
+router.post('/api/location/add', (req, res) => {
   const locationData = {
     name: req.body.name,
     keywords: req.body.keywords.split('\n'),
@@ -60,11 +60,31 @@ router.post('/api/location/add', (req, res, next) => {
 
   location.create(locationData, (err) => {
     if (err) {
-      return next(err)
+      res.status(httpStatus.OK).send('not ok')
+    } else {
+      res.status(httpStatus.OK).send('ok')
     }
   })
+})
 
-  res.status(httpStatus.OK).send('ok')
+router.post('/api/location/update', (req, res) => {
+  const locationData = {
+    name: req.body.name,
+    keywords: req.body.keywords.split('\n'),
+    lat: req.body.lat,
+    lon: req.body.lon,
+    imgs: req.body.imgs.split('\n'),
+  }
+
+  location.update({_id: req.body.id}, {
+    '$set': locationData,
+  }, (err, stats) => {
+    if (stats.n === 1) {
+      res.status(httpStatus.OK).send('ok')
+    } else {
+      res.status(httpStatus.OK).send('not ok')
+    }
+  })
 })
 
 router.post('/api/location/del', (req, res) => {

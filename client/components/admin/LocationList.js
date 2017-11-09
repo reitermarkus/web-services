@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import Trash from 'react-icons/lib/fa/trash'
-import '../../style/admin.scss'
+import Edit from 'react-icons/lib/fa/pencil'
 
-export default class AdminLocationList extends Component {
+export default class LocationList extends Component {
   constructor(props) {
     super(props)
 
@@ -20,6 +21,14 @@ export default class AdminLocationList extends Component {
           list: res,
         })
       })
+  }
+
+  addLocation() {
+    this.props.setMode.call(this.props.view, 'add')
+  }
+
+  editIndex(i) {
+    this.props.setMode.call(this.props.view, 'edit', this.state.list[i])
   }
 
   removeIndex(i) {
@@ -55,10 +64,17 @@ export default class AdminLocationList extends Component {
               </div>
             )
           })}
-          <div className='trash' onClick={() => this.removeIndex(i)}>
-            <Trash />
+          <div className='tools'>
+            <Edit className='edit' onClick={() => this.editIndex(i)} />
+            <Trash className='trash' onClick={() => this.removeIndex(i)} />
           </div>
         </div>
       )}
+      <input type='button' value='add location' onClick={() => this.addLocation()} />
     </div>
+}
+
+LocationList.propTypes = {
+  setMode: PropTypes.func.isRequired,
+  view: PropTypes.object.isRequired,
 }

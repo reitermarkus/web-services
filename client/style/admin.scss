@@ -1,7 +1,6 @@
 @import 'vars';
 
 .admin-location-list {
-  background: $lightgrey;
   border-radius: 4px;
   text-align: left;
 
@@ -10,6 +9,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 16px;
+    background: $lightgrey;
     border-bottom: 1px solid $grey;
 
     > div {
@@ -24,17 +24,37 @@
     }
   }
 
-  .trash {
+  .tools {
     position: absolute;
     top: 8px;
     right: 8px;
+    text-align: right;
+    user-select: none;
+
+    * {
+      cursor: pointer;
+    }
+
+    * + * {
+      margin-left: 8px;
+    }
+  }
+
+  .edit {
+    color: $blue;
+  }
+
+  .trash {
     color: $red;
-    cursor: pointer;
   }
 
   label {
     display: block;
     font-size: 14px;
     color: $grey;
+  }
+
+  input[type='button'] {
+    margin-top: 16px;
   }
 }
