@@ -1,9 +1,11 @@
 import React from 'react'
-import Slider from './Slider'
+import Distance from './Distance'
+import Pixabay from './Pixabay'
 
 const Article = () =>
   <article>
-    <Slider />
+    <Distance from='Innsbruck' to='Vienna' apiKey={process.env.GOOGLE_API_KEY} />
+    <Pixabay query='Innsbruck' apiKey={process.env.PIXABAY_API_KEY} />
   </article>
 
 export default Article
