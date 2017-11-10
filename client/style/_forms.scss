@@ -39,15 +39,15 @@ input {
   &[type='submit'],
   &[type='button'] {
     padding: 8px 16px;
-    color: $blue;
+    color: $green;
     background: transparent;
-    border: 1px solid $blue;
+    border: 1px solid $green;
     cursor: pointer;
     transition: color 0.2s, background 0.2s;
 
     &:hover {
       color: #fff;
-      background: $blue;
+      background: $green;
     }
   }
 }
