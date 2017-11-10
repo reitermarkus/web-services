@@ -90,6 +90,12 @@ describe('Number.prototype.clamp', () => {
   expect((100).clamp(-50, 50)).toBe(50)
 })
 
+describe('Number.prototype.between', () => {
+  expect((-100).between(-50, 50)).toBe(false)
+  expect((0).between(-50, 50)).toBe(true)
+  expect((100).between(-50, 50)).toBe(false)
+})
+
 describe('Array.prototype.first', () => {
   it('returns the first element of an array', () => {
     expect([1, 2, 3].first).toBe(1)

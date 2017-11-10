@@ -40,9 +40,17 @@ Object.defineProperty(Number.prototype, 'decrement', {
   },
 })
 
-Number.prototype.clamp = function(min, max) {
-  return this <= min ? min : this >= max ? max : this
-}
+Object.defineProperty(Number.prototype, 'clamp', {
+  value: function(min, max) {
+    return this <= min ? min : this >= max ? max : this
+  },
+})
+
+Object.defineProperty(Number.prototype, 'between', {
+  value: function(min, max) {
+    return this >= min && this <= max
+  },
+})
 
 Object.defineProperty(Array.prototype, 'first', {
   get: function() {

@@ -48,7 +48,7 @@ export default class Pixabay extends Component {
 
   render = () =>
     <fragment>
-      <Slider images={this.state.data.hits.map((v) => {
+      <Slider images={this.state.data.hits.filter((v) => (v.webformatWidth / v.webformatHeight).between(1.5, 1.9)).map((v) => {
         return v.webformatURL
       })} />
     </fragment>
