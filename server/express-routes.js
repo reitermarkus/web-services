@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const user = require('./schema/user')
 const location = require('./schema/location')
+const pixabay = require('./schema/pixabay')
 const httpStatus = require('http-status-codes')
 
 router.post('/user', (req, res, next) => {
@@ -89,6 +90,32 @@ router.post('/api/location/update', (req, res) => {
 
 router.post('/api/location/del', (req, res) => {
   location.find({name: req.body.name}).remove().exec()
+
+  res.status(httpStatus.OK).send('ok')
+})
+
+router.post('/api/pixabay/find', (req, res) => {
+  pixabay.find({}, (err, result) => {
+    if (err) {
+      res.status(httpStatus.OK).send('"not ok"')
+    } else {
+      res.status(httpStatus.OK).send(JSON.stringify(result))
+    }
+  })
+})
+
+router.post('/api/pixabay/cache', (req, res) => {
+  pixabay.create(req.body, (err) => {
+    if (err) {
+      res.status(httpStatus.OK).send('not ok')
+    } else {
+      res.status(httpStatus.OK).send('ok')
+    }
+  })
+})
+
+router.get('/api/pixabay/del', (req, res) => {
+  location.find({query: req.query.q}).remove().exec()
 
   res.status(httpStatus.OK).send('ok')
 })
