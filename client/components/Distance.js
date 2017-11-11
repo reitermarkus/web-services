@@ -31,7 +31,7 @@ export default class Distance extends Component {
 
   componentDidMount() {
     fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.state.from}&destinations=${this.state.to}&language=en&key=${this.props.apiKey}`)
-      .then(res => res.json())
+      .then(res => console.log('distance:', res))
       .then(res => {
         console.log(res)
       })
