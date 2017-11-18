@@ -16,30 +16,48 @@ export default class Pixabay extends Component {
     }
   }
 
+  updateState(data) {
+    this.setState({
+      data: {
+        totalHits: data.totalHits,
+        hits: data.hits,
+        total: data.total,
+      },
+    })
+  }
+
+  fetchData() {
+    fetch(`https://pixabay.com/api/?q=${this.state.query}&image_type=photo&category=nature&key=${this.props.apiKey}`)
+      .then(res => res.json())
+      .then(res => {
+        let data = res
+
+        data.query = this.state.query
+        data.time = Date.now()
+
+        axios.post('/api/pixabay/cache', data)
+          .catch(function(error) {
+            console.error(error) // eslint-disable-line no-console
+          })
+
+        this.updateState(res)
+      })
+  }
+
   componentDidMount() {
+    // Pixabay invalidates image-links after some time.
+    // At the moment we assume it is about 24 hours. So we store the time, when we cached the entry.
+    // If the time exceeds the given delta, we refetch data from Pixabay.
+    const dayInMS = 86400000
+
     axios.post('/api/pixabay/find', {query: this.state.query})
       .then(res => res.data.first)
       .then(res => {
-        if (res.length === 0) {
-          fetch(`https://pixabay.com/api/?q=${this.state.query}&image_type=photo&category=nature&key=${this.props.apiKey}`)
-            .then(res => res.json())
-            .then(res => {
-              let postData = res
-
-              postData.query = this.state.query
-              axios.post('/api/pixabay/cache', postData)
-                .catch(function(error) {
-                  console.error(error) // eslint-disable-line no-console
-                })
-            })
+        if (!res || (Date.now() - res.time) > dayInMS) {
+          this.fetchData()
+        } else {
+          this.updateState(res)
         }
-        this.setState({
-          data: {
-            totalHits: res.totalHits,
-            hits: res.hits,
-            total: res.total,
-          },
-        })
       })
       .catch(function(error) {
         console.error(error) // eslint-disable-line no-console
