@@ -51,7 +51,7 @@ export default class Pixabay extends Component {
     const dayInMS = 86400000
 
     axios.post('/api/pixabay/find', {query: this.state.query})
-      .then(res => res.data.first)
+      .then(res => res.data)
       .then(res => {
         if (!res || (Date.now() - res.time) > dayInMS) {
           this.fetchData()
