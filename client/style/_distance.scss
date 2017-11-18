@@ -1,0 +1,28 @@
+.distance {
+  @include box;
+
+  margin-bottom: 16px;
+  padding: 16px;
+
+  > div {
+    display: grid;
+
+    @include sm-down {
+      grid-template-columns: 1fr;
+    }
+
+    @include md-up {
+      grid-template-columns: 1fr 1fr;
+
+      div:last-child {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    color: $grey;
+  }
+}
