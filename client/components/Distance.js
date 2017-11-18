@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 export default class Distance extends Component {
   constructor(props) {
@@ -12,6 +13,13 @@ export default class Distance extends Component {
       lon1: 0,
       lat2: 0,
       lon2: 0,
+      result: {
+        from: '',
+        to: '',
+        distance: '',
+        time: '',
+        transport: 'car',
+      },
     }
   }
 
@@ -29,17 +37,66 @@ export default class Distance extends Component {
     return (rad * c) / 1000 // Kilometers
   }
 
+  parseGoogleData(data) {
+    if (!data.rows.first.elements) {
+      return false
+    }
+
+    this.setState({
+      result: {
+        from: data.origin_addresses.first,
+        to: data.destination_addresses.first,
+        distance: data.rows.first.elements.first.distance.text,
+        time: data.rows.first.elements.first.duration.text,
+        transport: 'car',
+      },
+    })
+
+    return true
+  }
+
   componentDidMount() {
-    fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.state.from}&destinations=${this.state.to}&language=en&key=${this.props.apiKey}`)
-      .then(res => console.log('distance:', res))
+    let url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.state.from}&destinations=${this.state.to}&language=en&key=${this.props.apiKey}`
+    const opts = {}
+
+    axios.post('/api/curl', {url: url, opts: opts})
       .then(res => {
-        console.log(res)
+        if (this.parseGoogleData(res.data)) {
+          return
+        }
+
+        // Calculate distance and estimate travel time by an average speed
+        // Do: let time = distanceBetweenCoordinates() / averageSpeed
       })
   }
 
   render = () =>
-    <fragment>
-    </fragment>
+    <div className='distance'>
+      <h2>Distance</h2>
+      <h3>How long will it take to reach the goal?</h3>
+      <div>
+        <div>
+          <label>from</label>
+          <span>{this.state.result.from}</span>
+        </div>
+        <div>
+          <label>to</label>
+          <span>{this.state.result.to}</span>
+        </div>
+        <div>
+          <label>distance</label>
+          <span>{this.state.result.distance}</span>
+        </div>
+        <div>
+          <label>time</label>
+          <span>{this.state.result.time}</span>
+        </div>
+        <div>
+          <label>required mean(s) of transportation</label>
+          <span>{this.state.result.transport}</span>
+        </div>
+      </div>
+    </div>
 }
 
 Distance.propTypes = {
