@@ -38,7 +38,7 @@ export default class Distance extends Component {
   }
 
   parseGoogleData(data) {
-    if (!data.rows.first.elements) {
+    if (data.rows.first.elements.first.status !== 'OK') {
       return false
     }
 
@@ -104,45 +104,3 @@ Distance.propTypes = {
   to: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
 }
-
-/* Bad result: Innsbruck -> New York
-{
-   "destination_addresses" : [ "New York City, New York, USA" ],
-   "origin_addresses" : [ "Innsbruck, Österreich" ],
-   "rows" : [
-      {
-         "elements" : [
-            {
-               "status" : "ZERO_RESULTS"
-            }
-         ]
-      }
-   ],
-   "status" : "OK"
-}
-*/
-
-/* Good result: Innsbruck -> Vienna
-{
-   "destination_addresses" : [ "Vienna, Austria" ],
-   "origin_addresses" : [ "Innsbruck, Austria" ],
-   "rows" : [
-      {
-         "elements" : [
-            {
-               "distance" : {
-                  "text" : "476 km",
-                  "value" : 476192
-               },
-               "duration" : {
-                  "text" : "4 hours 56 mins",
-                  "value" : 17783
-               },
-               "status" : "OK"
-            }
-         ]
-      }
-   ],
-   "status" : "OK"
-}
-*/

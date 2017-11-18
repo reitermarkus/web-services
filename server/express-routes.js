@@ -97,14 +97,12 @@ router.post('/api/location/del', (req, res) => {
       res.status(httpStatus.OK).send('ok')
     }
   })
-
-  res.status(httpStatus.OK).send('ok')
 })
 
 router.post('/api/pixabay/find', (req, res) => {
   pixabay.findOne({query: req.body.query}, (err, result) => {
     if (err) {
-      res.status(httpStatus.OK).send('"not ok"')
+      res.status(httpStatus.OK).send('not ok')
     } else {
       res.status(httpStatus.OK).send(JSON.stringify(result))
     }
@@ -129,8 +127,6 @@ router.get('/api/pixabay/del', (req, res) => {
       res.status(httpStatus.OK).send('ok')
     }
   })
-
-  res.status(httpStatus.OK).send('ok')
 })
 
 router.post('/api/curl', (req, res) => {
