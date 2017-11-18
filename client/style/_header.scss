@@ -18,8 +18,11 @@ header {
   }
 
   .logo {
-    height: 20px;
     grid-row: 1;
+
+    svg {
+      height: 20px;
+    }
   }
 
   nav {
@@ -45,7 +48,8 @@ header {
       overflow-x: auto;
     }
 
-    li {
+    li a {
+      color: #fff;
       font-size: 16px;
       line-height: 1;
       white-space: nowrap;

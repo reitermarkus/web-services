@@ -7,20 +7,19 @@
   > div {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 16px;
     background: $lightgrey;
     border-bottom: 1px solid $grey;
 
     > div {
-      &:nth-of-type(4),
       &:nth-of-type(5) {
-        grid-column: 1 / span 3;
+        grid-column: 1 / span 4;
       }
-    }
 
-    > div:not(:last-child) {
-      margin-bottom: 8px;
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
     }
   }
 
