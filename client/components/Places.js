@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 export default class Places extends Component {
   constructor(props) {
@@ -12,17 +13,17 @@ export default class Places extends Component {
   }
 
   componentWillUpdate() {
-    fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${this.state.query}&language=en&key=${this.props.apiKey}`, {credentials: 'same-origin'})
-      .then(res => console.log('places:', res))
+    let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${this.state.query}&language=en&key=${this.props.apiKey}`
+    const opts = {}
+
+    axios.post('/api/curl', {url: url, opts: opts})
       .then(res => {
-        console.log(res)
+        console.log('places:', res)
       })
   }
 
   render = () =>
-    <fragment>
-      test
-    </fragment>
+    <fragment></fragment>
 }
 
 Places.propTypes = {
