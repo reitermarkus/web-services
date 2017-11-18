@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const httpStatus = require('http-status-codes')
+const curl = require('curl')
 const user = require('./schema/user')
 const location = require('./schema/location')
 const pixabay = require('./schema/pixabay')
-const httpStatus = require('http-status-codes')
 
 router.post('/user', (req, res, next) => {
   if (req.body.password === req.body.passwordConf) {
@@ -89,7 +90,13 @@ router.post('/api/location/update', (req, res) => {
 })
 
 router.post('/api/location/del', (req, res) => {
-  location.find({name: req.body.name}).remove().exec()
+  location.findOneAndRemove({name: req.body.name}, (err) => {
+    if (err) {
+      res.status(httpStatus.OK).send('not ok')
+    } else {
+      res.status(httpStatus.OK).send('ok')
+    }
+  })
 
   res.status(httpStatus.OK).send('ok')
 })
@@ -115,9 +122,21 @@ router.post('/api/pixabay/cache', (req, res) => {
 })
 
 router.get('/api/pixabay/del', (req, res) => {
-  location.find({query: req.query.q}).remove().exec()
+  pixabay.findOneAndRemove({query: req.query.q}, (err) => {
+    if (err) {
+      res.status(httpStatus.OK).send('not ok')
+    } else {
+      res.status(httpStatus.OK).send('ok')
+    }
+  })
 
   res.status(httpStatus.OK).send('ok')
+})
+
+router.post('/api/curl', (req, res) => {
+  curl.get(req.body.url, req.body.opts, (err, resp, data) => {
+    res.status(httpStatus.OK).send(data)
+  })
 })
 
 module.exports = router
