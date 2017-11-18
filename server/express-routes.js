@@ -54,10 +54,10 @@ router.post('/api/location/find', (req, res) => {
 router.post('/api/location/add', (req, res) => {
   const locationData = {
     name: req.body.name,
-    keywords: req.body.keywords.split('\n'),
     lat: req.body.lat,
     lon: req.body.lon,
-    imgs: req.body.imgs.split('\n'),
+    weatherid: req.body.weatherid,
+    keywords: req.body.keywords.split('\n'),
   }
 
   location.create(locationData, (err) => {
@@ -72,10 +72,10 @@ router.post('/api/location/add', (req, res) => {
 router.post('/api/location/update', (req, res) => {
   const locationData = {
     name: req.body.name,
-    keywords: req.body.keywords.split('\n'),
     lat: req.body.lat,
     lon: req.body.lon,
-    imgs: req.body.imgs.split('\n'),
+    weatherid: req.body.weatherid,
+    keywords: req.body.keywords.split('\n'),
   }
 
   location.update({_id: req.body._id}, {

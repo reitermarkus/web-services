@@ -1,58 +1,55 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Article from './Article'
 
 export default class SearchForm extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      timeout: null,
-      value: '',
-      output: '',
+      output: [],
     }
   }
 
   handleChange = event => {
-    this.setState({value: event.target.value})
-    this.clearTimeout()
+    this.value = event.target.value
+    if (this.timeout) {
+      this.clearTimeout()
+      this.timeout = null
+    }
 
-    const triggerDelay = 1000
-
-    this.setState(prevState => ({
-      timeout: setTimeout(() => {
-        this.clearTimeout()
-        this.searchTargets(prevState.value)
-      }, triggerDelay),
-    }))
+    this.timeout = setTimeout(() => {
+      this.searchTargets()
+    }, 1000)
   }
 
   clearTimeout = () => {
-    if (this.state.timeout) {
-      clearTimeout(this.state.timeout)
-      this.setState({timeout: null})
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+      this.setState({
+        timeout: null,
+      })
     }
   }
 
-  searchTargets = value => {
+  searchTargets = () => {
     axios.post('/api/location/find', {
-      keywords: value,
+      keywords: this.value,
     }).then((res) => {
-      this.setState({output: JSON.stringify(res.data)})
+      this.setState({output: res.data})
     })
-  }
-
-  handleSubmit = event => {
-    event.preventDefault()
-    this.clearTimeout()
-    this.searchTargets(this.state.value)
   }
 
   render = () => (
     <fragment>
-      <form className='col' onSubmit={this.handleSubmit}>
+      <form className='col'>
         <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange}/>
       </form>
-      <div>{this.state.output}</div>
+      <div>
+        {this.state.output.map((e, i) => {
+          return <Article key={i} name={e.name || ''} lat={e.lat || ''} lon={e.lon || ''} weatherid={e.weatherid || ''}/>
+        })}
+      </div>
     </fragment>
   )
 }

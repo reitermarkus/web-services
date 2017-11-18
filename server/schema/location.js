@@ -25,22 +25,13 @@ const locationSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  imgs: {
-    type: Array,
-    unique: false,
-    required: false,
+  weatherid: {
+    type: String,
+    unique: true,
+    required: true,
     trim: true,
   },
 })
-
-/* TODO
-locationSchema.pre('save', function(next) {
-  const location = this
-
-  console.log('saving: ', this)
-  next()
-})
-*/
 
 const location = mongoose.model('Location', locationSchema)
 

@@ -27,7 +27,7 @@ export default class Pixabay extends Component {
   }
 
   fetchData() {
-    fetch(`https://pixabay.com/api/?q=${this.state.query}&image_type=photo&category=nature&key=${this.props.apiKey}`)
+    fetch(`https://pixabay.com/api/?q=${this.state.query}&image_type=photo&category=buildings&key=${this.props.apiKey}`)
       .then(res => res.json())
       .then(res => {
         let data = res

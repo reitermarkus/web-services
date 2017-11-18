@@ -4,7 +4,7 @@ import HeaderMenu from './HeaderMenu'
 
 const Header = () =>
   <header>
-    <Logo className='logo'/>
+    <a href='/' className='logo'><Logo/></a>
     <HeaderMenu/>
   </header>
 

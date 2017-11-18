@@ -17,7 +17,7 @@ export default class LocationView extends Component {
       name: '',
       lat: '',
       lon: '',
-      imgs: [],
+      weatherid: '',
       keywords: [],
     }
   }
@@ -31,7 +31,7 @@ export default class LocationView extends Component {
 
   render = () =>
     <fragment>
-      <LocationList mode={this.state.mode} data={this.state.data} emptyData={this.emptyData} setMode={this.setMode.bind(this)} />
-      <LocationForm mode={this.state.mode} data={this.state.data} emptyData={this.emptyData} setMode={this.setMode.bind(this)} />
+      <LocationList mode={this.state.mode} data={this.state.data} emptyData={this.emptyData} setMode={this.setMode.bind(this)}/>
+      <LocationForm mode={this.state.mode} data={this.state.data} emptyData={this.emptyData} setMode={this.setMode.bind(this)}/>
     </fragment>
 }
