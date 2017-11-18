@@ -102,7 +102,7 @@ router.post('/api/location/del', (req, res) => {
 })
 
 router.post('/api/pixabay/find', (req, res) => {
-  pixabay.find({}, (err, result) => {
+  pixabay.findOne({query: req.body.query}, (err, result) => {
     if (err) {
       res.status(httpStatus.OK).send('"not ok"')
     } else {
