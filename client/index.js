@@ -4,13 +4,17 @@ import App from './components/App'
 import './prototypes'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
+import { Provider } from 'react-redux'
+import store from './store'
 
 const render = (Component) => {
   ReactDOM.hydrate(
     <AppContainer>
-      <BrowserRouter>
-        <Component />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>
     </AppContainer>,
     document.getElementById('root')
   )
