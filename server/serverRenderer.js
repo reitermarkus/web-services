@@ -4,6 +4,8 @@ import { StaticRouter } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import App from '../client/components/App'
 import HttpStatus from 'http-status-codes'
+import { Provider } from 'react-redux'
+import store from '../client/store'
 
 const serverRenderer = () => {
   return (req, res) => {
@@ -20,9 +22,11 @@ const serverRenderer = () => {
     let context = {}
 
     const markup = ReactDOMServer.renderToStaticMarkup(
-      <StaticRouter location={req.url} context={context}>
-        <App />
-      </StaticRouter>
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={context}>
+          <App />
+        </StaticRouter>
+      </Provider>
     )
 
     if (context.url) {
