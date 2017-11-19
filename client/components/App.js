@@ -11,6 +11,7 @@ import SearchForm from './SearchForm'
 import Places from './Places'
 import Footer from './Footer'
 import '../style/App.scss'
+import BackgroundSwitcher from './BackgroundSwitcher'
 
 const Search = ({ match }) =>
   <fragment>
