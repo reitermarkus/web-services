@@ -24,13 +24,13 @@ html {
 
 body {
   margin: 0;
+  background: $background;
 }
 
 #root {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-  background: $background;
 }
 
 main {
