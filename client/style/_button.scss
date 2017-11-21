@@ -1,0 +1,44 @@
+%button-style {
+  border-radius: 4px;
+  font-size: 1em;
+  font-weight: 200;
+  transition: box-shadow .25s ease;
+  outline: 0;
+  padding: .5em .75em;
+  margin: 0;
+  line-height: normal;
+}
+
+@mixin button-color($button-color, $text-color: white) {
+  background: $button-color;
+  border: darken($button-color, 10%);
+  color: $text-color;
+
+  &:not([disabled]) {
+    &:hover {
+      background: lighten($button-color, 5%);
+    }
+
+    &:active,
+    &.ui-state-active {
+      background: darken($button-color, 5%);
+    }
+  }
+}
+
+button {
+  @extend %button-style;
+  @include button-color($green);
+
+  &.danger {
+    @include button-color($red);
+  }
+
+  &.info {
+    @include button-color($blue);
+  }
+
+  + button {
+    margin-left: .5em;
+  }
+}

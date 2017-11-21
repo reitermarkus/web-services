@@ -10,6 +10,7 @@ import IPLocation from './IPLocation'
 import SearchForm from './SearchForm'
 import Places from './Places'
 import Footer from './Footer'
+import Login from './Login'
 import '../style/App.scss'
 import BackgroundSwitcher from './BackgroundSwitcher'
 
@@ -43,6 +44,17 @@ const App = () =>
       <Redirect exact from='/' to='/search'/>
       <Route exact path='/search' component={Search}/>
       <Route path='/search/:query' component={Search}/>
+      <Route exact path='/login' render={() =>
+        <fragment>
+          <Header />
+          <main>
+            <BackgroundSwitcher timeout={6000}>
+              <Login />
+            </BackgroundSwitcher>
+          </main>
+          <Footer />
+        </fragment>
+      } />
       <Route exact path='/admin/location' render={() =>
         <fragment>
           <Header />

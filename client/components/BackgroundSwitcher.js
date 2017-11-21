@@ -39,6 +39,7 @@ class BackgroundSwitcher extends Component {
         width: '100%',
         height: '100%',
         backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
         backgroundPosition: 'center center',
       },
     }
@@ -52,6 +53,7 @@ class BackgroundSwitcher extends Component {
 
           return <div key={key} style={{...styles.img, backgroundImage: `url("${img}")`}}/>
         })}
+        {this.props.children}
       </div>
     )
   }
