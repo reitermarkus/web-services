@@ -67,6 +67,15 @@ export default class Distance extends Component {
 
         // Calculate distance and estimate travel time by an average speed
         // Do: let time = distanceBetweenCoordinates() / averageSpeed
+        this.setState({
+          result: {
+            from: res.data.origin_addresses.first,
+            to: res.data.destination_addresses.first,
+            distance: '-',
+            time: '-',
+            transport: 'plane',
+          }
+        })
       })
   }
 
