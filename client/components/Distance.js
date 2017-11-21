@@ -74,7 +74,7 @@ export default class Distance extends Component {
             distance: '-',
             time: '-',
             transport: 'plane',
-          }
+          },
         })
       })
   }
