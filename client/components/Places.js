@@ -18,7 +18,7 @@ export default class Places extends Component {
 
     axios.post('/api/curl', {url: url, opts: opts})
       .then(res => {
-        console.log('places:', res)
+        console.log('places:', res) // eslint-disable-line no-console
       })
   }
 

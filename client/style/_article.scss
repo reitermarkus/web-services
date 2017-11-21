@@ -1,13 +1,13 @@
 article {
-    @include box;
+  @include box;
 
-    padding: 16px;
+  padding: 16px;
 
-    .description h2 {
-        margin-bottom: 16px;
-    }
+  .description h2 {
+    margin-bottom: 16px;
+  }
 }
 
 article + article {
-    margin-top: 16px;
+  margin-top: 16px;
 }
