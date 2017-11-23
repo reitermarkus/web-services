@@ -10,7 +10,7 @@
     "stylelint": "stylelint '**/*.scss' --cache --cache-location node_modules/.cache/stylelint",
     "spec": "jest",
     "coveralls": "coveralls < ./coverage/lcov.info",
-    "start": "yarn mongodb & trap exit INT; trap \"kill -INT $(cat db/mongod.lock)\" EXIT; yarn server",
+    "start": "run-p mongodb server",
     "build": "webpack --config=webpack.config.prod --progress --profile --colors",
     "mongodb": "mongod --dbpath ./db",
     "server": "node ./server/server.dev.js"
@@ -87,6 +87,7 @@
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-react-functional-set-state": "^1.2.1",
     "markdownlint-cli": "^0.3.1",
+    "npm-run-all": "^4.1.2",
     "postcss": "^6.0.13",
     "postcss-loader": "^2.0.8",
     "react-hot-loader": "^3.1.1",
