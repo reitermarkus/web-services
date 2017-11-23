@@ -10,7 +10,7 @@
     "stylelint": "stylelint '**/*.scss' --cache --cache-location node_modules/.cache/stylelint",
     "spec": "jest",
     "coveralls": "coveralls < ./coverage/lcov.info",
-    "start": "webpack-dev-server --config=webpack.config.prod --hot --inline",
+    "start": "yarn mongodb & trap exit INT; trap \"kill -INT $(cat db/mongod.lock)\" EXIT; yarn server",
     "build": "webpack --config=webpack.config.prod --progress --profile --colors",
     "mongodb": "mongod --dbpath ./db",
     "server": "node ./server/server.dev.js"
