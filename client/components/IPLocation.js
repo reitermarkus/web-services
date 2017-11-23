@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import store from '../store'
+import locationAction from '../actions/location-action'
 
 export default class IPLocation extends Component {
   constructor(props) {
@@ -44,6 +46,11 @@ export default class IPLocation extends Component {
       lat: lat,
       lon: lon,
     })
+
+    store.dispatch(locationAction('USER_LOCATION', {
+      lat: lat,
+      lon: lon,
+    }))
 
     if (this.onLocationChange) {
       this.props.onLocationChange({lat: lat, lon: lon})

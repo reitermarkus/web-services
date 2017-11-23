@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
-export default class Distance extends Component {
+class Distance extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       from: this.props.from.replace(' ', '+'),
       to: this.props.to.replace(' ', '+'),
-      lat1: 0,
-      lon1: 0,
       lat2: 0,
       lon2: 0,
       result: {
@@ -26,10 +25,10 @@ export default class Distance extends Component {
   distanceBetweenCoordinates() {
     // Copied from https://www.movable-type.co.uk/scripts/latlong.html
     let rad = 6371e3 // Meters
-    let phi1 = this.state.lat1.toRadians()
+    let phi1 = this.props.userLocation.lat.toRadians()
     let phi2 = this.state.lat2.toRadians()
-    let deltaPhi = (this.state.lat2 - this.state.lat1).toRadians()
-    let deltaGamma = (this.state.lon2 - this.state.lon1).toRadians()
+    let deltaPhi = (this.state.lat2 - this.props.userLocation.lat).toRadians()
+    let deltaGamma = (this.state.lon2 - this.props.userLocation.lon).toRadians()
 
     let a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaGamma / 2) * Math.sin(deltaGamma / 2)
     let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
@@ -108,8 +107,17 @@ export default class Distance extends Component {
     </div>
 }
 
+const mapStateToProps = (store) => {
+  return {
+    userLocation: store.locationReducer.userLocation,
+  }
+}
+
+export default connect(mapStateToProps)(Distance)
+
 Distance.propTypes = {
   from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
+  userLocation: PropTypes.object,
 }
