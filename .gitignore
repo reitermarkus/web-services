@@ -8,3 +8,5 @@ db/*
 !db/.gitkeep
 
 .env
+
+*.log
