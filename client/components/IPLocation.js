@@ -26,6 +26,25 @@ export default class IPLocation extends Component {
           })
         }
       })
+      .catch(err => {
+        if (process.env.NODE_ENV === 'development') {
+          console.error(err) // eslint-disable-line no-console
+        }
+
+        // Fail-over to another IP location API.
+        fetch('http://ip-api.com/json/?fields=lat,lon')
+          .then(res => res.json())
+          .then(res => {
+            if (!this.state.initialized) {
+              this.setLocation(res)
+            }
+          })
+          .catch(err => {
+            if (process.env.NODE_ENV === 'development') {
+              console.error(err) // eslint-disable-line no-console
+            }
+          })
+      })
 
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(pos => {
