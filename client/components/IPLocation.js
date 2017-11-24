@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import store from '../store'
 import locationAction from '../actions/location-action'
+import Map from './Map'
 
 export default class IPLocation extends Component {
   constructor(props) {
@@ -57,12 +58,22 @@ export default class IPLocation extends Component {
     }
   }
 
-  render = () =>
-    <div className='iplocation'>
-      <h2>IP location</h2>
-      <h3>We track every step you&#39;re going ...</h3>
-      You are here: ({this.state.lat}, {this.state.lon})
-    </div>
+  render = () => {
+    if (this.state.initialized) {
+      return (
+        <fragment>
+          <div className='iplocation'>
+            <h2>IP location</h2>
+            <h3>We track every step you&#39;re going ...</h3>
+            You are here: ({this.state.lat}, {this.state.lon})
+          </div>
+          <Map lat={this.state.lat + ''} lon={this.state.lon + ''} zoom='100'/>
+        </fragment>
+      )
+    }
+
+    return <fragment></fragment>
+  }
 }
 
 IPLocation.propTypes = {
