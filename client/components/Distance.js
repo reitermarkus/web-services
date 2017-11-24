@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { computeDistanceBetween, LatLng } from 'spherical-geometry-js'
+import numeral from 'numeral'
 
 class Distance extends Component {
   constructor(props) {
@@ -10,8 +12,6 @@ class Distance extends Component {
     this.state = {
       from: this.props.from.replace(' ', '+'),
       to: this.props.to.replace(' ', '+'),
-      lat2: 0,
-      lon2: 0,
       result: {
         from: '',
         to: '',
@@ -22,25 +22,11 @@ class Distance extends Component {
     }
   }
 
-  distanceBetweenCoordinates() {
-    // Copied from https://www.movable-type.co.uk/scripts/latlong.html
-    let rad = 6371e3 // Meters
-    let phi1 = this.props.userLocation.lat.toRadians()
-    let phi2 = this.state.lat2.toRadians()
-    let deltaPhi = (this.state.lat2 - this.props.userLocation.lat).toRadians()
-    let deltaGamma = (this.state.lon2 - this.props.userLocation.lon).toRadians()
-
-    let a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaGamma / 2) * Math.sin(deltaGamma / 2)
-    let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-
-    return (rad * c) / 1000 // Kilometers
-  }
-
   parseGoogleData(data) {
     if (data.rows.first.elements.first.status !== 'OK') {
       return false
     }
-console.log(this.props.userLocation)
+
     this.setState({
       result: {
         from: data.origin_addresses.first,
@@ -65,13 +51,17 @@ console.log(this.props.userLocation)
         }
 
         // Calculate distance and estimate travel time by an average speed
-        // Do: let time = distanceBetweenCoordinates() / averageSpeed
+        let dist = computeDistanceBetween(new LatLng(this.props.coordFrom.lat, this.props.coordFrom.lon), new LatLng(this.props.coordTo.lat, this.props.coordTo.lon)) / 1000 // Km
+        let time = (dist / 300 + 2) * 3600 // Sec
+        let hours = Math.floor(time / 3600)
+        let mins = Math.floor((time - hours * 3600) / 60)
+
         this.setState({
           result: {
             from: res.data.origin_addresses.first,
             to: res.data.destination_addresses.first,
-            distance: '-',
-            time: '-',
+            distance: numeral(dist).format('0,0.0') + ' km',
+            time: (((hours) ? hours + ' hours' : '') + ' ' + ((mins) ? mins + ' mins' : '')).trim(),
             transport: 'plane',
           },
         })
@@ -109,7 +99,7 @@ console.log(this.props.userLocation)
 
 const mapStateToProps = (store) => {
   return {
-    userLocation: store.locationReducer.userLocation,
+    coordFrom: store.locationReducer,
   }
 }
 
@@ -119,5 +109,6 @@ Distance.propTypes = {
   from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
-  userLocation: PropTypes.object,
+  coordFrom: PropTypes.object,
+  coordTo: PropTypes.object,
 }

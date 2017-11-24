@@ -8,6 +8,7 @@ export default class SearchForm extends Component {
 
     this.state = {
       output: [],
+      timeout: null,
     }
   }
 

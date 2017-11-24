@@ -4,7 +4,6 @@ import LeftArrow from 'react-icons/lib/fa/arrow-left'
 import RightArrow from 'react-icons/lib/fa/arrow-right'
 import CircleOutlined from 'react-icons/lib/fa/circle-thin'
 import CircleFilled from 'react-icons/lib/fa/circle'
-import { connect } from 'react-redux'
 
 const Circle = (props) => {
   const EMPTY_CIRCLE  = <CircleOutlined />
