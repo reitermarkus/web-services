@@ -25,6 +25,12 @@ const pixabaySchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  time: {
+    type: Number,
+    unique: false,
+    required: false,
+    trim: true,
+  },
 })
 
 const pixabay = mongoose.model('Pixabay', pixabaySchema)

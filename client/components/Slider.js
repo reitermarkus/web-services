@@ -23,7 +23,7 @@ Circle.defaultProps = {
   filled: false,
 }
 
-class Slider extends Component {
+export default class Slider extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -61,14 +61,6 @@ class Slider extends Component {
       </div>
     </div>
 }
-
-const mapStateToProps = (store) => {
-  return {
-    images: store.imageReducer.bgImages,
-  }
-}
-
-export default connect(mapStateToProps)(Slider)
 
 Slider.propTypes = {
   images: PropTypes.array,
