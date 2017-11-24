@@ -57,6 +57,7 @@
     "jest": "^21.2.1",
     "mongoose": "^4.13.0",
     "node-sass": "^4.5.3",
+    "numeral": "^2.0.6",
     "path": "^0.12.7",
     "react": "^16.0.0",
     "react-dev-utils": "^4.1.0",
@@ -67,6 +68,7 @@
     "react-router-dom": "^4.2.2",
     "react-svg-loader": "^2.1.0",
     "redux": "^3.7.2",
+    "spherical-geometry-js": "^1.0.1",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3",
     "webpack-merge": "^4.1.0"

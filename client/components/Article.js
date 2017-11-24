@@ -25,7 +25,7 @@ export default class Article extends Component {
       </div>
       <Pixabay query={this.state.name} apiKey={process.env.PIXABAY_API_KEY}/>
       <Map lat={this.state.lat} lon={this.state.lon} zoom='100'/>
-      <Distance from='Telfs' to={this.state.name} apiKey={process.env.GOOGLE_API_KEY}/>
+      <Distance from='Telfs' to={this.state.name} coordTo={{lat: parseFloat(this.state.lat), lon: parseFloat(this.state.lon)}} apiKey={process.env.GOOGLE_API_KEY}/>
       <Weather id={this.state.weatherid} apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
       <Exchange from='EUR' to='USD'/>
     </article>
