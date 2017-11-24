@@ -40,7 +40,7 @@ class Distance extends Component {
     if (data.rows.first.elements.first.status !== 'OK') {
       return false
     }
-
+console.log(this.props.userLocation)
     this.setState({
       result: {
         from: data.origin_addresses.first,
