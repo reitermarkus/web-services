@@ -7,12 +7,6 @@ const locationSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  keywords: {
-    type: Array,
-    unique: false,
-    required: true,
-    trim: true,
-  },
   lat: {
     type: String,
     unique: false,
@@ -28,6 +22,12 @@ const locationSchema = new mongoose.Schema({
   weatherid: {
     type: String,
     unique: true,
+    required: true,
+    trim: true,
+  },
+  keywords: {
+    type: Array,
+    unique: false,
     required: true,
     trim: true,
   },
