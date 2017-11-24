@@ -42,10 +42,20 @@ router.get('/api/location/list', (req, res) => {
 })
 
 router.post('/api/location/find', (req, res) => {
+  if (req.body.keywords === '') {
+    res.status(httpStatus.OK).send('[]')
+    return
+  }
+
+  let data = req.body.keywords.split(',').map(e => {
+    return new RegExp('.*?' + e.trim() + '.*?', 'i')
+  })
+
   location.find({
-    keywords: {
-      '$in': req.body.keywords.split(' '),
-    },
+    '$or' : [
+      {keywords: {'$in': data}},
+      {name: {'$in': data}},
+    ],
   }, (err, locations) => {
     res.status(httpStatus.OK).send(JSON.stringify(locations))
   })
