@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const http = require('http')
 const https = require('https')
 const app = express()
@@ -29,16 +30,12 @@ db.once('open', () => {
   console.log('connected to db: arriven') // eslint-disable-line no-console
 })
 
+app.use(cors())
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/', routes)
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-  next()
-})
 
 app.use(webpackDevMiddleware(compiler, {
   serverSideRender: true,
@@ -62,5 +59,3 @@ https.createServer(sslOptions, app).listen(SSL_PORT, (error) => {
     console.info(`Server started at https://127.0.0.1:${SSL_PORT}/`) // eslint-disable-line no-console
   }
 })
-
-
