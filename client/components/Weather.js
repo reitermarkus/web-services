@@ -5,7 +5,7 @@ import axios from 'axios'
 const WeatherIcon = ({ id, forceDay }) => {
   const iconName = forceDay ? id.replace(/n$/, 'd') : id
 
-  return <img src={`http://openweathermap.org/img/w/${iconName}.png`}/>
+  return <img src={`https://openweathermap.org/img/w/${iconName}.png`}/>
 }
 
 WeatherIcon.propTypes = {
@@ -28,7 +28,7 @@ export default class Weather extends Component {
   }
 
   componentDidMount() {
-    const url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${this.props.apiKey}`
+    const url = `https://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${this.props.apiKey}`
     const factorMPStoKMPH = 3.6
 
     axios.get(url).then(
