@@ -13,7 +13,7 @@ export default class Map extends Component {
       lat: lat,
       lon: lon,
       zoom: zoom,
-      url: `http://www.openstreetmap.org/export/embed.html?bbox=${lon - zoom}%2C${lat - zoom}%2C${lon + zoom}%2C${lat + zoom}&layer=mapnik&marker=${this.props.lat}%2C${this.props.lon}`,
+      url: `https://www.openstreetmap.org/export/embed.html?bbox=${lon - zoom}%2C${lat - zoom}%2C${lon + zoom}%2C${lat + zoom}&layer=mapnik&marker=${this.props.lat}%2C${this.props.lon}`,
       lurl: `https://www.openstreetmap.org/?mlat=${this.props.lat}&mlon=${this.props.lon}#map=19/${this.props.lat}/${this.props.lon}&layers=N`,
     }
   }
