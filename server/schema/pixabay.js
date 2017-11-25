@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const pixabaySchema = new mongoose.Schema({
+const PixabaySchema = new Schema({
   query: {
     type: String,
     unique: true,
@@ -33,6 +34,4 @@ const pixabaySchema = new mongoose.Schema({
   },
 })
 
-const pixabay = mongoose.model('Pixabay', pixabaySchema)
-
-module.exports = pixabay
+module.exports = mongoose.model('Pixabay', PixabaySchema)

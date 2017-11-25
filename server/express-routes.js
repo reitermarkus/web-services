@@ -4,7 +4,7 @@ const httpStatus = require('http-status-codes')
 const curl = require('curl')
 const user = require('./schema/user')
 const location = require('./schema/location')
-const pixabayModel = require('./model/Pixabay')
+const Pixabay = require('./model/Pixabay')
 const fixerModel = require('./model/Fixer')
 
 router.post('/user', (req, res, next) => {
@@ -110,13 +110,7 @@ router.post('/api/location/del', (req, res) => {
   })
 })
 
-router.post('/api/pixabay/find', (req, res) => {
-  (new pixabayModel(req, res)).find()
-})
-
-router.get('/api/pixabay/clear', (_, res) => {
-  pixabayModel.clear(res)
-})
+router.get('/api/pixabay/find/:query', Pixabay.find)
 
 router.get('/api/fixer/get', (req, res) => {
   (new fixerModel(req, res)).request()
