@@ -1,7 +1,67 @@
-[
-  {"name": "Innsbruck", "lat": "47.262661", "lon": "11.39454", "weatherid": "2775220", "keywords": ["mountain", "mountains", "alpine", "alpines", "austria"]},
-  {"name": "Vienna", "lat": "48.208199", "lon": "16.371691", "weatherid": "2761367", "keywords": ["austria"]},
-  {"name": "New York", "lat": "40.72298", "lon": "-73.98855", "weatherid": "5128638", "keywords": ["america"]},
-  {"name": "Paris", "lat": "48.853409", "lon": "2.3488", "weatherid": "2988507", "keywords": ["france", "eiffel tower"]},
-  {"name": "Hawaii", "lat": "20.75028", "lon": "-156.500275", "weatherid": "5855797", "keywords": ["beach", "relax"]}
-]
+[{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1530"
+	},
+	"name": "Innsbruck",
+	"lat": "47.262661",
+	"lon": "11.39454",
+	"weatherid": "2775220",
+	"keywords": [
+		"mountain",
+		"mountains",
+		"alpine",
+		"alpines",
+		"austria"
+	]
+},
+{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1531"
+	},
+	"name": "Vienna",
+	"lat": "48.208199",
+	"lon": "16.371691",
+	"weatherid": "2761367",
+	"keywords": [
+		"austria"
+	]
+},
+{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1532"
+	},
+	"name": "Paris",
+	"lat": "48.853409",
+	"lon": "2.3488",
+	"weatherid": "2988507",
+	"keywords": [
+		"france",
+		"eiffel tower"
+	]
+},
+{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1533"
+	},
+	"name": "Hawaii",
+	"lat": "20.75028",
+	"lon": "-156.500275",
+	"weatherid": "5855797",
+	"keywords": [
+		"beach",
+		"relax"
+	]
+},
+{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1534"
+	},
+	"name": "New York",
+	"lat": "40.72298",
+	"lon": "-73.98855",
+	"weatherid": "5128638",
+	"keywords": [
+		"america"
+	]
+}]
+

@@ -4,7 +4,8 @@ const httpStatus = require('http-status-codes')
 const curl = require('curl')
 const user = require('./schema/user')
 const location = require('./schema/location')
-const pixabay = require('./schema/pixabay')
+const pixabayModel = require('./model/Pixabay')
+const fixerModel = require('./model/Fixer')
 
 router.post('/user', (req, res, next) => {
   if (req.body.password === req.body.passwordConf) {
@@ -110,33 +111,15 @@ router.post('/api/location/del', (req, res) => {
 })
 
 router.post('/api/pixabay/find', (req, res) => {
-  pixabay.findOne({query: req.body.query}, (err, result) => {
-    if (err) {
-      res.status(httpStatus.OK).send('not ok')
-    } else {
-      res.status(httpStatus.OK).send(JSON.stringify(result))
-    }
-  })
+  (new pixabayModel(req, res)).find()
 })
 
-router.post('/api/pixabay/cache', (req, res) => {
-  pixabay.create(req.body, (err) => {
-    if (err) {
-      res.status(httpStatus.OK).send('not ok')
-    } else {
-      res.status(httpStatus.OK).send('ok')
-    }
-  })
+router.get('/api/pixabay/clear', (_, res) => {
+  pixabayModel.clear(res)
 })
 
-router.get('/api/pixabay/del', (req, res) => {
-  pixabay.findOneAndRemove({query: req.query.q}, (err) => {
-    if (err) {
-      res.status(httpStatus.OK).send('not ok')
-    } else {
-      res.status(httpStatus.OK).send('ok')
-    }
-  })
+router.get('/api/fixer/get', (req, res) => {
+  (new fixerModel(req, res)).request()
 })
 
 router.post('/api/curl', (req, res) => {

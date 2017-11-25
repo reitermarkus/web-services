@@ -1,94 +1,119 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
+import numeral from 'numeral'
+
+const currencies = {
+  AUD: 'Australia Dollar (AUD)',
+  BGN: 'Bulgaria Lev (BGN)',
+  BRL: 'Brazil Real (BRL)',
+  CAD: 'Canada Dollar (CAD)',
+  CHF: 'Swiss Frank (CHF)',
+  CNY: 'China Yuan Renminbi (CNY)',
+  CZK: 'Czech Republic Koruna (CZK)',
+  DKK: 'Denmark Krone (DKK)',
+  EUR: 'Euro (€)',
+  GBP: 'United Kingdom Pound (£)',
+  HKD: 'Hong Kong Dollar (HKD)',
+  HRK: 'Croatia Kuna (HRK)',
+  HUF: 'Hungary Forint (HUF)',
+  IDR: 'Indonesia Rupiah (IDR)',
+  ILS: 'Israel Shekel (ILS)',
+  INR: 'India Rupee (INR)',
+  JPY: 'Japan Yen (¥)',
+  KRW: 'Korea (South) Won (KRW)',
+  MXN: 'Mexico Peso (MXN)',
+  MYR: 'Malaysia Ringgit (MYR)',
+  NOK: 'Norway Krone (NOK)',
+  NZD: 'New Zealand Dollar (NZD)',
+  PHP: 'Philippines Peso (PHP)',
+  PLN: 'Poland Zloty (PLN)',
+  RON: 'Romania Leu (RON)',
+  RUB: 'Russia Ruble (RUB)',
+  SEK: 'Sweden Krona (SEK)',
+  SGD: 'Singapore Dollar (SGD)',
+  THB: 'Thailand Baht (THB)',
+  TRY: 'Turkey Lira (TRY)',
+  USD: 'United States Dollar ($)',
+  ZAR: 'South Africa Rand (ZAR)',
+}
 
 // Using fixer.io API: http://fixer.io/
 export default class Exchange extends Component {
   constructor(props) {
     super(props)
 
-    let currencyFrom = this.props.from
-    let currencyTo = this.props.to
-    let url = `https://api.fixer.io/latest?base=${currencyFrom}&symbols=${currencyTo}`
+    let cs = currencies
 
-    axios.get(url).then(
+    delete cs[this.props.to]
+
+    this.state = {
+      from: null,
+      to: this.props.to,
+      rates: null,
+      rate: null,
+      value: 0,
+      calc: 0,
+      currencies: cs,
+    }
+  }
+
+  componentDidMount() {
+    axios.get(`/api/fixer/get?base=${this.state.to}`).then(
       res => {
         this.setState({
-          from: currencyFrom,
-          to: currencyTo,
-          rate: res.data.rates[currencyTo],
+          rates: res.data,
         })
       }
     )
   }
 
-  currencyFromChanged = (event) => {
-    let currencyFrom = event.target.value
-    let currencyTo = this.state.to
-    let url = `https://api.fixer.io/latest?base=${currencyFrom}&symbols=${currencyTo}`
+  currencyFromChanged = event => {
+    const frm = event.target.value
+    const val = this.state.value
+    const rates = this.state.rates
+    const rate = 1 / rates[frm]
 
-    axios.get(url).then(
-      res => {
-        this.setState({
-          from: currencyFrom,
-          to: currencyTo,
-          rate: res.data.rates[currencyTo],
-        })
-      }
-    )
+    this.setState({
+      from: frm,
+      rate: rate,
+      calc: rate * val,
+    })
+  }
+
+  valueFromChanged = event => {
+    const rate = this.state.rate
+    const val = parseFloat(event.target.value) || 0
+
+    this.setState({
+      value: val,
+      calc: rate * val,
+    })
   }
 
   render = () =>
     <div className='exchange'>
       <h2>Exchange rate</h2>
       <h3>Request exchange-rate for given currency ...</h3>
-      1&nbsp;
-      <select onChange={this.currencyFromChanged} defaultValue={this.props.from}>
-        <option value='AUD'>Australia Dollar (AUD)</option>
-        <option value='BGN'>Bulgaria Lev (BGN)</option>
-        <option value='BRL'>Brazil Real (BRL)</option>
-        <option value='CAD'>Canada Dollar (CAD)</option>
-        <option value='CHF'>Swiss Frank (CHF)</option>
-        <option value='CNY'>China Yuan Renminbi (CNY)</option>
-        <option value='CZK'>Czech Republic Koruna (CZK)</option>
-        <option value='DKK'>Denmark Krone (DKK)</option>
-        <option value='EUR'>Euro (€)</option>
-        <option value='GBP'>United Kingdom Pound (£)</option>
-        <option value='HKD'>Hong Kong Dollar (HKD)</option>
-        <option value='HRK'>Croatia Kuna (HRK)</option>
-        <option value='HUF'>Hungary Forint (HUF)</option>
-        <option value='IDR'>Indonesia Rupiah (IDR)</option>
-        <option value='ILS'>Israel Shekel (ILS)</option>
-        <option value='INR'>India Rupee (INR)</option>
-        <option value='JPY'>Japan Yen (¥)</option>
-        <option value='KRW'>Korea (South) Won (KRW)</option>
-        <option value='MXN'>Mexico Peso (MXN)</option>
-        <option value='MYR'>Malaysia Ringgit (MYR)</option>
-        <option value='NOK'>Norway Krone (NOK)</option>
-        <option value='NZD'>New Zealand Dollar (NZD)</option>
-        <option value='PHP'>Philippines Peso (PHP)</option>
-        <option value='PLN'>Poland Zloty (PLN)</option>
-        <option value='RON'>Romania Leu (RON)</option>
-        <option value='RUB'>Russia Ruble (RUB)</option>
-        <option value='SEK'>Sweden Krona (SEK)</option>
-        <option value='SGD'>Singapore Dollar (SGD)</option>
-        <option value='THB'>Thailand Baht (THB)</option>
-        <option value='TRY'>Turkey Lira (TRY)</option>
-        <option value='USD'>United States Dollar ($)</option>
-        <option value='ZAR'>South Africa Rand (ZAR)</option>
-      </select>
-      &nbsp;=&nbsp;
-      <b className='result'>{(this.state || {}).rate}</b>
-      &nbsp;{this.props.to}
+      <div className='col'>
+        <input type='number' className='col-xs-12 col-sm-4' onChange={this.valueFromChanged}/>
+        <select className='col-xs-12 col-sm-4' onChange={this.currencyFromChanged}>
+          <option value='' selected></option>
+          {Object.entries(this.state.currencies).map(([sym, name], i) => {
+            return <option key={i} value={sym}>{name}</option>
+          })}
+        </select>
+        <div className='col-xs-12 col-sm-4'>
+          = <b className='result'>{numeral(this.state.calc).format('0,0.00')}</b> {this.props.to}
+        </div>
+      </div>
     </div>
 }
 
 Exchange.propTypes = {
-  from: PropTypes.string,
   to: PropTypes.string,
 }
 
 Exchange.defaultProps = {
-  from: 'EUR',
   to: 'USD',
 }
