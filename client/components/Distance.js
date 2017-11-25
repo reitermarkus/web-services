@@ -40,8 +40,16 @@ class Distance extends Component {
     return true
   }
 
+  componentWillReceiveProps(newProps) {
+    this.fetch(newProps)
+  }
+
   componentDidMount() {
-    let url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${this.state.from}&destinations=${this.state.to}&language=en&key=${this.props.apiKey}`
+    this.fetch(this.props)
+  }
+
+  fetch(props) {
+    let url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(props.from)}&destinations=${encodeURIComponent(props.to)}&language=en&key=${props.apiKey}`
     const opts = {}
 
     axios.post('/api/curl', {url: url, opts: opts})
@@ -51,7 +59,7 @@ class Distance extends Component {
         }
 
         // Calculate distance and estimate travel time by an average speed
-        let dist = computeDistanceBetween(new LatLng(this.props.coordFrom.lat, this.props.coordFrom.lon), new LatLng(this.props.coordTo.lat, this.props.coordTo.lon)) / 1000 // Km
+        let dist = computeDistanceBetween(new LatLng(props.coordFrom.lat, props.coordFrom.lon), new LatLng(props.coordTo.lat, props.coordTo.lon)) / 1000 // Km
         let time = (dist / 300 + 2) * 3600 // Sec
         let hours = Math.floor(time / 3600)
         let mins = Math.floor((time - hours * 3600) / 60)
@@ -109,6 +117,6 @@ Distance.propTypes = {
   from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
-  coordFrom: PropTypes.object,
-  coordTo: PropTypes.object,
+  coordFrom: PropTypes.objectOf(PropTypes.number).isRequired,
+  coordTo: PropTypes.objectOf(PropTypes.number).isRequired,
 }

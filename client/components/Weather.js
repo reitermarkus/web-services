@@ -23,12 +23,20 @@ export default class Weather extends Component {
     }
   }
 
-  isDayTime(hour) {
-    return hour >= this.props.day.start && hour <= this.props.day.end
+  isDayTime(hour, props) {
+    return hour >= props.day.start && hour <= props.day.end
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.fetch(newProps)
   }
 
   componentDidMount() {
-    const url = `https://api.openweathermap.org/data/2.5/forecast?id=${this.props.id}&units=metric&APPID=${this.props.apiKey}`
+    this.fetch(this.props)
+  }
+
+  fetch = (props) => {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?id=${props.id}&units=metric&APPID=${props.apiKey}`
     const factorMPStoKMPH = 3.6
 
     axios.get(url).then(
@@ -51,7 +59,7 @@ export default class Weather extends Component {
         })
 
         const dayTimeForecast = forecast
-          .filter(f => this.isDayTime(Number(f.time.split(':').first)))
+          .filter(f => this.isDayTime(Number(f.time.split(':').first), props))
           .reduce((acc, { date, ...obj }) => (
             {...acc, [date]: [...(acc[date] || []), obj]}
           ), {})

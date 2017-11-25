@@ -7,35 +7,44 @@ export default class SearchForm extends Component {
     super(props)
 
     this.state = {
+      input: '',
       output: [],
       timeout: null,
     }
   }
 
   handleChange = event => {
-    this.value = event.target.value
-    if (this.timeout) {
-      this.clearTimeout()
-      this.timeout = null
-    }
+    this.setState({
+      input: event.target.value,
+    })
 
-    this.timeout = setTimeout(() => {
-      this.searchTargets()
-    }, 1000)
+    this.clearTimeout()
+
+    this.setState({
+      timeout: setTimeout(() => {
+        this.performSearch()
+      }, 1000),
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    this.clearTimeout()
+    this.performSearch()
   }
 
   clearTimeout = () => {
-    if (this.timeout) {
-      clearTimeout(this.timeout)
+    if (this.state.timeout) {
+      clearTimeout(this.state.timeout)
       this.setState({
         timeout: null,
       })
     }
   }
 
-  searchTargets = () => {
+  performSearch = () => {
     axios.post('/api/location/find', {
-      keywords: this.value,
+      keywords: this.state.input,
     }).then((res) => {
       this.setState({output: res.data})
     })
@@ -43,12 +52,12 @@ export default class SearchForm extends Component {
 
   render = () => (
     <fragment>
-      <form className='col'>
+      <form className='col' onSubmit={this.handleSubmit}>
         <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange}/>
       </form>
       <div>
         {this.state.output.map((e, i) => {
-          return <Article key={i} name={e.name || ''} lat={e.lat || ''} lon={e.lon || ''} weatherid={e.weatherid || ''}/>
+          return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid}/>
         })}
       </div>
     </fragment>

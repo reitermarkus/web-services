@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import store from '../store'
 import locationAction from '../actions/location-action'
-import Map from './Map'
+import OpenStreetMap from './OpenStreetMap'
 
 export default class IPLocation extends Component {
   constructor(props) {
@@ -61,6 +61,9 @@ export default class IPLocation extends Component {
   }
 
   setLocation({lat, lon}) {
+    lat = Number(lat)
+    lon = Number(lon)
+
     this.setState({
       initialized: true,
       lat: lat,
@@ -71,10 +74,6 @@ export default class IPLocation extends Component {
       lat: lat,
       lon: lon,
     }))
-
-    if (this.onLocationChange) {
-      this.props.onLocationChange({lat: lat, lon: lon})
-    }
   }
 
   render = () => {
@@ -86,7 +85,7 @@ export default class IPLocation extends Component {
             <h3>We track every step you&#39;re going ...</h3>
             You are here: ({this.state.lat}, {this.state.lon})
           </div>
-          <Map lat={this.state.lat + ''} lon={this.state.lon + ''} zoom='100'/>
+          <OpenStreetMap lat={this.state.lat} lon={this.state.lon}/>
         </fragment>
       )
     }
@@ -96,7 +95,7 @@ export default class IPLocation extends Component {
 }
 
 IPLocation.propTypes = {
-  onLocationChange: PropTypes.func,
+  ip: PropTypes.string,
 }
 
 IPLocation.defaultProps = {
