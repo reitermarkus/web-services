@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const httpStatus = require('http-status-codes')
 const curl = require('curl')
-const user = require('./schema/user')
-const location = require('./schema/location')
-const Pixabay = require('./schema/Pixabay')
-const Fixer = require('./schema/Fixer')
+const user = require('./model/user')
+const location = require('./model/location')
+const Pixabay = require('./model/Pixabay')
+const Fixer = require('./model/Fixer')
 
 router.post('/user', (req, res, next) => {
   if (req.body.password === req.body.passwordConf) {
