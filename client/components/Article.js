@@ -1,39 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Map from './Map'
+import OpenStreetMap from './OpenStreetMap'
 import Weather from './Weather'
 import Exchange from './Exchange'
 import Distance from './Distance'
 import Pixabay from './Pixabay'
 
-export default class Article extends Component {
-  constructor(props) {
-    super(props)
+const Article = (props) =>
+  <article>
+    <div className='description'>
+      <h2>{props.name}</h2>
+    </div>
+    <Pixabay query={props.name} apiKey={process.env.PIXABAY_API_KEY}/>
+    <OpenStreetMap lat={props.lat} lon={props.lon}/>
+    <Distance from='Telfs' to={props.name} coordTo={{lat: props.lat, lon: props.lon}} apiKey={process.env.GOOGLE_API_KEY}/>
+    <Weather id={props.weatherid} apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
+    <Exchange from='EUR' to='USD'/>
+  </article>
 
-    this.state = {
-      name: this.props.name,
-      lat: this.props.lat,
-      lon: this.props.lon,
-      weatherid: this.props.weatherid,
-    }
-  }
-
-  render = () =>
-    <article>
-      <div className='description'>
-        <h2>{this.state.name}</h2>
-      </div>
-      <Pixabay query={this.state.name} apiKey={process.env.PIXABAY_API_KEY}/>
-      <Map lat={this.state.lat} lon={this.state.lon} zoom='100'/>
-      <Distance from='Telfs' to={this.state.name} coordTo={{lat: parseFloat(this.state.lat), lon: parseFloat(this.state.lon)}} apiKey={process.env.GOOGLE_API_KEY}/>
-      <Weather id={this.state.weatherid} apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
-      <Exchange from='EUR' to='USD'/>
-    </article>
-}
+export default Article
 
 Article.propTypes = {
   name: PropTypes.string.isRequired,
-  lat: PropTypes.string.isRequired,
-  lon: PropTypes.string.isRequired,
+  lat: PropTypes.number.isRequired,
+  lon: PropTypes.number.isRequired,
   weatherid: PropTypes.string.isRequired,
 }
