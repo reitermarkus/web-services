@@ -4,7 +4,7 @@ const httpStatus = require('http-status-codes')
 const curl = require('curl')
 const user = require('./schema/user')
 const location = require('./schema/location')
-const Pixabay = require('./model/Pixabay')
+const Pixabay = require('./schema/Pixabay')
 const fixerModel = require('./model/Fixer')
 
 router.post('/user', (req, res, next) => {
