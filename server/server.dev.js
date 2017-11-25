@@ -23,6 +23,9 @@ const sslOptions = {
   cert: fs.readFileSync(path.join(__dirname, 'cert.pem')),
 }
 
+// Configure .env
+require('dotenv').config()
+
 mongoose.connect('mongodb://localhost/arriven')
 const db = mongoose.connection
 

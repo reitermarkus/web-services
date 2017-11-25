@@ -33,38 +33,11 @@ export default class Pixabay extends Component {
     this.fetch(this.props)
   }
 
-  fetchData(props) {
-    fetch(`https://pixabay.com/api/?q=${props.query}&image_type=photo&category=buildings&key=${props.apiKey}`)
-      .then(res => res.json())
-      .then(res => {
-        let data = res
-
-        data.query = props.query
-        data.time = Date.now()
-
-        axios.post('/api/pixabay/cache', data)
-          .catch(function(error) {
-            console.error(error) // eslint-disable-line no-console
-          })
-
-        this.updateState(res)
-      })
-  }
-
   fetch(props) {
-    // Pixabay invalidates image-links after some time.
-    // At the moment we assume it is about 24 hours. So we store the time, when we cached the entry.
-    // If the time exceeds the given delta, we refetch data from Pixabay.
-    const dayInMS = 86400000
-
     axios.post('/api/pixabay/find', {query: props.query})
       .then(res => res.data)
       .then(res => {
-        if (!res || (Date.now() - res.time) > dayInMS) {
-          this.fetchData(props)
-        } else {
-          this.updateState(res)
-        }
+        this.updateState(res)
       })
       .catch(function(error) {
         console.error(error) // eslint-disable-line no-console
