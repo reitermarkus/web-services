@@ -52,14 +52,14 @@ export default class Exchange extends Component {
       to: this.props.to,
       rates: null,
       rate: null,
-      value: 0,
+      value: 1,
       calc: 0,
       currencies: cs,
     }
   }
 
   componentDidMount() {
-    axios.get(`/api/fixer/get?base=${this.state.to}`).then(
+    axios.get(`/api/fixer/${encodeURIComponent(this.state.to)}`).then(
       res => {
         this.setState({
           rates: res.data,
@@ -96,7 +96,7 @@ export default class Exchange extends Component {
       <h2>Exchange rate</h2>
       <h3>Request exchange-rate for given currency ...</h3>
       <div className='col'>
-        <input type='number' className='col-xs-12 col-sm-4' onChange={this.valueFromChanged}/>
+        <input type='number' className='col-xs-12 col-sm-4' onChange={this.valueFromChanged} defaultValue={this.state.value}/>
         <select className='col-xs-12 col-sm-4' onChange={this.currencyFromChanged}>
           <option value='' selected></option>
           {Object.entries(this.state.currencies).map(([sym, name], i) => {

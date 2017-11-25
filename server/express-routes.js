@@ -5,7 +5,7 @@ const curl = require('curl')
 const user = require('./schema/user')
 const location = require('./schema/location')
 const Pixabay = require('./schema/Pixabay')
-const fixerModel = require('./model/Fixer')
+const Fixer = require('./schema/Fixer')
 
 router.post('/user', (req, res, next) => {
   if (req.body.password === req.body.passwordConf) {
@@ -111,10 +111,7 @@ router.post('/api/location/del', (req, res) => {
 })
 
 router.get('/api/pixabay/find/:query', Pixabay.find)
-
-router.get('/api/fixer/get', (req, res) => {
-  (new fixerModel(req, res)).request()
-})
+router.get('/api/fixer/:base', Fixer.ratesForBase)
 
 router.post('/api/curl', (req, res) => {
   curl.get(req.body.url, req.body.opts, (err, resp, data) => {
