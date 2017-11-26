@@ -39,44 +39,63 @@ const CURRENCIES = {
   ZAR: 'South Africa Rand (ZAR)',
 }
 
-// Using fixer.io API: http://fixer.io/
 export default class Exchange extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      from: this.props.from,
-      value: 1,
-      rates: {},
+      base: this.props.base,
+      value: this.props.initialValue,
     }
 
-    this.state.to = this.props.to || Object.keys(this.availableCurrencies()).first
+    this.state.from = this.fromState(props)
   }
 
-  availableCurrencies() {
+  availableCurrencies(base) {
     let currencies = CURRENCIES
 
-    delete currencies[this.state.from]
+    delete currencies[base]
     return currencies
   }
 
-  componentDidMount() {
-    axios.get(`/api/fixer/${encodeURIComponent(this.state.from)}`).then(
-      ({ data }) => {
-        Object.entries(data).forEach(([s, r]) => {
-          data[s] = 1 / r
-        })
+  fromState(props) {
+    if (props.from && props.from !== props.base) {
+      return props.from
+    }
 
-        this.setState({
-          rates: data,
+    return Object.keys(this.availableCurrencies(props.base)).first
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      base: newProps.base,
+      from: this.fromState(newProps),
+    })
+  }
+
+  componentDidMount() {
+    const base = this.props.base
+
+    if (Money.base !== '') {
+      return
+    }
+
+    axios.get(`/api/fixer/${encodeURIComponent(base)}`).then(
+      ({ data }) => {
+        this.setState(() => {
+          // TODO: Store this in Redux and only fetch it once.
+          Money.base = base
+          Money.rates = data
+
+          return {}
         })
       }
     )
   }
 
-  currencyToChanged = event => {
+  currencyFromChanged = event => {
     this.setState({
-      to: event.target.value,
+      from: event.target.value,
     })
   }
 
@@ -86,14 +105,11 @@ export default class Exchange extends Component {
     })
   }
 
-  convertValue = (value) => {
-    Money.base = this.state.from
-    Money.rates = this.state.rates
-
+  convertValue() {
     try {
-      return Money(value).from(this.state.from).to(this.state.to)
+      return Money(this.state.value).from(this.state.from).to(this.state.base)
     } catch (e) {
-      return 1.0
+      return NaN
     }
   }
 
@@ -103,23 +119,25 @@ export default class Exchange extends Component {
       <h3>Request exchange-rate for given currency ...</h3>
       <div className='col'>
         <input type='number' className='col-xs-12 col-sm-4' onChange={this.valueFromChanged} defaultValue={this.state.value}/>
-        <select className='col-xs-12 col-sm-4' onChange={this.currencyToChanged} defaultValue={this.state.to}>
-          {Object.entries(this.availableCurrencies()).map(([sym, name], i) =>
+        <select className='col-xs-12 col-sm-4' onChange={this.currencyFromChanged} defaultValue={this.state.from}>
+          {Object.entries(this.availableCurrencies(this.state.base)).map(([sym, name], i) =>
             <option key={i} value={sym}>{name}</option>
           )}
         </select>
         <div className='col-xs-12 col-sm-4'>
-          = <b className='result'>{numeral(this.convertValue(this.state.value)).format('0,0.00')}</b> {this.state.from}
+          = <b className='result'>{numeral(this.convertValue()).format('0,0.00')}</b> {this.state.base}
         </div>
       </div>
     </div>
 }
 
 Exchange.propTypes = {
-  from: PropTypes.string.isRequired,
-  to: PropTypes.string,
+  base: PropTypes.string.isRequired,
+  from: PropTypes.string,
+  initialValue: PropTypes.number.isRequired,
 }
 
 Exchange.defaultProps = {
-  from: 'USD',
+  base: 'USD',
+  initialValue: 100,
 }
