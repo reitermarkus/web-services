@@ -5,11 +5,23 @@ import IPLocation from './IPLocation'
 import Places from './Places'
 import Footer from './Footer'
 import AdminLocationView from './admin/LocationView'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import HttpStatus from 'http-status-codes'
 import Status from './Status'
 import '../style/App.scss'
+
+const Search = ({ match }) =>
+  <fragment>
+    <Header/>
+    <main>
+      <h4>We make sure you&#39;ll be arriven at your destination.</h4>
+      <IPLocation/>
+      <SearchForm query={match.params.query}/>
+      <Places query='beach france' apiKey={process.env.GOOGLE_API_KEY} />
+    </main>
+    <Footer />
+  </fragment>
 
 const App = () =>
   <fragment>
@@ -22,18 +34,9 @@ const App = () =>
       <title itemProp='name' lang='en'>arriven</title>
     </Helmet>
     <Switch>
-      <Route exact path='/' render={() =>
-        <fragment>
-          <Header/>
-          <main>
-            <h4>We make sure you&#39;ll be arriven at your destination.</h4>
-            <IPLocation/>
-            <SearchForm/>
-            <Places query='beach france' apiKey={process.env.GOOGLE_API_KEY} />
-          </main>
-          <Footer />
-        </fragment>
-      }/>
+      <Redirect exact from='/' to='/search'/>
+      <Route exact path='/search' component={Search}/>
+      <Route path='/search/:query' component={Search}/>
       <Route exact path='/admin/location' render={() =>
         <fragment>
           <Header />
