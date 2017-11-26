@@ -54,11 +54,10 @@ export default class LocationList extends Component {
       list: lst,
     })
 
-    axios.post('/api/location/del', {
-      name: name,
-    }).catch(function(error) {
-      console.error(error) // eslint-disable-line no-console
-    })
+    axios.delete(`/api/location/${encodeURIComponent(name)}`)
+      .catch(function(error) {
+        console.error(error) // eslint-disable-line no-console
+      })
   }
 
   componentWillReceiveProps(props) {
