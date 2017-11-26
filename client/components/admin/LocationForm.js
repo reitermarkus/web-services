@@ -48,13 +48,13 @@ export default class LocationForm extends Component {
   }
 
   addLocation = () => {
-    axios.post('/api/location/add', this.state).catch(function(error) {
+    axios.post('/api/location', this.state).catch(function(error) {
       console.error(error) // eslint-disable-line no-console
     })
 
     this.setState({
       mode: 'add',
-      id: '',
+      _id: '',
       name: '',
       lat: '',
       lon: '',
@@ -64,7 +64,7 @@ export default class LocationForm extends Component {
   }
 
   updateLocation = () => {
-    axios.post('/api/location/update', this.state).catch(function(error) {
+    axios.put('/api/location', this.state).catch(function(error) {
       console.error(error) // eslint-disable-line no-console
     })
   }

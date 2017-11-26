@@ -3,7 +3,7 @@ const router = express.Router()
 const httpStatus = require('http-status-codes')
 const curl = require('curl')
 const user = require('./model/user')
-const location = require('./model/location')
+const Location = require('./model/Location')
 const Pixabay = require('./model/Pixabay')
 const Fixer = require('./model/Fixer')
 

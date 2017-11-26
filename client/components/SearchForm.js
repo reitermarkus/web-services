@@ -43,11 +43,10 @@ export default class SearchForm extends Component {
   }
 
   performSearch = () => {
-    axios.post('/api/location/find', {
-      keywords: this.state.input,
-    }).then((res) => {
-      this.setState({output: res.data})
-    })
+    axios.get(`/api/location/find/${encodeURIComponent(this.state.input)}`)
+      .then((res) => {
+        this.setState({output: res.data})
+      })
   }
 
   render = () => (
