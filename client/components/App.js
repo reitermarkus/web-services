@@ -1,14 +1,15 @@
 import React from 'react'
-import Header from './Header'
-import SearchForm from './SearchForm'
-import IPLocation from './IPLocation'
-import Places from './Places'
-import Footer from './Footer'
-import AdminLocationView from './admin/LocationView'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import HttpStatus from 'http-status-codes'
+import PropTypes from 'prop-types'
 import Status from './Status'
+import Header from './Header'
+import AdminLocationView from './admin/LocationView'
+import IPLocation from './IPLocation'
+import SearchForm from './SearchForm'
+import Places from './Places'
+import Footer from './Footer'
 import '../style/App.scss'
 
 const Search = ({ match }) =>
@@ -22,6 +23,10 @@ const Search = ({ match }) =>
     </main>
     <Footer />
   </fragment>
+
+Search.propTypes = {
+  match: PropTypes.object.isRequired,
+}
 
 const App = () =>
   <fragment>
