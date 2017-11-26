@@ -6,6 +6,7 @@ import { withRouter } from 'react-router'
 
 class SearchForm extends Component {
   static propTypes = {
+    query: PropTypes.string,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -22,7 +23,7 @@ class SearchForm extends Component {
   }
 
   componentDidMount() {
-    if (this.state.input != '') {
+    if (this.state.input !== '') {
       this.performSearch()
     }
   }
@@ -61,7 +62,7 @@ class SearchForm extends Component {
       .then((res) => {
         const url = `/search/${encodeURIComponent(this.state.input)}`
 
-        if (this.props.location != url) {
+        if (this.props.location !== url) {
           this.props.history.push(url)
         }
 
