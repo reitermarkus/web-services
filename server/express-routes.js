@@ -36,81 +36,14 @@ router.post('/login', (req, res) => {
   })
 })
 
-router.get('/api/location/list', (req, res) => {
-  location.find({}, (err, locations) => {
-    res.status(httpStatus.OK).send(JSON.stringify(locations))
-  })
-})
+router.get('/api/location/list', Location.listLocations)
+router.get('/api/location/find/:keywords', Location.findLocations)
+router.post('/api/location', Location.addLocation)
+router.put('/api/location', Location.updateLocation)
+router.delete('/api/location/:name', Location.deleteLocation)
 
-router.post('/api/location/find', (req, res) => {
-  if (req.body.keywords === '') {
-    res.status(httpStatus.OK).send('[]')
-    return
-  }
+router.get('/api/pixabay/find/:query', Pixabay.findImages)
 
-  let data = req.body.keywords.split(',').map(e => {
-    return new RegExp('.*?' + e.trim() + '.*?', 'i')
-  })
-
-  location.find({
-    '$or' : [
-      {keywords: {'$in': data}},
-      {name: {'$in': data}},
-    ],
-  }, (err, locations) => {
-    res.status(httpStatus.OK).send(JSON.stringify(locations))
-  })
-})
-
-router.post('/api/location/add', (req, res) => {
-  const locationData = {
-    name: req.body.name,
-    lat: req.body.lat,
-    lon: req.body.lon,
-    weatherid: req.body.weatherid,
-    keywords: req.body.keywords.split('\n'),
-  }
-
-  location.create(locationData, (err) => {
-    if (err) {
-      res.status(httpStatus.OK).send('not ok')
-    } else {
-      res.status(httpStatus.OK).send('ok')
-    }
-  })
-})
-
-router.post('/api/location/update', (req, res) => {
-  const locationData = {
-    name: req.body.name,
-    lat: req.body.lat,
-    lon: req.body.lon,
-    weatherid: req.body.weatherid,
-    keywords: req.body.keywords.split('\n'),
-  }
-
-  location.update({_id: req.body._id}, {
-    '$set': locationData,
-  }, (err, stats) => {
-    if (stats.n === 1) {
-      res.status(httpStatus.OK).send('ok')
-    } else {
-      res.status(httpStatus.OK).send('not ok')
-    }
-  })
-})
-
-router.post('/api/location/del', (req, res) => {
-  location.findOneAndRemove({name: req.body.name}, (err) => {
-    if (err) {
-      res.status(httpStatus.OK).send('not ok')
-    } else {
-      res.status(httpStatus.OK).send('ok')
-    }
-  })
-})
-
-router.get('/api/pixabay/find/:query', Pixabay.find)
 router.get('/api/fixer/:base', Fixer.ratesForBase)
 
 router.post('/api/curl', (req, res) => {

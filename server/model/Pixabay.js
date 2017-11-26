@@ -37,7 +37,7 @@ let schema = new Schema({
   },
 })
 
-schema.static('find', (req, res) => {
+schema.static('findImages', (req, res) => {
   const query = req.params.query
 
   // Try fetching from database first.
