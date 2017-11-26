@@ -1,15 +1,29 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Article from './Article'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router'
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  }
+
   constructor(props) {
     super(props)
 
     this.state = {
-      input: '',
+      input: props.query || '',
       output: [],
       timeout: null,
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.input != '') {
+      this.performSearch()
     }
   }
 
@@ -45,6 +59,7 @@ export default class SearchForm extends Component {
   performSearch = () => {
     axios.get(`/api/location/find/${encodeURIComponent(this.state.input)}`)
       .then((res) => {
+        this.props.history.push(`/search/${encodeURIComponent(this.state.input)}`)
         this.setState({output: res.data})
       })
   }
@@ -52,7 +67,7 @@ export default class SearchForm extends Component {
   render = () => (
     <fragment>
       <form className='col' onSubmit={this.handleSubmit}>
-        <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange}/>
+        <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange} defaultValue={this.state.input}/>
       </form>
       <div>
         {this.state.output.map((e, i) => {
@@ -62,3 +77,5 @@ export default class SearchForm extends Component {
     </fragment>
   )
 }
+
+export default withRouter(SearchForm)
