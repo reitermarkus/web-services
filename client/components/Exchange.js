@@ -62,9 +62,13 @@ export default class Exchange extends Component {
 
   componentDidMount() {
     axios.get(`/api/fixer/${encodeURIComponent(this.state.from)}`).then(
-      res => {
+      ({ data }) => {
+        Object.entries(data).forEach(([s, r]) => {
+          data[s] = 1 / r
+        })
+
         this.setState({
-          rates: res.data,
+          rates: data,
         })
       }
     )
