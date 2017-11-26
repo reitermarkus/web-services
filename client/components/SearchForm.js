@@ -59,7 +59,12 @@ class SearchForm extends Component {
   performSearch = () => {
     axios.get(`/api/location/find/${encodeURIComponent(this.state.input)}`)
       .then((res) => {
-        this.props.history.push(`/search/${encodeURIComponent(this.state.input)}`)
+        const url = `/search/${encodeURIComponent(this.state.input)}`
+
+        if (this.props.location != url) {
+          this.props.history.push(url)
+        }
+
         this.setState({output: res.data})
       })
   }
