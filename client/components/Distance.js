@@ -49,6 +49,9 @@ class Distance extends Component {
   }
 
   fetch(props) {
+    if (!props.coordFrom.lat || !props.coordFrom.lon) return
+    if (!props.coordTo.lat || !props.coordTo.lon) return
+
     let url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(props.from)}&destinations=${encodeURIComponent(props.to)}&language=en&key=${props.apiKey}`
     const opts = {}
 
