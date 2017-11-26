@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import numeral from 'numeral'
+import Money from 'money'
 
-const currencies = {
+const CURRENCIES = {
   AUD: 'Australia Dollar (AUD)',
   BGN: 'Bulgaria Lev (BGN)',
   BRL: 'Brazil Real (BRL)',
@@ -43,23 +44,24 @@ export default class Exchange extends Component {
   constructor(props) {
     super(props)
 
-    let cs = currencies
-
-    delete cs[this.props.to]
-
     this.state = {
-      from: null,
-      to: this.props.to,
-      rates: null,
-      rate: null,
+      from: this.props.from,
       value: 1,
-      calc: 0,
-      currencies: cs,
+      rates: {},
     }
+
+    this.state.to = this.props.to || Object.keys(this.availableCurrencies()).first
+  }
+
+  availableCurrencies() {
+    let currencies = CURRENCIES
+
+    delete currencies[this.state.from]
+    return currencies
   }
 
   componentDidMount() {
-    axios.get(`/api/fixer/${encodeURIComponent(this.state.to)}`).then(
+    axios.get(`/api/fixer/${encodeURIComponent(this.state.from)}`).then(
       res => {
         this.setState({
           rates: res.data,
@@ -68,27 +70,27 @@ export default class Exchange extends Component {
     )
   }
 
-  currencyFromChanged = event => {
-    const frm = event.target.value
-    const val = this.state.value
-    const rates = this.state.rates
-    const rate = 1 / rates[frm]
-
+  currencyToChanged = event => {
     this.setState({
-      from: frm,
-      rate: rate,
-      calc: rate * val,
+      to: event.target.value,
     })
   }
 
   valueFromChanged = event => {
-    const rate = this.state.rate
-    const val = parseFloat(event.target.value) || 0
-
     this.setState({
-      value: val,
-      calc: rate * val,
+      value: Number(event.target.value),
     })
+  }
+
+  convertValue = (value) => {
+    Money.base = this.state.from
+    Money.rates = this.state.rates
+
+    try {
+      return Money(value).from(this.state.from).to(this.state.to)
+    } catch (e) {
+      return 1.0
+    }
   }
 
   render = () =>
@@ -97,23 +99,23 @@ export default class Exchange extends Component {
       <h3>Request exchange-rate for given currency ...</h3>
       <div className='col'>
         <input type='number' className='col-xs-12 col-sm-4' onChange={this.valueFromChanged} defaultValue={this.state.value}/>
-        <select className='col-xs-12 col-sm-4' onChange={this.currencyFromChanged}>
-          <option value='' selected></option>
-          {Object.entries(this.state.currencies).map(([sym, name], i) => {
-            return <option key={i} value={sym}>{name}</option>
-          })}
+        <select className='col-xs-12 col-sm-4' onChange={this.currencyToChanged} defaultValue={this.state.to}>
+          {Object.entries(this.availableCurrencies()).map(([sym, name], i) =>
+            <option key={i} value={sym}>{name}</option>
+          )}
         </select>
         <div className='col-xs-12 col-sm-4'>
-          = <b className='result'>{numeral(this.state.calc).format('0,0.00')}</b> {this.props.to}
+          = <b className='result'>{numeral(this.convertValue(this.state.value)).format('0,0.00')}</b> {this.state.from}
         </div>
       </div>
     </div>
 }
 
 Exchange.propTypes = {
+  from: PropTypes.string.isRequired,
   to: PropTypes.string,
 }
 
 Exchange.defaultProps = {
-  to: 'USD',
+  from: 'USD',
 }
