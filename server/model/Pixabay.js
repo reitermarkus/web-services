@@ -53,7 +53,7 @@ schema.static('find', (req, res) => {
           data.query = query
           data.time = Date.now()
 
-          mongoose.model('Pixabay').create(data, (err) => {
+          mongoose.model('Pixabay').update({ query: query }, data, {upsert: true}, (err) => {
             if (err) {
               console.error(err) // eslint-disable-line no-console
             }

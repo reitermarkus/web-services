@@ -40,7 +40,7 @@ schema.static('ratesForBase', (req, res) => {
         .then(({ data }) => {
           data.date = today
 
-          mongoose.model('Fixer').create(data, (err) => {
+          mongoose.model('Fixer').update({ base: base }, data, {upsert: true}, (err) => {
             if (err) {
               console.error(err) // eslint-disable-line no-console
             }
