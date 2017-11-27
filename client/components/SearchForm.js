@@ -15,7 +15,7 @@ class SearchForm extends Component {
     super(props)
 
     this.state = {
-      input: props.query || '',
+      input: decodeURIComponent((props.match.params.query || '').replace(/\+/g, '%20')),
       output: [],
       timeout: null,
     }
@@ -57,9 +57,11 @@ class SearchForm extends Component {
   }
 
   performSearch = () => {
-    axios.get(`/api/location/find/${encodeURIComponent(this.state.input)}`)
+    const query = encodeURIComponent(this.state.input.trim())
+
+    axios.get(`/api/location/find/${query}`)
       .then((res) => {
-        const url = `/search/${encodeURIComponent(this.state.input)}`
+        const url = `/search/${query.replace(/%20/g, '+')}`
 
         if (this.props.location !== url) {
           this.props.history.push(url)
