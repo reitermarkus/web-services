@@ -54,7 +54,7 @@ export default class IPLocation extends Component {
     }
   }
 
-  setLocation({ lat, lon }, override = false) {
+  setLocation({ lat, lon }, override = true) {
     lat = Number(lat)
     lon = Number(lon)
 
@@ -66,11 +66,11 @@ export default class IPLocation extends Component {
         lon: lon,
       }))
 
-      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}`)
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&lat=${lat}&lon=${lon}&accept-language=en`)
         .then(res => res.json())
         .then(res => {
-          delete res.lat
-          delete res.lon
+          res.lat = parseFloat(res.lat)
+          res.lon = parseFloat(res.lon)
 
           this.setState(prevState => {
             if (prevState.initialized && !override) return {}

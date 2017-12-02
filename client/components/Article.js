@@ -13,9 +13,10 @@ const Article = (props) =>
     </div>
     <Pixabay query={props.name} apiKey={process.env.PIXABAY_API_KEY}/>
     <OpenStreetMap lat={props.lat} lon={props.lon}/>
-    <Distance from='Telfs' to={props.name} coordTo={{lat: props.lat, lon: props.lon}} apiKey={process.env.GOOGLE_API_KEY}/>
+    <Distance to={props.name} coordTo={{lat: props.lat, lon: props.lon}} apiKey={process.env.GOOGLE_API_KEY}/>
     <Weather id={props.weatherid} apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
     <Exchange base='USD'/>
+    <CountryData code={props.countrycode}/>
   </article>
 
 export default Article
