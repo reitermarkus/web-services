@@ -10,7 +10,6 @@ class Distance extends Component {
     super(props)
 
     this.state = {
-      from: this.props.from.replace(' ', '+'),
       to: this.props.to.replace(' ', '+'),
       result: {
         from: '',
@@ -110,16 +109,16 @@ class Distance extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    coordFrom: store.locationReducer,
+    from: ((store.locationReducer.city || '') + ' ' + (store.locationReducer.country || '')).replace(' ', '+'),
+    coordFrom: {lat: store.locationReducer.lat, lon: store.locationReducer.lon},
   }
 }
 
 export default connect(mapStateToProps)(Distance)
 
 Distance.propTypes = {
-  from: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
-  coordFrom: PropTypes.objectOf(PropTypes.number).isRequired,
-  coordTo: PropTypes.objectOf(PropTypes.number).isRequired,
+  coordFrom: PropTypes.object.isRequired,
+  coordTo: PropTypes.object.isRequired,
 }
