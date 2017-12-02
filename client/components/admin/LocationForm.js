@@ -14,6 +14,7 @@ export default class LocationForm extends Component {
       lon: '',
       weatherid: '',
       countrycode: '',
+      currency: '',
       keywords: '',
     }
   }
@@ -42,15 +43,21 @@ export default class LocationForm extends Component {
     })
   }
 
+  changeKeywords = event => {
+    this.setState({
+      keywords: event.target.value,
+    })
+  }
+
   changeCountryCode = event => {
     this.setState({
       countrycode: event.target.value,
     })
   }
 
-  changeKeywords = event => {
+  changeCurrency = event => {
     this.setState({
-      keywords: event.target.value,
+      currency: event.target.value,
     })
   }
 
@@ -67,6 +74,7 @@ export default class LocationForm extends Component {
       lon: '',
       weatherid: '',
       countrycode: '',
+      currency: '',
       keywords: '',
     })
   }
@@ -100,6 +108,7 @@ export default class LocationForm extends Component {
       lon: props.data.lon,
       weatherid: props.data.weatherid,
       countrycode: props.data.countrycode,
+      currency: props.data.currency,
       keywords: props.data.keywords.join('\n'),
     })
   }
@@ -113,6 +122,7 @@ export default class LocationForm extends Component {
           <input type='text' className='col-sm-6 col-md-2' name='lon' value={this.state.lon} placeholder='longitude' onChange={this.changeLongitude}/>
           <input type='text' className='col-sm-6 col-md-2' name='weatherid' value={this.state.weatherid} placeholder='weather id' onChange={this.changeWeatherId}/>
           <input type='text' className='col-sm-6 col-md-2' name='countrycode' value={this.state.countrycode} placeholder='country code' onChange={this.changeCountryCode}/>
+          <input type='text' className='col-sm-6 col-md-2' name='currency' value={this.state.currency} placeholder='currency' onChange={this.changeCurrency}/>
           <textarea rows='10' className='col-sm-12' name='keywords' value={this.state.keywords} placeholder='keywords (newline separated)' onChange={this.changeKeywords}></textarea>
           <input type='submit' className='col-sm-6 col-md-3' value={this.state.mode + ' location'}/>
           <input type='button' className='col-sm-6 col-md-2' value='cancel' onClick={this.showList}/>
