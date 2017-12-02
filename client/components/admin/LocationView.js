@@ -18,6 +18,7 @@ export default class LocationView extends Component {
       lat: '',
       lon: '',
       weatherid: '',
+      countrycode: '',
       keywords: [],
     }
   }

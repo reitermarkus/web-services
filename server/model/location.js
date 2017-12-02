@@ -28,6 +28,12 @@ let schema = new Schema({
     required: true,
     trim: true,
   },
+  countrycode: {
+    type: String,
+    unique: false,
+    required: true,
+    trim: true,
+  },
   keywords: {
     type: Array,
     unique: false,
@@ -68,6 +74,7 @@ schema.static('addLocation', (req, res) => {
     lat: req.body.lat,
     lon: req.body.lon,
     weatherid: req.body.weatherid,
+    countrycode: req.body.countrycode,
     keywords: req.body.keywords.split('\n'),
   }
 
@@ -86,6 +93,7 @@ schema.static('updateLocation', (req, res) => {
     lat: req.body.lat,
     lon: req.body.lon,
     weatherid: req.body.weatherid,
+    countrycode: req.body.countrycode,
     keywords: req.body.keywords.split('\n'),
   }
 

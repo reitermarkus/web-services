@@ -77,7 +77,7 @@ class SearchForm extends Component {
       </form>
       <div>
         {this.state.output.map((e, i) => {
-          return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid}/>
+          return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid} countrycode={e.countrycode}/>
         })}
       </div>
     </fragment>

@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import OpenStreetMap from './OpenStreetMap'
 import Weather from './Weather'
-import Exchange from './Exchange'
 import Distance from './Distance'
 import Pixabay from './Pixabay'
+import Exchange from './Exchange'
+import CountryData from './CountryData'
 
 const Article = (props) =>
   <article>
@@ -25,5 +26,6 @@ Article.propTypes = {
   name: PropTypes.string.isRequired,
   lat: PropTypes.number.isRequired,
   lon: PropTypes.number.isRequired,
+  countrycode: PropTypes.string.isRequired,
   weatherid: PropTypes.string.isRequired,
 }

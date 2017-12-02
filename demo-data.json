@@ -1,15 +1,17 @@
 [{
 	"_id": {
-		"$oid": "5a19443557851f91ef2b1532"
+		"$oid": "5a19443557851f91ef2b1530"
 	},
-	"name": "Paris",
-	"lat": "48.853409",
-	"lon": "2.3488",
-	"weatherid": "2988507",
+	"name": "Innsbruck",
+	"lat": "47.262661",
+	"lon": "11.39454",
+	"weatherid": "2775220",
 	"keywords": [
-		"france",
-		"eiffel tower"
-	]
+		"mountains",
+		"alpines",
+		"austria"
+	],
+	"countrycode": "at"
 },
 {
 	"_id": {
@@ -21,7 +23,22 @@
 	"weatherid": "2761367",
 	"keywords": [
 		"austria"
-	]
+	],
+	"countrycode": "at"
+},
+{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1532"
+	},
+	"name": "Paris",
+	"lat": "48.853409",
+	"lon": "2.3488",
+	"weatherid": "2988507",
+	"keywords": [
+		"france",
+		"eiffel tower"
+	],
+	"countrycode": "fr"
 },
 {
 	"_id": {
@@ -34,7 +51,8 @@
 	"keywords": [
 		"beach",
 		"relax"
-	]
+	],
+	"countrycode": "us"
 },
 {
 	"_id": {
@@ -46,22 +64,21 @@
 	"weatherid": "5128638",
 	"keywords": [
 		"america"
-	]
+	],
+	"countrycode": "us"
 },
 {
 	"_id": {
-		"$oid": "5a19443557851f91ef2b1530"
+		"$oid": "5a2296e124e9d5089fa87eb3"
 	},
-	"name": "Innsbruck",
-	"lat": "47.262661",
-	"lon": "11.39454",
-	"weatherid": "2775220",
+	"name": "Berlin",
+	"lat": "52.524368",
+	"lon": "13.41053",
+	"weatherid": "2950159",
+	"countrycode": "de",
 	"keywords": [
-		"mountain",
-		"mountains",
-		"alpine",
-		"alpines",
-		"austria"
-	]
+		"brandenburger tor"
+	],
+	"__v": 0
 }]
 
