@@ -13,6 +13,7 @@ export default class LocationForm extends Component {
       lat: '',
       lon: '',
       weatherid: '',
+      countrycode: '',
       keywords: '',
     }
   }
@@ -41,6 +42,12 @@ export default class LocationForm extends Component {
     })
   }
 
+  changeCountryCode = event => {
+    this.setState({
+      countrycode: event.target.value,
+    })
+  }
+
   changeKeywords = event => {
     this.setState({
       keywords: event.target.value,
@@ -59,6 +66,7 @@ export default class LocationForm extends Component {
       lat: '',
       lon: '',
       weatherid: '',
+      countrycode: '',
       keywords: '',
     })
   }
@@ -91,6 +99,7 @@ export default class LocationForm extends Component {
       lat: props.data.lat,
       lon: props.data.lon,
       weatherid: props.data.weatherid,
+      countrycode: props.data.countrycode,
       keywords: props.data.keywords.join('\n'),
     })
   }
@@ -99,13 +108,14 @@ export default class LocationForm extends Component {
     if (this.state.mode === 'add' || this.state.mode === 'update') {
       return (
         <form className='admin-location-form col' onSubmit={this.handleSubmit}>
-          <input type='text' className='col-sm-3' name='name' value={this.state.name} placeholder='name' onChange={this.changeName}/>
-          <input type='text' className='col-sm-3' name='lat' value={this.state.lat} placeholder='latitude' onChange={this.changeLatitude}/>
-          <input type='text' className='col-sm-3' name='lon' value={this.state.lon} placeholder='longitude' onChange={this.changeLongitude}/>
-          <input type='text' className='col-sm-3' name='weatherid' value={this.state.weatherid} placeholder='weather id' onChange={this.changeWeatherId}/>
+          <input type='text' className='col-sm-6 col-md-2' name='name' value={this.state.name} placeholder='name' onChange={this.changeName}/>
+          <input type='text' className='col-sm-6 col-md-2' name='lat' value={this.state.lat} placeholder='latitude' onChange={this.changeLatitude}/>
+          <input type='text' className='col-sm-6 col-md-2' name='lon' value={this.state.lon} placeholder='longitude' onChange={this.changeLongitude}/>
+          <input type='text' className='col-sm-6 col-md-2' name='weatherid' value={this.state.weatherid} placeholder='weather id' onChange={this.changeWeatherId}/>
+          <input type='text' className='col-sm-6 col-md-2' name='countrycode' value={this.state.countrycode} placeholder='country code' onChange={this.changeCountryCode}/>
           <textarea rows='10' className='col-sm-12' name='keywords' value={this.state.keywords} placeholder='keywords (newline separated)' onChange={this.changeKeywords}></textarea>
-          <input type='submit' className='col-sm-3' value={this.state.mode + ' location'}/>
-          <input type='button' className='col-sm-2' value='cancel' onClick={this.showList}/>
+          <input type='submit' className='col-sm-6 col-md-3' value={this.state.mode + ' location'}/>
+          <input type='button' className='col-sm-6 col-md-2' value='cancel' onClick={this.showList}/>
         </form>
       )
     }
