@@ -1,5 +1,20 @@
 [{
 	"_id": {
+		"$oid": "5a19443557851f91ef2b1533"
+	},
+	"name": "Hawaii",
+	"lat": "20.75028",
+	"lon": "-156.500275",
+	"weatherid": "5855797",
+	"keywords": [
+		"beach",
+		"relax"
+	],
+	"countrycode": "us",
+	"currency": "USD"
+},
+{
+	"_id": {
 		"$oid": "5a19443557851f91ef2b1530"
 	},
 	"name": "Innsbruck",
@@ -11,20 +26,8 @@
 		"alpines",
 		"austria"
 	],
-	"countrycode": "at"
-},
-{
-	"_id": {
-		"$oid": "5a19443557851f91ef2b1531"
-	},
-	"name": "Vienna",
-	"lat": "48.208199",
-	"lon": "16.371691",
-	"weatherid": "2761367",
-	"keywords": [
-		"austria"
-	],
-	"countrycode": "at"
+	"countrycode": "at",
+	"currency": "EUR"
 },
 {
 	"_id": {
@@ -38,21 +41,8 @@
 		"france",
 		"eiffel tower"
 	],
-	"countrycode": "fr"
-},
-{
-	"_id": {
-		"$oid": "5a19443557851f91ef2b1533"
-	},
-	"name": "Hawaii",
-	"lat": "20.75028",
-	"lon": "-156.500275",
-	"weatherid": "5855797",
-	"keywords": [
-		"beach",
-		"relax"
-	],
-	"countrycode": "us"
+	"countrycode": "fr",
+	"currency": "EUR"
 },
 {
 	"_id": {
@@ -65,7 +55,22 @@
 	"keywords": [
 		"america"
 	],
-	"countrycode": "us"
+	"countrycode": "us",
+	"currency": "USD"
+},
+{
+	"_id": {
+		"$oid": "5a19443557851f91ef2b1531"
+	},
+	"name": "Vienna",
+	"lat": "48.208199",
+	"lon": "16.371691",
+	"weatherid": "2761367",
+	"keywords": [
+		"austria"
+	],
+	"countrycode": "at",
+	"currency": "EUR"
 },
 {
 	"_id": {
@@ -79,6 +84,7 @@
 	"keywords": [
 		"brandenburger tor"
 	],
-	"__v": 0
+	"__v": 0,
+	"currency": "EUR"
 }]
 
