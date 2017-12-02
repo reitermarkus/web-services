@@ -11,7 +11,7 @@ export default class CountryData extends Component {
       capital: '',
       currs: '',
       flag: '',
-      langs: [],
+      langs: '',
       region: '',
       subregion: '',
       timezone: '',
