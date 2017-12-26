@@ -53,7 +53,6 @@ class BackgroundSwitcher extends Component {
 
           return <div key={key} style={{...styles.img, backgroundImage: `url("${img}")`}}/>
         })}
-        {this.props.children}
       </div>
     )
   }

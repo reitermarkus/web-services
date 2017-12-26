@@ -48,9 +48,8 @@ const App = () =>
         <fragment>
           <Header />
           <main>
-            <BackgroundSwitcher timeout={6000}>
-              <Login />
-            </BackgroundSwitcher>
+            <Login />
+            <BackgroundSwitcher timeout={6000} />
           </main>
           <Footer />
         </fragment>
