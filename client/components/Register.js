@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import axios from 'axios'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
 
 export default class Register extends Component {
@@ -9,10 +10,25 @@ export default class Register extends Component {
     this.state = {
       email: '',
       password: '',
-      passwordConfirm: '',
-      user: '',
+      passwordConf: '',
+      username: '',
       redirect: false,
     }
+  }
+
+  register = () => {
+    event.preventDefault()
+
+    axios.post('/user', {
+      email: this.state.email,
+      username: this.state.username,
+      password: this.state.password,
+      passwordConf: this.state.passwordConf,
+    }).then(() => {
+      this.setState({redirect: true})
+    }).catch((err) => {
+      alert(err.response.data)
+    })
   }
 
   render = () => {
@@ -23,11 +39,11 @@ export default class Register extends Component {
     return (
       <AuthenticationSkeleton height={'29.5em'}>
         <form>
-          <input type='text' value={this.state.user} onChange={(e) => { this.setState({user: e.target.value}) }} placeholder='username' />
+          <input type='text' value={this.state.username} onChange={(e) => { this.setState({username: e.target.value}) }} placeholder='username' />
           <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
           <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
-          <input type='password' value={this.state.passwordConfirm} onChange={(e) => { this.setState({passwordConfirm: e.target.value}) }} placeholder='confirm password' />
-          <button type='button'>register</button>
+          <input type='password' value={this.state.passwordConf} onChange={(e) => { this.setState({passwordConf: e.target.value}) }} placeholder='confirm password' />
+          <button type='button' onClick={this.register}>register</button>
         </form>
       </AuthenticationSkeleton>
     )

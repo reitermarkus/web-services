@@ -5,15 +5,23 @@ const SALT_WORK_FACTOR = 10
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    unique: true,
     required: true,
     trim: true,
+    validate: {
+      validator: (v, cb) => {
+        user.find({email: v}, (err, user) => cb(user.length === 0))
+      }, message: 'already in use',
+    },
   },
   username: {
     type: String,
-    unique: true,
     required: true,
     trim: true,
+    validate: {
+      validator: (v, cb) => {
+        user.find({username: v}, (err, user) => cb(user.length === 0))
+      }, message: 'already in use',
+    },
   },
   password: {
     type: String,
