@@ -7,7 +7,7 @@ const Location = require('./model/Location')
 const Pixabay = require('./model/Pixabay')
 const Fixer = require('./model/Fixer')
 
-router.post('/user', (req, res, next) => {
+router.post('/user', (req, res) => {
   if (req.body.password === req.body.passwordConf) {
     const userData = {
       email: req.body.email,
@@ -18,12 +18,14 @@ router.post('/user', (req, res, next) => {
 
     user.create(userData, (err) => {
       if (err) {
-        return next(err)
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message)
+      } else {
+        res.status(httpStatus.CREATED).send('user created successfully')
       }
     })
+  } else {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send('passwords do not match')
   }
-
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).send('passwords do not match')
 })
 
 router.post('/login', (req, res) => {
