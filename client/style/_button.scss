@@ -2,9 +2,9 @@
   border-radius: 4px;
   font-size: 1em;
   font-weight: 200;
-  transition: box-shadow .25s ease;
+  transition: box-shadow 0.25s ease;
   outline: 0;
-  padding: .5em .75em;
+  padding: 0.5em 0.75em;
   margin: 0;
   line-height: normal;
 }
@@ -28,6 +28,7 @@
 
 button {
   @extend %button-style;
+
   @include button-color($green);
 
   &.danger {
@@ -39,6 +40,6 @@ button {
   }
 
   + button {
-    margin-left: .5em;
+    margin-left: 0.5em;
   }
 }
