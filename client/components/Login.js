@@ -23,7 +23,7 @@ export default class Login extends Component {
     }).then(() => {
       this.setState({redirect: true})
     }).catch((err) => {
-      alert(err.response.data)
+      alert(err.response.data) // eslint-disable-line no-alert
     })
   }
 
