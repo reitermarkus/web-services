@@ -1,23 +1,34 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const validator = require('validator')
+
 const SALT_WORK_FACTOR = 10
+const required = 'is required'
+
+const emailValidators = [
+  {
+    validator: (v, cb) => {
+      user.find({email: v}, (err, user) => cb(user.length === 0))
+    }, message: 'already in use',
+  },
+  {
+    validator: validator.isEmail, message: 'invalid',
+  },
+]
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    required: [true, required],
     trim: true,
-    validate: {
-      validator: (v, cb) => {
-        user.find({email: v}, (err, user) => cb(user.length === 0))
-      }, message: 'already in use',
-    },
+    validate: emailValidators,
   },
   username: {
     type: String,
-    required: true,
+    required: [true, required],
     trim: true,
     validate: {
+      isAsync: true,
       validator: (v, cb) => {
         user.find({username: v}, (err, user) => cb(user.length === 0))
       }, message: 'already in use',
@@ -25,17 +36,18 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, required],
   },
 })
 
 userSchema.statics.login = (email, password, callback) => {
-  user.findOne({ email: email }).exec((err, user) => {
+  user.findOne({ email: email }, (err, user) => {
     if (err) {
       return callback(err)
     } else if (!user) {
       return callback(new Error('User not found.'))
     }
+
     bcrypt.compare(password, user.password, (err, result) => {
       if (result) {
         return callback(null, user)
