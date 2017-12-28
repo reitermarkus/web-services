@@ -37,7 +37,7 @@ export default class Register extends Component {
     }
 
     return (
-      <AuthenticationSkeleton height={'29.5em'}>
+      <AuthenticationSkeleton height={'31em'} title={'Register'}>
         <form>
           <input type='text' value={this.state.username} onChange={(e) => { this.setState({username: e.target.value}) }} placeholder='username' />
           <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />

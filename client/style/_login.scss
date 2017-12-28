@@ -7,7 +7,7 @@
   transform: translate(-50%, -50%);
   border-radius: 8px;
   display: grid;
-  grid-template-rows: 7em auto;
+  grid-template-rows: 7em 2.1em auto;
 
   .top {
     display: flex;
@@ -18,6 +18,14 @@
     .logo {
       height: 25px;
     }
+  }
+
+  .title {
+    background: $green;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
   }
 
   .wrapper {
@@ -43,7 +51,7 @@
         margin-bottom: 0.8em;
 
         &:focus {
-          outline: none;
+          box-shadow: none;
         }
       }
 

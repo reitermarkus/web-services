@@ -7,6 +7,7 @@ const AuthenticationSkeleton = (props) =>
     <div className='top'>
       <Logo className='logo'/>
     </div>
+    <div className='title'>{props.title}</div>
     <div className='wrapper'>
       {props.children}
     </div>
@@ -14,6 +15,7 @@ const AuthenticationSkeleton = (props) =>
 
 AuthenticationSkeleton.propTypes = {
   children: PropTypes.object,
+  title: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
 }
 
