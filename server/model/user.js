@@ -9,34 +9,34 @@ const emailValidators = [
   {
     validator: (v, cb) => {
       user.find({email: v}, (err, user) => cb(user.length === 0))
-    }, message: 'already in use',
+    }, message: 'email already in use',
   },
   {
-    validator: validator.isEmail, message: 'invalid',
+    validator: validator.isEmail, message: 'email is invalid',
   },
 ]
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, required],
+    required: [true, `email ${required}`],
     trim: true,
     validate: emailValidators,
   },
   username: {
     type: String,
-    required: [true, required],
+    required: [true, `username ${required}`],
     trim: true,
     validate: {
       isAsync: true,
       validator: (v, cb) => {
         user.find({username: v}, (err, user) => cb(user.length === 0))
-      }, message: 'already in use',
+      }, message: 'username already in use',
     },
   },
   password: {
     type: String,
-    required: [true, required],
+    required: [true, `password ${required}`],
   },
 })
 

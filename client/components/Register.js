@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
+import Notification from './Notification'
 
 export default class Register extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ export default class Register extends Component {
       passwordConf: '',
       username: '',
       redirect: false,
+      messages: null,
     }
   }
 
@@ -27,7 +29,14 @@ export default class Register extends Component {
     }).then(() => {
       this.setState({redirect: true})
     }).catch((err) => {
-      alert(err.response.data) // eslint-disable-line no-alert
+      const res = err.response.data.split(':')
+
+      if (res.length > 1) {
+        this.setState({messages: res.slice(2, res.length)
+          .map((msg) =>  msg.includes(',') ? msg.split(',')[0] : msg)})
+      } else {
+        this.setState({messages: res})
+      }
     })
   }
 
@@ -37,15 +46,18 @@ export default class Register extends Component {
     }
 
     return (
-      <AuthenticationSkeleton height={'31em'} title={'Register'}>
-        <form>
-          <input type='text' value={this.state.username} onChange={(e) => { this.setState({username: e.target.value}) }} placeholder='username' />
-          <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
-          <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
-          <input type='password' value={this.state.passwordConf} onChange={(e) => { this.setState({passwordConf: e.target.value}) }} placeholder='confirm password' />
-          <button type='button' onClick={this.register}>register</button>
-        </form>
-      </AuthenticationSkeleton>
+      <fragment>
+        <Notification messages={this.state.messages} type={'error'} />
+        <AuthenticationSkeleton height={'31em'} title={'Register'}>
+          <form>
+            <input type='text' value={this.state.username} onChange={(e) => { this.setState({username: e.target.value}) }} placeholder='username' />
+            <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
+            <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
+            <input type='password' value={this.state.passwordConf} onChange={(e) => { this.setState({passwordConf: e.target.value}) }} placeholder='confirm password' />
+            <button type='button' onClick={this.register}>register</button>
+          </form>
+        </AuthenticationSkeleton>
+      </fragment>
     )
   }
 }

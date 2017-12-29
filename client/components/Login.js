@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
+import Notification from './Notification'
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class Login extends Component {
       email: '',
       password: '',
       redirect: false,
+      messages: null,
     }
   }
 
@@ -23,7 +25,7 @@ export default class Login extends Component {
     }).then(() => {
       this.setState({redirect: true})
     }).catch((err) => {
-      alert(err.response.data) // eslint-disable-line no-alert
+      this.setState({messages: [err.response.data]})
     })
   }
 
@@ -33,13 +35,16 @@ export default class Login extends Component {
     }
 
     return (
-      <AuthenticationSkeleton height={'23.5em'} title={'login'}>
-        <form>
-          <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
-          <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
-          <button type='button' onClick={this.login}>login</button>
-        </form>
-      </AuthenticationSkeleton>
+      <fragment>
+        <Notification messages={this.state.messages} type={'error'} />
+        <AuthenticationSkeleton height={'23.5em'} title={'login'}>
+          <form>
+            <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
+            <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
+            <button type='button' onClick={this.login}>login</button>
+          </form>
+        </AuthenticationSkeleton>
+      </fragment>
     )
   }
 }
