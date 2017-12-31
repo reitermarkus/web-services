@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-export default class Notification extends Component {
+class Notification extends Component {
   constructor(props) {
     super(props)
   }
 
   render = () => {
     const status = {
-      notification: '#0074D9',
-      success: '#27AE60',
-      error: '#E74C3C',
+      NOTIFICATION: '#0074D9',
+      SUCCESS: '#27AE60',
+      ERROR: '#E74C3C',
     }
 
     return (
@@ -26,7 +27,16 @@ export default class Notification extends Component {
   }
 }
 
-Notification.defaultProps = {type: 'notification'}
+Notification.defaultProps = {type: 'NOTIFICATION'}
+
+const mapStateToProps = (store) => {
+  return {
+    messages: store.notificationReducer.messages,
+    type: store.notificationReducer.type,
+  }
+}
+
+export default connect(mapStateToProps)(Notification)
 
 Notification.propTypes = {
   messages: PropTypes.array,

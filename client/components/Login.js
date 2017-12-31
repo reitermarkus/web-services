@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
+import store from '../store'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
-import Notification from './Notification'
+import notificationAction from '../actions/notification-action'
 
 export default class Login extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class Login extends Component {
     }).then(() => {
       this.setState({redirect: true})
     }).catch((err) => {
-      this.setState({messages: [err.response.data]})
+      store.dispatch(notificationAction('ERROR', [err.response.data]))
     })
   }
 
@@ -36,7 +37,6 @@ export default class Login extends Component {
 
     return (
       <fragment>
-        <Notification messages={this.state.messages} type={'error'} />
         <AuthenticationSkeleton height={'23.5em'} title={'login'}>
           <form>
             <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
