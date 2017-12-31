@@ -11,8 +11,9 @@ import SearchForm from './SearchForm'
 import Footer from './Footer'
 import Login from './Login'
 import Register from './Register'
-import '../style/App.scss'
 import BackgroundSwitcher from './BackgroundSwitcher'
+import Notification from './Notification'
+import '../style/App.scss'
 
 const Search = ({ match }) =>
   <fragment>
@@ -46,6 +47,7 @@ const App = () =>
       <Route exact path='/login' render={() =>
         <fragment>
           <Header />
+          <Notification />
           <main>
             <Login />
             <BackgroundSwitcher timeout={6000} />
@@ -56,6 +58,7 @@ const App = () =>
       <Route exact path='/register' render={() =>
         <fragment>
           <Header />
+          <Notification />
           <main>
             <Register />
             <BackgroundSwitcher timeout={6000} />

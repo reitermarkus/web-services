@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
+import store from '../store'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
-import Notification from './Notification'
+import notificationAction from '../actions/notification-action'
 
 export default class Register extends Component {
   constructor(props) {
@@ -32,10 +33,10 @@ export default class Register extends Component {
       const res = err.response.data.split(':')
 
       if (res.length > 1) {
-        this.setState({messages: res.slice(2, res.length)
-          .map((msg) =>  msg.includes(',') ? msg.split(',')[0] : msg)})
+        store.dispatch(notificationAction('ERROR',
+          res.slice(2, res.length).map((msg) =>  msg.includes(',') ? msg.split(',')[0] : msg)))
       } else {
-        this.setState({messages: res})
+        store.dispatch(notificationAction('ERROR', res))
       }
     })
   }
@@ -47,7 +48,6 @@ export default class Register extends Component {
 
     return (
       <fragment>
-        <Notification messages={this.state.messages} type={'error'} />
         <AuthenticationSkeleton height={'31em'} title={'Register'}>
           <form>
             <input type='text' value={this.state.username} onChange={(e) => { this.setState({username: e.target.value}) }} placeholder='username' />
