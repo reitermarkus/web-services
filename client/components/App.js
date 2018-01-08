@@ -8,7 +8,6 @@ import Header from './Header'
 import AdminLocationView from './admin/LocationView'
 import IPLocation from './IPLocation'
 import SearchForm from './SearchForm'
-import Places from './Places'
 import Footer from './Footer'
 import Login from './Login'
 import Register from './Register'
@@ -22,9 +21,8 @@ const Search = ({ match }) =>
       <h4>We make sure you&#39;ll be arriven at your destination.</h4>
       <IPLocation/>
       <SearchForm query={match.params.query}/>
-      <Places query='beach france' apiKey={process.env.GOOGLE_API_KEY} />
     </main>
-    <Footer />
+    <Footer/>
   </fragment>
 
 Search.propTypes = {
@@ -70,7 +68,7 @@ const App = () =>
           <Header />
           <main>
             <h1>Admin: Location list</h1>
-            <AdminLocationView />
+            <AdminLocationView/>
           </main>
           <Footer />
         </fragment>
