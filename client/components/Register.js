@@ -4,6 +4,7 @@ import axios from 'axios'
 import store from '../store'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
 import notificationAction from '../actions/notification-action'
+import { signAuth, hasToken } from '../jwt'
 
 export default class Register extends Component {
   constructor(props) {
@@ -19,6 +20,12 @@ export default class Register extends Component {
     }
   }
 
+  componentDidMount() {
+    if (hasToken()) {
+      this.setState({redirect: true})
+    }
+  }
+
   register = () => {
     event.preventDefault()
 
@@ -28,6 +35,7 @@ export default class Register extends Component {
       password: this.state.password,
       passwordConf: this.state.passwordConf,
     }).then(() => {
+      signAuth(this.state.email)
       this.setState({redirect: true})
     }).catch((err) => {
       const res = err.response.data.split(':')
