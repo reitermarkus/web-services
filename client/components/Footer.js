@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () =>
   <footer>
-    <div id='copy'>&copy; by arriven 2017</div>
+    <div id='copy'>&copy; arriven 2017</div>
     <div id='help'>
       <ul>
         <li>Help</li>

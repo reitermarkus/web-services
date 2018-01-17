@@ -3,11 +3,9 @@ footer {
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0 0 16px;
-  color: #fff;
-  background: $darkgrey;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  padding: 1.5em 1em 1em;
   line-height: 1;
+  color: #fff;
 
   ul {
     display: flex;
@@ -18,7 +16,9 @@ footer {
     user-select: none;
 
     li {
-      padding: 16px;
+      &:not(:last-child) {
+        margin-right: 1em;
+      }
 
       @include hover-only {
         transition: background 0.2s;

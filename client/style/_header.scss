@@ -2,8 +2,6 @@ header {
   display: grid;
   align-items: center;
   color: #fff;
-  background: $green;
-  border-bottom: 1px solid $darkgreen;
 
   @include xs-only {
     grid-template-columns: 1fr;

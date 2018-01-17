@@ -31,7 +31,7 @@ html {
 
 body {
   margin: 0;
-  background: $background;
+  background: darken($green, 20%);
 }
 
 #root {
