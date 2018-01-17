@@ -14,6 +14,7 @@ router.post('/user', (req, res) => {
       username: req.body.username,
       password: req.body.password,
       passwordConf: req.body.passwordConf,
+      admin: false,
     }
 
     user.create(userData, (err) => {
@@ -35,6 +36,24 @@ router.post('/login', (req, res) => {
     } else {
       res.status(httpStatus.OK).send('login successfull')
     }
+  })
+})
+
+router.post('/user/info', (req, res) => {
+  user.findOne({ email: req.body.email }, (err, user) => {
+    if (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('error while getting user')
+    } else if (!user) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('user not found')
+    } else if (!user.admin) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('user is not admin')
+    }
+
+    res.status(httpStatus.OK).send(JSON.stringify({
+      'email': user.email,
+      'username': user.username,
+      'admin': user.admin,
+    }))
   })
 })
 

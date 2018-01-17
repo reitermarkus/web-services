@@ -38,6 +38,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, `password ${required}`],
   },
+  admin: {
+    type: Boolean,
+  },
 })
 
 userSchema.statics.login = (email, password, callback) => {
