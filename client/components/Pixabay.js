@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import Slider from './Slider'
 
 export default class Pixabay extends Component {
   constructor(props) {
@@ -44,14 +43,15 @@ export default class Pixabay extends Component {
   }
 
   render = () =>
-    <fragment>
-      <Slider images={this.state.data.hits.filter((v) => (v.webformatWidth / v.webformatHeight) >= 1.0).map((v) => {
-        return v.webformatURL.replace(/_640\.(\w+)$/, '_960.$1')
-      })} />
-    </fragment>
+    <header style={{backgroundImage:`url(${this.state.data.hits.filter((v) => (v.webformatWidth / v.webformatHeight) >= 1.0).map((v) => {
+      return v.webformatURL.replace(/_640\.(\w+)$/, '_960.$1')
+    }).first})`}}>
+      <h1 className='title'>{this.props.title}</h1>
+    </header>
 }
 
 Pixabay.propTypes = {
   query: PropTypes.string.isRequired,
   apiKey: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 }
