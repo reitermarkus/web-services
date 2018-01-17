@@ -39,6 +39,7 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/api/location/list', Location.listLocations)
+router.get('/api/location/get/:id', Location.findById)
 router.get('/api/location/find/:keywords', Location.findLocations)
 router.post('/api/location', Location.addLocation)
 router.put('/api/location', Location.updateLocation)

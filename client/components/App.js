@@ -8,6 +8,7 @@ import Header from './Header'
 import AdminLocationView from './admin/LocationView'
 import IPLocation from './IPLocation'
 import SearchForm from './SearchForm'
+import LocationDetails from './LocationDetails'
 import Footer from './Footer'
 import Login from './Login'
 import Register from './Register'
@@ -30,6 +31,19 @@ Search.propTypes = {
   match: PropTypes.object.isRequired,
 }
 
+const Detail = ({ match }) =>
+  <fragment>
+    <Header/>
+    <main>
+      <LocationDetails id={match.params.id}/>
+    </main>
+    <Footer/>
+  </fragment>
+
+Detail.propTypes = {
+  match: PropTypes.object.isRequired,
+}
+
 const App = () =>
   <fragment>
     <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
@@ -44,36 +58,37 @@ const App = () =>
       <Redirect exact from='/' to='/search'/>
       <Route exact path='/search' component={Search}/>
       <Route path='/search/:query' component={Search}/>
+      <Route path='/detail/:id' component={Detail}/>
       <Route exact path='/login' render={() =>
         <fragment>
           <Header />
           <Notification />
           <main>
-            <Login />
-            <BackgroundSwitcher timeout={6000} />
+            <Login/>
+            <BackgroundSwitcher timeout={6000}/>
           </main>
-          <Footer />
+          <Footer/>
         </fragment>
-      } />
+      }/>
       <Route exact path='/register' render={() =>
         <fragment>
           <Header />
           <Notification />
           <main>
-            <Register />
-            <BackgroundSwitcher timeout={6000} />
+            <Register/>
+            <BackgroundSwitcher timeout={6000}/>
           </main>
-          <Footer />
+          <Footer/>
         </fragment>
-      } />
+      }/>
       <Route exact path='/admin/location' render={() =>
         <fragment>
-          <Header />
+          <Header/>
           <main>
             <h1>Admin: Location list</h1>
             <AdminLocationView/>
           </main>
-          <Footer />
+          <Footer/>
         </fragment>
       }/>
       <Route render={() => {

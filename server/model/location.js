@@ -54,6 +54,24 @@ schema.static('listLocations', (req, res) => {
   })
 })
 
+schema.static('findById', (req, res) => {
+  if (req.params.id === '') {
+    res.status(httpStatus.OK).send('[]')
+    return
+  }
+
+  mongoose.model('Location').find({
+    '_id' : req.params.id,
+  }, (err, location) => {
+    if (err) {
+      res.status(httpStatus.OK).send('[]')
+      return
+    }
+
+    res.status(httpStatus.OK).send(JSON.stringify(location))
+  })
+})
+
 schema.static('findLocations', (req, res) => {
   if (req.params.keywords === '') {
     res.status(httpStatus.OK).send('[]')
