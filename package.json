@@ -46,6 +46,7 @@
   ],
   "dependencies": {
     "axios": "^0.17.0",
+    "babel-core": "^6.26.0",
     "babel-plugin-jsx-fragment": "^4.0.3",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
@@ -63,6 +64,7 @@
     "node-sass": "^4.5.3",
     "numeral": "^2.0.6",
     "path": "^0.12.7",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dev-utils": "^4.1.0",
     "react-dom": "^16.0.0",
@@ -78,7 +80,6 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
