@@ -4,11 +4,10 @@ import LeftArrow from 'react-icons/lib/fa/arrow-left'
 import RightArrow from 'react-icons/lib/fa/arrow-right'
 import CircleOutlined from 'react-icons/lib/fa/circle-thin'
 import CircleFilled from 'react-icons/lib/fa/circle'
-import { connect } from 'react-redux'
 
 const Circle = (props) => {
-  const EMPTY_CIRCLE  = <CircleOutlined />
-  const FILLED_CIRCLE = <CircleFilled />
+  const EMPTY_CIRCLE  = <CircleOutlined/>
+  const FILLED_CIRCLE = <CircleFilled/>
 
   const { filled, ...other } = props
 
@@ -26,6 +25,7 @@ Circle.defaultProps = {
 class Slider extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       pos: 0,
     }
@@ -55,20 +55,14 @@ class Slider extends Component {
           )}
         </div>
         <div className='btn-container'>
-          <div className='left-btn' onClick={this.left}><LeftArrow /></div>
-          <div className='right-btn' onClick={this.right}><RightArrow /></div>
+          <div className='left-btn' onClick={this.left}><LeftArrow/></div>
+          <div className='right-btn' onClick={this.right}><RightArrow/></div>
         </div>
       </div>
     </div>
 }
 
-const mapStateToProps = (store) => {
-  return {
-    images: store.imageReducer.bgImages,
-  }
-}
-
-export default connect(mapStateToProps)(Slider)
+export default Slider
 
 Slider.propTypes = {
   images: PropTypes.array,
