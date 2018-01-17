@@ -71,7 +71,7 @@ class SearchForm extends Component {
             .then(res => {
               let o = this.state.output
 
-              o[i].image = res.hits.randomIndex.webformatURL
+              o[i].image = res.hits.filter((v) => (v.webformatWidth / v.webformatHeight) >= 1.0).randomIndex.webformatURL.replace(/_640\.(\w+)$/, '_960.$1')
               this.setState({
                 output: o,
               })
