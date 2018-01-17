@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { getUserInfo } from '../jwt'
 import HttpStatus from 'http-status-codes'
 import PropTypes from 'prop-types'
 import Status from './Status'
@@ -31,76 +32,70 @@ Search.propTypes = {
   match: PropTypes.object.isRequired,
 }
 
-const Detail = ({ match }) =>
-  <fragment>
-    <Header/>
-    <main>
-      <LocationDetails id={match.params.id}/>
-    </main>
-    <Footer/>
-  </fragment>
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-Detail.propTypes = {
-  match: PropTypes.object.isRequired,
+  componentDidMount() {
+    getUserInfo()
+  }
+
+  render = () =>
+    <fragment>
+      <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
+        <meta name='description' content='We make sure you&#39;ll be arriven at your destination.'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
+        <meta name='theme-color' content='#000000'/>
+        <link rel='manifest' href='/manifest.json'/>
+        <link rel='shortcut icon' href='/favicon.ico'/>
+        <title itemProp='name' lang='en'>arriven</title>
+      </Helmet>
+      <Switch>
+        <Redirect exact from='/' to='/search'/>
+        <Route exact path='/search' component={Search} />
+        <Route path='/search/:query' component={Search}/>
+        <Route exact path='/login' render={() =>
+          <fragment>
+            <Header />
+            <Notification />
+            <main>
+              <Login />
+              <BackgroundSwitcher timeout={6000} />
+            </main>
+            <Footer />
+          </fragment>
+        } />
+        <Route exact path='/register' render={() =>
+          <fragment>
+            <Header />
+            <Notification />
+            <main>
+              <Register />
+              <BackgroundSwitcher timeout={6000} />
+            </main>
+            <Footer />
+          </fragment>
+        } />
+        <Route exact path='/admin/location' render={() =>
+          <fragment>
+            <Header />
+            <main>
+              <h1>Admin: Location list</h1>
+              <AdminLocationView />
+            </main>
+            <Footer />
+          </fragment>
+        }/>
+        <Route render={() => {
+          const status = HttpStatus.NOT_FOUND
+
+          return (
+            <Status code={status}>
+              {status} {HttpStatus.getStatusText(status)}
+            </Status>
+          )
+        }}/>
+      </Switch>
+    </fragment>
 }
-
-const App = () =>
-  <fragment>
-    <Helmet htmlAttributes={{lang: 'en', amp: undefined}}>
-      <meta name='description' content='We make sure you&#39;ll be arriven at your destination.'/>
-      <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'/>
-      <meta name='theme-color' content='#000000'/>
-      <link rel='manifest' href='/manifest.json'/>
-      <link rel='shortcut icon' href='/favicon.ico'/>
-      <title itemProp='name' lang='en'>arriven</title>
-    </Helmet>
-    <Switch>
-      <Redirect exact from='/' to='/search'/>
-      <Route exact path='/search' component={Search}/>
-      <Route path='/search/:query' component={Search}/>
-      <Route path='/detail/:id' component={Detail}/>
-      <Route exact path='/login' render={() =>
-        <fragment>
-          <Header />
-          <Notification />
-          <main>
-            <Login/>
-            <BackgroundSwitcher timeout={6000}/>
-          </main>
-          <Footer/>
-        </fragment>
-      }/>
-      <Route exact path='/register' render={() =>
-        <fragment>
-          <Header />
-          <Notification />
-          <main>
-            <Register/>
-            <BackgroundSwitcher timeout={6000}/>
-          </main>
-          <Footer/>
-        </fragment>
-      }/>
-      <Route exact path='/admin/location' render={() =>
-        <fragment>
-          <Header/>
-          <main>
-            <h1>Admin: Location list</h1>
-            <AdminLocationView/>
-          </main>
-          <Footer/>
-        </fragment>
-      }/>
-      <Route render={() => {
-        const status = HttpStatus.NOT_FOUND
-
-        return (
-          <Status code={status}>
-            {status} {HttpStatus.getStatusText(status)}
-          </Status>
-        )
-      }}/>
-    </Switch>
-  </fragment>
-
-export default App
