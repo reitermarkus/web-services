@@ -1,0 +1,38 @@
+.preview-cards {
+  > a {
+    @include aspect-ratio(16, 9);
+
+    border-radius: 4px;
+    overflow: hidden;
+
+    > div {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    &:hover {
+      .txt {
+        opacity: 1;
+      }
+    }
+  }
+
+  .img {
+    background-size: 100% 100%;
+  }
+
+  .txt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 20px;
+    opacity: 0;
+    will-change: opacity; // For fancy optimization on fancy browsers
+    transition: opacity 0.2s;
+  }
+}

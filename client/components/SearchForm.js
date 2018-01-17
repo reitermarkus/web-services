@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Article from './Article'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
@@ -66,6 +65,20 @@ class SearchForm extends Component {
           this.props.history.push(url)
         }
 
+        res.data.map((e, i) => {
+          axios.get(`/api/pixabay/find/${encodeURIComponent(e.name)}`)
+            .then(res => res.data)
+            .then(res => {
+              let o = this.state.output
+
+              o[i].image = res.hits.randomIndex.webformatURL
+              this.setState({
+                output: o,
+              })
+            })
+          return e
+        })
+
         this.setState({output: res.data})
       })
   }
@@ -75,9 +88,12 @@ class SearchForm extends Component {
       <form className='col' onSubmit={this.handleSubmit}>
         <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange} defaultValue={this.state.input}/>
       </form>
-      <div>
+      <div className='preview-cards col'>
         {this.state.output.map((e, i) => {
-          return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid} countrycode={e.countrycode} currency={e.currency}/>
+          return <a key={i} href={'/detail/' + e._id} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
+            <div className='img' style={{backgroundImage: `url(${e.image})`}}></div>
+            <div className='txt'>{e.name}</div>
+          </a>
         })}
       </div>
     </fragment>
