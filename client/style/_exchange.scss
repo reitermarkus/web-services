@@ -1,5 +1,6 @@
 .exchange {
-  margin-bottom: 16px;
+  grid-column: 2 / 2;
+  grid-row: 3 / 4;
 
   > div > div {
     align-self: center;

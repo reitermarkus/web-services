@@ -92,8 +92,7 @@ export default class Weather extends Component {
 
   render = () =>
     <div className='weather'>
-      <h2>Weather at <b>{this.state.city.name}</b> ({this.state.city.country})</h2>
-      <h3>We provide you a 5-day weather forecast for a safe trip ...</h3>
+      <h2>Forecast</h2>
       <div className='grid'>
         {
           Object.entries(this.state.forecast).map(([date, f], i) =>

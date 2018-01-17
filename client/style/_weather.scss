@@ -1,7 +1,8 @@
 $weather-itemborder: 1px solid $green;
 
 .weather {
-  margin-bottom: 16px;
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
 
   .grid {
     display: grid;
