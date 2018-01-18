@@ -79,32 +79,14 @@ class Distance extends Component {
   }
 
   render = () =>
-    <div className='distance'>
-      <h2>Distance</h2>
-      <h3>How long will it take to reach the goal?</h3>
-      <div>
-        <div>
-          <label>from</label>
-          <span>{this.state.result.from}</span>
-        </div>
-        <div>
-          <label>to</label>
-          <span>{this.state.result.to}</span>
-        </div>
-        <div>
-          <label>distance</label>
-          <span>{this.state.result.distance}</span>
-        </div>
-        <div>
-          <label>time</label>
-          <span>{this.state.result.time}</span>
-        </div>
-        <div>
-          <label>required mean(s) of transportation</label>
-          <span>{this.state.result.transport}</span>
-        </div>
+    <fragment>
+      <div className='distance'>
+        <h2>Distance</h2>
+        <p>{this.state.result.distance}<br/> from {this.state.result.from}</p>
+        <h2>Travel Time</h2>
+        <p>{this.state.result.time} <br/>by {this.state.result.transport}</p>
       </div>
-    </div>
+    </fragment>
 }
 
 const mapStateToProps = (store) => {
