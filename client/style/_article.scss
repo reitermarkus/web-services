@@ -1,5 +1,6 @@
 article {
-  @include box;
+  border-radius: 5px;
+  overflow: hidden;
 
   header {
     background-size: cover;
@@ -17,6 +18,9 @@ article {
   }
 
   .content {
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+
     padding: 1em;
 
     display: grid;
