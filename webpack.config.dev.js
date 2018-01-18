@@ -50,6 +50,7 @@ const config = merge.smart(baseConfig, {
             'style-loader',
             'css-loader',
             'sass-loader',
+            'resolve-url-loader',
           ],
         },
       ],

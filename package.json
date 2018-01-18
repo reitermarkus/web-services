@@ -75,6 +75,7 @@
     "react-svg-loader": "^2.1.0",
     "redux": "^3.7.2",
     "spherical-geometry-js": "^1.0.1",
+    "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3",
     "webpack-merge": "^4.1.0"
@@ -99,6 +100,7 @@
     "postcss": "^6.0.13",
     "postcss-loader": "^2.0.8",
     "react-hot-loader": "^3.1.1",
+    "resolve-url-loader": "^2.2.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "stylelint": "^8.2.0",
