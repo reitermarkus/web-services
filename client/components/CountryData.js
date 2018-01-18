@@ -69,7 +69,7 @@ export default class CountryData extends Component {
           <span>{this.state.capital}</span>
         </div>
         <div className='col-sm-4'>
-          <label>Currentcies</label>
+          <label>Currencies</label>
           <span>{this.state.currs}</span>
         </div>
         <div className='col-sm-4'>
