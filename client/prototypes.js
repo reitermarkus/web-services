@@ -70,7 +70,7 @@ Object.defineProperty(Array.prototype, 'middle', {
   },
 })
 
-Object.defineProperty(Array.prototype, 'randomIndex', {
+Object.defineProperty(Array.prototype, 'randomElement', {
   get: function() {
     return this[Math.floor(Math.random() * (this.length - 1))] // eslint-disable-line no-magic-numbers
   },

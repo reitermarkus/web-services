@@ -45,7 +45,7 @@ export default class Pixabay extends Component {
   render = () =>
     <header style={{backgroundImage:`url(${this.state.data.hits.filter((v) => (v.webformatWidth / v.webformatHeight) >= 1.0).map((v) => {
       return v.webformatURL.replace(/_640\.(\w+)$/, '_960.$1')
-    }).first})`}}>
+    }).randomElement})`}}>
       <h1 className='title'>{this.props.title}</h1>
     </header>
 }
