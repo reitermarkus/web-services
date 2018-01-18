@@ -2,6 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
+const WEEKDAYS = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
+
 export default class Weather extends Component {
   constructor(props) {
     super(props)
@@ -35,7 +45,7 @@ export default class Weather extends Component {
           const [date, time] = ent.dt_txt.split(' ')
 
           return {
-            date: date,
+            date: Date.parse(date),
             time: time,
             weather: ent.weather.first.description,
             temp: ent.main.temp,
@@ -86,7 +96,7 @@ export default class Weather extends Component {
         {
           Object.entries(this.state.forecast).map(([date, f], i) =>
             <div className='weather-item' key={i}>
-              <div className='date'>{date}</div>
+              <div className='date'>{WEEKDAYS[new Date(Number(date)).getDay()]}</div>
               <div className='icon'><i className={`owf owf-3x owf-${f.id}`}/></div>
               <div className='temp' data-description='temp'>{Math.round(f.temp)} °C</div>
               <div className='rain' data-description='rain'>{Math.round(f.rain * 10) / 10} mm</div>
