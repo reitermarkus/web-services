@@ -14,8 +14,8 @@ const Article = (props) =>
       <OpenStreetMap lat={props.lat} lon={props.lon}/>
       <Distance to={props.name} coordTo={{lat: props.lat, lon: props.lon}} apiKey={process.env.GOOGLE_API_KEY}/>
       <Weather id={props.weatherid} apiKey={process.env.OPENWEATHERMAP_API_KEY}/>
-      <Exchange base={props.currency}/>
       <CountryData code={props.countrycode}/>
+      <Exchange base={props.currency}/>
     </section>
   </article>
 
