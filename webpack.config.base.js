@@ -16,7 +16,12 @@ const baseConfig = {
         use: [
           'css-loader',
           'sass-loader',
+          'resolve-url-loader',
         ],
+      },
+      {
+        test: /\.(eot|otf|ttf|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=100000',
       },
       {
         test: /\.svg$/,

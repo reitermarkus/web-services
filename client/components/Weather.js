@@ -2,17 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
-const WeatherIcon = ({ id, forceDay }) => {
-  const iconName = forceDay ? id.replace(/n$/, 'd') : id
-
-  return <img src={`https://openweathermap.org/img/w/${iconName}.png`}/>
-}
-
-WeatherIcon.propTypes = {
-  id: PropTypes.string,
-  forceDay: PropTypes.bool,
-}
-
 export default class Weather extends Component {
   constructor(props) {
     super(props)
@@ -54,7 +43,7 @@ export default class Weather extends Component {
             rain: Object.values(ent.rain || {}).first || 0,
             snow: Object.values(ent.snow || {}).first || 0,
             wind: ent.wind.speed * factorMPStoKMPH,
-            icon: ent.weather.first.icon,
+            id: ent.weather.first.id,
           }
         })
 
@@ -72,7 +61,7 @@ export default class Weather extends Component {
               rain:   val.reduce((acc, { rain })   => acc + rain,   0) / val.length,
               snow:   val.reduce((acc, { snow })   => acc + snow,   0) / val.length,
               wind:   val.reduce((acc, { wind })   => acc + wind,   0) / val.length,
-              icon:   val.middle.icon,
+              id:     val.middle.id,
             }}
           ), {})
 
@@ -98,7 +87,7 @@ export default class Weather extends Component {
           Object.entries(this.state.forecast).map(([date, f], i) =>
             <div className='weather-item' key={i}>
               <div className='date'>{date}</div>
-              <div className='icon'><WeatherIcon id={f.icon} forceDay/></div>
+              <div className='icon'><i className={`owf owf-3x owf-${f.id}`}/></div>
               <div className='temp' data-description='temp'>{Math.round(f.temp)} °C</div>
               <div className='rain' data-description='rain'>{Math.round(f.rain * 10) / 10} mm</div>
               <div className='snow' data-description='snow'>{Math.round(f.snow * 10) / 10} mm</div>
