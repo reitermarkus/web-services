@@ -73,7 +73,7 @@ export default class CountryData extends Component {
           <span>{this.state.currs}</span>
         </div>
         <div className='col-sm-4'>
-          <label>Native languages</label>
+          <label>Language</label>
           <span>{this.state.langs}</span>
         </div>
       </div>

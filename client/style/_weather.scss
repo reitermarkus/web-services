@@ -7,6 +7,8 @@ $weather-itemborder: 1px solid $green;
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin-left: -1em;
+    margin-right: -1em;
 
     @include xs-only {
       grid-template-columns: 1fr;
@@ -24,6 +26,7 @@ $weather-itemborder: 1px solid $green;
     grid-gap: 8px;
     padding: 8px;
     text-align: center;
+    background: rgba(240, 255, 240, 0.1);
 
     @include xs-only {
       &:not(:last-child) {
@@ -46,13 +49,13 @@ $weather-itemborder: 1px solid $green;
 
     @include md-up {
       &:not(:nth-child(3n)) {
-        border-right: $weather-itemborder;
+        margin-right: 1px;
       }
 
       &:nth-child(1),
       &:nth-child(2),
       &:nth-child(3) {
-        border-bottom: $weather-itemborder;
+        margin-bottom: 1px;
       }
     }
   }
