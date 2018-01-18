@@ -1,13 +1,14 @@
 $cols: 12;
+$gap: 16px;
 
 .col {
   display: grid;
   grid-template-columns: repeat($cols, 1fr);
-  grid-gap: 1rem;
+  grid-gap: $gap;
 }
 
 // xs
-@include xs-only {
+@include xs-up {
   [class^="col-"] {
     grid-column: auto / span 12;
   }
@@ -15,6 +16,11 @@ $cols: 12;
   @for $i from 1 through $cols {
     .col-xs-#{$i} {
       grid-column: auto / span #{$i};
+    }
+
+    .push-xs-#{$i} {
+      position: relative;
+      left: calc(#{percentage(1 / $cols * $i)} + #{$gap / ($cols - 1) * $i});
     }
   }
 }
@@ -25,6 +31,11 @@ $cols: 12;
     .col-sm-#{$i} {
       grid-column: auto / span #{$i};
     }
+
+    .push-sm-#{$i} {
+      position: relative;
+      left: calc(#{percentage(1 / $cols * $i)} + #{$gap / ($cols - 1) * $i});
+    }
   }
 }
 
@@ -34,6 +45,11 @@ $cols: 12;
     .col-md-#{$i} {
       grid-column: auto / span #{$i};
     }
+
+    .push-md-#{$i} {
+      position: relative;
+      left: calc(#{percentage(1 / $cols * $i)} + #{$gap / ($cols - 1) * $i});
+    }
   }
 }
 
@@ -42,6 +58,11 @@ $cols: 12;
   @for $i from 1 through $cols {
     .col-lg-#{$i} {
       grid-column: auto / span #{$i};
+    }
+
+    .push-lg-#{$i} {
+      position: relative;
+      left: calc(#{percentage(1 / $cols * $i)} + #{$gap / ($cols - 1) * $i});
     }
   }
 }
