@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import axios from 'axios'
+import IPLocation from './IPLocation'
 import Article from './Article'
 
 class LocationDetails extends Component {
@@ -29,6 +30,7 @@ class LocationDetails extends Component {
 
   render = () =>
     <fragment>
+      <IPLocation/>
       {this.state.data.map((e, i) => {
         return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid} countrycode={e.countrycode} currency={e.currency}/>
       })}
