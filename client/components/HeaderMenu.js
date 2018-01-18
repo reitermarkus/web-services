@@ -1,10 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { deleteToken } from '../jwt'
+import userAction from '../actions/user-action'
+import store from '../store'
 
-const HeaderMenu = () =>
-  <nav>
-    <ul>
-      <li><a href='/admin/location' target='_blank'>manage locations</a></li>
-    </ul>
-  </nav>
+class HeaderMenu extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-export default HeaderMenu
+  removeUserData = () => {
+    store.dispatch(userAction('REMOVE_USER'))
+    deleteToken()
+  }
+
+  render = () =>
+    <nav>
+      <ul>
+        {this.props.user ?
+          <li><a onClick={() => this.removeUserData()} target='_blank'>logout</a></li> :
+          <li><a href='/login' target='_blank'>login</a></li> }
+        <li><a href='/admin/location' target='_blank'>manage locations</a></li>
+      </ul>
+    </nav>
+}
+
+const mapStateToProps = (store) => {
+  return {
+    user: store.userReducer.user,
+  }
+}
+
+export default connect(mapStateToProps)(HeaderMenu)

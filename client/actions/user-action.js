@@ -5,6 +5,11 @@ const userAction = (type, user) => {
       type: 'GET_USER',
       user: user,
     }
+  case 'REMOVE_USER':
+    return {
+      type: 'REMOVE_USER',
+      user: null,
+    }
   }
 }
 
