@@ -4,6 +4,10 @@ const userReducer = (state = {}, action) => {
     return {
       user: action.user,
     }
+  case 'REMOVE_USER':
+    return {
+      user: action.user,
+    }
   default:
     return state
   }
