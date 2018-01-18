@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import Trash from 'react-icons/lib/fa/trash'
-import Edit from 'react-icons/lib/fa/pencil'
+
+import Icon from 'react-icons-kit'
+import { trash } from 'react-icons-kit/fa/trash'
+import { edit } from 'react-icons-kit/fa/edit'
 
 export default class LocationList extends Component {
   constructor(props) {
@@ -87,8 +89,8 @@ export default class LocationList extends Component {
                 )
               })}
               <div className='tools'>
-                <Edit className='edit' onClick={() => this.editIndex(i)} />
-                <Trash className='trash' onClick={() => this.removeIndex(i)} />
+                <Icon icon={edit} className='edit' onClick={() => this.editIndex(i)} />
+                <Icon icon={trash} className='trash' onClick={() => this.removeIndex(i)} />
               </div>
             </div>
           )}

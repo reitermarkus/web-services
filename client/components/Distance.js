@@ -5,6 +5,10 @@ import { connect } from 'react-redux'
 import { computeDistanceBetween, LatLng } from 'spherical-geometry-js'
 import numeral from 'numeral'
 
+import Icon from 'react-icons-kit'
+import { car } from 'react-icons-kit/fa/car'
+import { plane } from 'react-icons-kit/fa/plane'
+
 class Distance extends Component {
   constructor(props) {
     super(props)
@@ -17,6 +21,7 @@ class Distance extends Component {
         distance: '',
         time: '',
         transport: 'car',
+        icon: car,
       },
     }
   }
@@ -33,6 +38,7 @@ class Distance extends Component {
         distance: data.rows.first.elements.first.distance.text,
         time: data.rows.first.elements.first.duration.text,
         transport: 'car',
+        icon: car,
       },
     })
 
@@ -73,6 +79,7 @@ class Distance extends Component {
             distance: numeral(dist).format('0,0.0') + ' km',
             time: (((hours) ? hours + ' hours' : '') + ' ' + ((mins) ? mins + ' mins' : '')).trim(),
             transport: 'plane',
+            icon: plane,
           },
         })
       })
@@ -84,7 +91,7 @@ class Distance extends Component {
         <h2>Distance</h2>
         <p>{this.state.result.distance}<br/> from {this.state.result.from}</p>
         <h2>Travel Time</h2>
-        <p>{this.state.result.time} <br/>by {this.state.result.transport}</p>
+        <p>{this.state.result.time} <br/>by {this.state.result.transport} <Icon icon={this.state.result.icon}/></p>
       </div>
     </fragment>
 }
