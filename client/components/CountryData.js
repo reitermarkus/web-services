@@ -49,32 +49,30 @@ export default class CountryData extends Component {
 
   render = () =>
     <div className='country-data'>
-      <h2>Data</h2>
-      <h3>Some data about {this.state.name}:</h3>
       <div className='col'>
-        <div className='col-sm-6'>
-          <label>Country</label>
-          <span>{this.state.name} </span><img src={this.state.flag}/>
-        </div>
-        <div className='col-sm-6'>
-          <label>Region</label>
+        <div className='col-sm-4'>
+          <h2>Region</h2>
           <span>{this.state.region} ({this.state.subregion})</span>
         </div>
-        <div className='col-sm-12'>
-          <label>Timezone</label>
-          <span>{this.state.timezone}</span>
+        <div className='col-sm-4'>
+          <h2>Country</h2>
+          <span>{this.state.name} </span><img src={this.state.flag}/>
         </div>
         <div className='col-sm-4'>
-          <label>Capital</label>
+          <h2>Capital</h2>
           <span>{this.state.capital}</span>
         </div>
         <div className='col-sm-4'>
-          <label>Currencies</label>
-          <span>{this.state.currs}</span>
+          <h2>Timezone</h2>
+          <span>{this.state.timezone}</span>
         </div>
         <div className='col-sm-4'>
-          <label>Language</label>
+          <h2>Language</h2>
           <span>{this.state.langs}</span>
+        </div>
+        <div className='col-sm-4'>
+          <h2>Currency</h2>
+          <span>{this.state.currs}</span>
         </div>
       </div>
     </div>
