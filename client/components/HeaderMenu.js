@@ -24,13 +24,22 @@ class HeaderMenu extends Component {
       return <Redirect to='/login' />
     }
 
+    const renderUserMenu = () =>
+      <li>
+        <a href='#'>{this.props.user.username}</a>
+        <ul>
+          <li><a onClick={() => this.removeUserData()} target='_blank'>logout</a></li>
+          {this.props.user.admin ?
+            <li><a href='/admin/location' target='_blank'>manage locations</a></li> : null}
+        </ul>
+      </li>
+
     return (
       <nav>
         <ul>
-          {this.props.user ?
-            <li><a onClick={() => this.removeUserData()} target='_blank'>logout</a></li> :
+          {this.props.user ? renderUserMenu() :
             <li><a onClick={() => this.setState({redirect: true})} target='_blank'>login</a></li> }
-          <li><a href='/admin/location' target='_blank'>manage locations</a></li>
+
         </ul>
       </nav>
     )
