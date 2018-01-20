@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
     if (err || !user) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send('wrong email or password')
     } else {
-      res.status(httpStatus.OK).send('login successfull')
+      res.status(httpStatus.OK).end()
     }
   })
 })
@@ -43,17 +43,15 @@ router.post('/user/info', (req, res) => {
   user.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send('error while getting user')
-    } else if (!user) {
+    } else if (user) {
+      res.status(httpStatus.OK).send(JSON.stringify({
+        'email': user.email,
+        'username': user.username,
+        'admin': user.admin,
+      }))
+    } else {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send('user not found')
-    } else if (!user.admin) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('user is not admin')
     }
-
-    res.status(httpStatus.OK).send(JSON.stringify({
-      'email': user.email,
-      'username': user.username,
-      'admin': user.admin,
-    }))
   })
 })
 
