@@ -14,7 +14,7 @@ $lg-max: 999999px;
 // colors
 $background: #fafafa;
 
-$grey: #ccc;
+$grey: hsl(0, 0%, 50%);
 $darkergrey: #444;
 $darkgrey: #333;
 $lightergrey: #aaa;
@@ -24,8 +24,6 @@ $highlight: hsl(165, 100%, 40%);
 
 $blue: hsl(195, 100%, 50%);
 $green: #32dc6e;
-$lightgreen: hsl(165, 100%, 42.5%);
-$darkgreen: hsl(165, 100%, 30%);
 $red: hsl(20, 100%, 50%);
 
 // fonts

@@ -87,7 +87,7 @@ class Distance extends Component {
 
   render = () =>
     <fragment>
-      <div className='distance'>
+      <div className='distance col-xs-12 col-md-4'>
         <h2>Distance</h2>
         <p>{this.state.result.distance}<br/> from {this.state.result.from}</p>
         <h2>Travel Time</h2>

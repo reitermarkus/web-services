@@ -1,11 +1,11 @@
-footer {
+.site-footer {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5em 1em 1em;
   line-height: 1;
   color: #fff;
+  background: darken($grey, 20%);
 
   ul {
     display: flex;
@@ -16,9 +16,7 @@ footer {
     user-select: none;
 
     li {
-      &:not(:last-child) {
-        margin-right: 1em;
-      }
+      padding: 1em;
 
       @include hover-only {
         transition: background 0.2s;
