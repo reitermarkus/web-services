@@ -73,6 +73,16 @@
   }
 }
 
+@mixin xlg-down {
+  @content;
+}
+
+@mixin xlg-up {
+  @media (min-width: $xlg-min) {
+    @content;
+  }
+}
+
 // style-mixins
 @mixin box {
   background: #fff;

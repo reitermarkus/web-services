@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { deleteToken } from '../jwt'
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import userAction from '../actions/user-action'
 import store from '../store'
 
@@ -51,6 +52,12 @@ const mapStateToProps = (store) => {
   return {
     user: store.userReducer.user,
   }
+}
+
+HeaderMenu.propTypes = {
+  user: PropTypes.object,
+  username: PropTypes.string,
+  admin: PropTypes.bool,
 }
 
 export default connect(mapStateToProps)(HeaderMenu)
