@@ -1,3 +1,17 @@
+%dropdown-arrow {
+  &:after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.3em;
+    vertical-align: middle;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+  }
+}
+
 .site-header {
   display: grid;
   align-items: center;
@@ -45,6 +59,24 @@
 
     @include xs-only {
       overflow-x: auto;
+    }
+
+    li ul {
+      background: $green;
+      position: absolute;
+      display: none;
+
+      &:hover {
+        display: block;
+      }
+    }
+
+    li > a:not(:only-child) {
+      @extend %dropdown-arrow;
+
+      &:hover + ul {
+        display: block;
+      }
     }
 
     li a {
