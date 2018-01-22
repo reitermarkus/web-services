@@ -1,13 +1,26 @@
 .message-container {
-  width: 80%;
+  width: 100%;
   margin: 1em auto;
+
+  @include md-up {
+    width: 80%;
+  }
+
+  @include xlg-up {
+    width: 75%;
+  }
+
   opacity: 0.85;
 
   div {
     padding: 0.6em;
-    border-radius: 4px;
+    margin: 5px 0;
     color: white;
     text-align: center;
-    margin: 5px;
+
+    @include md-up {
+      margin: 5px;
+      border-radius: 4px;
+    }
   }
 }

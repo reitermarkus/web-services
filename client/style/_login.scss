@@ -1,13 +1,23 @@
+@import 'vars';
+
 .login-form {
-  width: 22em;
+  width: 100%;
   overflow: hidden;
   left: 50%;
-  position: fixed;
+  position: relative;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 8px;
   display: grid;
-  grid-template-rows: 7em 2.1em auto;
+  grid-template-rows: 7em 2.2em auto;
+
+  @include md-up {
+    width: 22em;
+  }
+
+  @media (min-height: 800px) {
+    position: fixed;
+  }
 
   .top {
     display: flex;
