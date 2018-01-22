@@ -57,24 +57,20 @@ export default class App extends Component {
         <Route path='/search/:query' component={Search}/>
         <Route exact path='/login' render={() =>
           <fragment>
-            <Header />
             <Notification />
             <main>
               <Login />
               <BackgroundSwitcher timeout={6000} />
             </main>
-            <Footer />
           </fragment>
         } />
         <Route exact path='/register' render={() =>
           <fragment>
-            <Header />
             <Notification />
             <main>
               <Register />
               <BackgroundSwitcher timeout={6000} />
             </main>
-            <Footer />
           </fragment>
         } />
         <Route exact path='/admin/location' render={() =>
