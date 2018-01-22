@@ -30,7 +30,7 @@ html {
 
 body {
   margin: 0;
-  background: darken($green, 20%);
+  background: lighten($grey, 40%);
 }
 
 #root {
@@ -66,18 +66,21 @@ h3 {
 }
 
 h1 {
+  margin-bottom: 1em;
+
   &:first-child {
     margin-top: 0;
   }
 }
 
 h2 {
+  margin-bottom: 0.5em;
   color: $green;
   font-weight: normal;
 }
 
 h3 {
-  margin: 0 0 16px;
+  margin-bottom: 16px;
   color: $grey;
   font-weight: 100;
   font-size: 12px;

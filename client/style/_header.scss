@@ -2,6 +2,7 @@
   display: grid;
   align-items: center;
   color: #fff;
+  background: darken($green, 20%);
 
   @include xs-only {
     grid-template-columns: 1fr;
@@ -27,7 +28,7 @@
     @include xs-only {
       width: 100vw;
       grid-row: 2;
-      background: $lightgreen;
+      background: darken($green, 17.5%);
     }
 
     @include sm-up {
@@ -66,7 +67,7 @@
         cursor: pointer;
 
         &:hover {
-          background: $lightgreen;
+          background: darken($green, 17.5%);
         }
       }
     }

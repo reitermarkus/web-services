@@ -10,10 +10,12 @@ const OpenStreetMap = (props) => {
   const url = `${baseURL}/export/embed.html?bbox=${lon - zoom}%2C${lat - zoom}%2C${lon + zoom}%2C${lat + zoom}&layer=mapnik&marker=${lat}%2C${lon}`
   const lurl = `${baseURL}/?mlat=${lat}&mlon=${lon}#map=19/${lat}/${lon}&layers=N`
 
-  return <div className='openstreetmap'>
-    <iframe src={url}></iframe>
-    <a href={lurl} target='_blank'>bigger</a>
-  </div>
+  return (
+    <div className='openstreetmap col-xs-12 col-md-8'>
+      <iframe src={url}></iframe>
+      <a href={lurl} target='_blank'>bigger</a>
+    </div>
+  )
 }
 
 export default OpenStreetMap

@@ -92,17 +92,17 @@ export default class Weather extends Component {
   render = () =>
     <div className='weather'>
       <h2>Forecast</h2>
-      <div className='grid'>
+      <div className='weather-items col-xs-12 col no-gap'>
         {
           Object.entries(this.state.forecast).map(([date, f], i) =>
-            <div className='weather-item' key={i}>
-              <div className='date'>{WEEKDAYS[new Date(Number(date)).getDay()]}</div>
-              <div className='icon'><i className={`owf owf-3x owf-${f.id}`}/></div>
-              <div className='temp' data-description='temp'>{Math.round(f.temp)} °C</div>
-              <div className='rain' data-description='rain'>{Math.round(f.rain * 10) / 10} mm</div>
-              <div className='snow' data-description='snow'>{Math.round(f.snow * 10) / 10} mm</div>
-              <div className='wind' data-description='wind'>{Math.round(f.wind)} km/h</div>
-              <div className='clouds' data-description='clouds'>{Math.round(f.clouds)} %</div>
+            <div className='weather-item col-xs-12 col-sm-6 col-md-4 col no-gap' key={i}>
+              <div className='date col-xs-12'>{WEEKDAYS[new Date(Number(date)).getDay()]}</div>
+              <div className='icon col-xs-6'><i className={`owf owf-3x owf-${f.id}`}/></div>
+              <div className='temp col-xs-6' data-description='temp'>{Math.round(f.temp)} °C</div>
+              <div className='rain col-xs-6' data-description='rain'>{Math.round(f.rain * 10) / 10} mm</div>
+              <div className='snow col-xs-6' data-description='snow'>{Math.round(f.snow * 10) / 10} mm</div>
+              <div className='wind col-xs-6' data-description='wind'>{Math.round(f.wind)} km/h</div>
+              <div className='clouds col-xs-6' data-description='clouds'>{Math.round(f.clouds)} %</div>
             </div>
           )
         }

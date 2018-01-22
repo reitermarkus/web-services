@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Footer = () =>
-  <footer>
+  <footer className='site-footer'>
     <div id='copy'>&copy; arriven 2017</div>
     <div id='help'>
       <ul>
