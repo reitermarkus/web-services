@@ -54,7 +54,6 @@ class Favourites extends Component {
       favourites: favourites,
     }).then(() => {
       getUserInfo()
-      console.log('works')
     })
   }
 
