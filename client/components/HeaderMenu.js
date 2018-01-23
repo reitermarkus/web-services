@@ -32,6 +32,7 @@ class HeaderMenu extends Component {
           <li><a onClick={() => this.removeUserData()} target='_blank'>logout</a></li>
           {this.props.user.admin ?
             <li><a href='/admin/location' target='_blank'>manage locations</a></li> : null}
+          <li><a href='/user/favourites' target='_blank'>manage favourites</a></li>
         </ul>
       </li>
 
