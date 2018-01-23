@@ -1,0 +1,42 @@
+.wrapper {
+  width: 95%;
+  margin: 0 auto;
+
+  @include lg-up {
+    width: 90%;
+  }
+
+  @include xlg-up {
+    width: 75%;
+  }
+
+  input[type=text] {
+    margin-top: 2em;
+    width: 100%;
+  }
+
+  ul {
+    width: 100%;
+    padding: 0;
+
+    @include lg-up {
+      margin-top: 2.25em;
+    }
+
+    li {
+      display: block;
+      padding: 0.4em;
+      margin: 0.5em 0;
+      text-align: center;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span:hover {
+        cursor: pointer;
+        color: #D0D0D0;
+      }
+    }
+  }
+}

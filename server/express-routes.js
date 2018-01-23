@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const mongoose = require('mongoose')
 const httpStatus = require('http-status-codes')
 const curl = require('curl')
 const user = require('./model/User')
@@ -48,9 +49,20 @@ router.post('/user/info', (req, res) => {
         'email': user.email,
         'username': user.username,
         'admin': user.admin,
+        'favourites': user.favourites,
       }))
+    }
+  })
+})
+
+router.post('/user/favourites', (req, res) => {
+  mongoose.model('User').update({email: req.body.email}, {
+    '$set': {'favourites': req.body.favourites},
+  }, (err) => {
+    if (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('could not update favourites')
     } else {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('user not found')
+      res.status(httpStatus.OK).end()
     }
   })
 })
