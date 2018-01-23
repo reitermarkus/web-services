@@ -110,9 +110,17 @@ describe('Array.prototype.last', () => {
 
 describe('Array.prototype.middle', () => {
   it('returns the middle element of an array', () => {
+    expect([].middle).toBe(undefined)
     expect([1].middle).toBe(1)
     expect([1, 2].middle).toBe(1)
     expect([1, 2, 3].middle).toBe(2)
+  })
+})
+
+describe('Array.prototype.randomElement', () => {
+  it('returns a random element of an array', () => {
+    expect([].randomElement).toBe(undefined)
+    expect([1].randomElement).toBe(1)
   })
 })
 
