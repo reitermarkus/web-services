@@ -59,7 +59,7 @@ class Favourites extends Component {
   }
 
   render = () =>
-    <div className='wrapper'>
+    <div className='fav-wrapper'>
       <input type='text' placeholder='Enter new favourite' onChange={this.handleChange} defaultValue={this.state.input}/>
       {this.props.user && this.props.user.favourites ?
         <ul>
