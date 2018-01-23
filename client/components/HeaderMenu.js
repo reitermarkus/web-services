@@ -33,7 +33,7 @@ class HeaderMenu extends Component {
     const renderUserMenu = () =>
       <li>
         <a href='#'>{this.props.user.username}</a>
-        <ul>
+        <ul className='sub-menu'>
           <li><a onClick={() => this.removeUserData()} target='_blank'>logout</a></li>
           {this.props.user.admin ?
             <li><a href='/admin/location' target='_blank'>manage locations</a></li> : null}
@@ -42,8 +42,8 @@ class HeaderMenu extends Component {
       </li>
 
     return (
-      <nav>
-        <ul>
+      <nav className='col-xs-12 col-sm-6'>
+        <ul className='menu'>
           {this.props.user ? null :
             <li><a onClick={() => this.setState({redirectRegister: true})} target='_blank'>register</a></li> }
           {this.props.user ? renderUserMenu() :

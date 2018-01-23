@@ -82,12 +82,17 @@ class SearchForm extends Component {
         })
 
         this.setState({output: res.data})
+      }).catch(() => {
+        this.props.history.push('/search')
+        this.setState({
+          output: [],
+        })
       })
   }
 
   render = () => (
     <fragment>
-      <form className='col' onSubmit={this.handleSubmit}>
+      <form className='search-form col' onSubmit={this.handleSubmit}>
         <input type='text' className='col-sm-12' placeholder='How should your holidays look like?' onChange={this.handleChange} defaultValue={this.state.input}/>
       </form>
       <div className='preview-cards col'>
