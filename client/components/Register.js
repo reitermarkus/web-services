@@ -4,7 +4,7 @@ import axios from 'axios'
 import store from '../store'
 import AuthenticationSkeleton from './AuthenticationSkeleton'
 import notificationAction from '../actions/notification-action'
-import { signAuth, hasToken } from '../jwt'
+import { signAuth, hasToken, setUserInfo } from '../jwt'
 
 export default class Register extends Component {
   constructor(props) {
@@ -36,7 +36,10 @@ export default class Register extends Component {
       passwordConf: this.state.passwordConf,
     }).then(() => {
       signAuth(this.state.email)
-      this.setState({redirect: true})
+
+      setUserInfo(this.state.email, () => {
+        this.setState({redirect: true})
+      })
     }).catch((err) => {
       const res = err.response.data.split(':')
 

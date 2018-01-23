@@ -11,7 +11,8 @@ class HeaderMenu extends Component {
     super(props)
 
     this.state = {
-      redirect: false,
+      redirectLogin: false,
+      redirectRegister: false,
     }
   }
 
@@ -21,8 +22,12 @@ class HeaderMenu extends Component {
   }
 
   render = () => {
-    if (this.state.redirect) {
+    if (this.state.redirectLogin) {
       return <Redirect to='/login' />
+    }
+
+    if (this.state.redirectRegister) {
+      return <Redirect to='/register' />
     }
 
     const renderUserMenu = () =>
@@ -39,9 +44,10 @@ class HeaderMenu extends Component {
     return (
       <nav>
         <ul>
+          {this.props.user ? null :
+            <li><a onClick={() => this.setState({redirectRegister: true})} target='_blank'>register</a></li> }
           {this.props.user ? renderUserMenu() :
-            <li><a onClick={() => this.setState({redirect: true})} target='_blank'>login</a></li> }
-
+            <li><a onClick={() => this.setState({redirectLogin: true})} target='_blank'>login</a></li> }
         </ul>
       </nav>
     )
