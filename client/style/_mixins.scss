@@ -83,6 +83,30 @@
   }
 }
 
+@mixin phone {
+  @include xs-up {
+    @content;
+  }
+}
+
+@mixin note {
+  @include sm-up {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include md-up {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include lg-up {
+    @content;
+  }
+}
+
 // style-mixins
 @mixin box {
   background: #fff;

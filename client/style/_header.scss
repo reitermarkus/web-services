@@ -13,95 +13,78 @@
 }
 
 .site-header {
-  display: grid;
-  align-items: center;
-  color: #fff;
   background: darken($green, 20%);
 
-  @include xs-only {
-    grid-template-columns: 1fr;
-    grid-template-rows: 48px auto;
-    justify-items: center;
-  }
-
-  @include sm-up {
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto;
-    padding-left: 16px;
-  }
-
-  .logo {
-    grid-row: 1;
-
-    svg {
-      height: 20px;
-    }
-  }
-
-  nav {
-    @include xs-only {
-      width: 100vw;
-      grid-row: 2;
-      background: darken($green, 17.5%);
-    }
-
-    @include sm-up {
-      grid-row: 1;
-    }
-  }
-
   ul {
-    display: flex;
-    flex-flow: row;
     margin: 0;
     padding: 0;
     list-style-type: none;
+  }
 
-    @include xs-only {
-      overflow-x: auto;
+  nav a {
+    padding: 0.75em;
+    color: lighten($green, 40%);
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .logo {
+    align-self: center;
+    margin-left: 1em;
+
+    @include xs-down {
+      min-height: 46px;
+      margin: 0;
+      display: flex;
+      background: darken($green, 22.5%);
+
+      svg {
+        margin: auto;
+      }
     }
 
-    li ul {
-      background: $green;
-      position: absolute;
-      display: none;
-
-      &:hover {
-        display: block;
-      }
+    svg {
+      display: block;
+      height: 20px;
+      pointer-events: none;
     }
+  }
 
-    li > a:not(:only-child) {
-      @extend %dropdown-arrow;
+  .menu {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
 
-      &:hover + ul {
-        display: block;
-      }
-    }
+    > li {
+      position: relative;
 
-    li a {
-      color: #fff;
-      font-size: 16px;
-      line-height: 1;
-      white-space: nowrap;
-      user-select: none;
+      &:hover,
+      &:focus {
+        .sub-menu {
+          display: flex;
+          flex-flow: column;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: darken($green, 25%);
 
-      @include xs-only {
-        padding: 8px;
-      }
-
-      @include sm-up {
-        padding: 16px;
-      }
-
-      @include hover-only {
-        transition: background 0.2s;
-        cursor: pointer;
-
-        &:hover {
-          background: darken($green, 17.5%);
+          > li > a {
+            width: 100%;
+            white-space: nowrap;
+          }
         }
       }
+
+      > a {
+        @extend %dropdown-arrow;
+      }
     }
+  }
+
+  .sub-menu {
+    display: none;
   }
 }

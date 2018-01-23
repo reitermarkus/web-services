@@ -1,4 +1,10 @@
+.search-form {
+  margin-bottom: 1em;
+}
+
 .preview-cards {
+  margin-bottom: 1em;
+
   > a {
     @include aspect-ratio(16, 9);
 
