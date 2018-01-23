@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import PropTypes from 'prop-types'
 import { getUserInfo } from '../jwt'
 
 class Favourites extends Component {
@@ -76,6 +77,10 @@ const mapStateToProps = (store) => {
   return {
     user: store.userReducer.user,
   }
+}
+
+Favourites.propTypes = {
+  user: PropTypes.object,
 }
 
 export default connect(mapStateToProps)(Favourites)
