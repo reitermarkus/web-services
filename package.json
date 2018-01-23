@@ -14,8 +14,8 @@
     "build": "webpack --config=webpack.config.prod --progress --profile --colors",
     "mongodb": "mongod --dbpath ./db",
     "server": "node ./server/server.dev.js",
-    "db-export": "mongoexport --db arriven --collection locations --jsonArray --pretty --out demo-data.json",
-    "db-import": "mongoimport --db arriven --collection locations --jsonArray --drop --file demo-data.json"
+    "location-export": "mongoexport --db arriven --collection locations --jsonArray --pretty --out location-demo-data.json",
+    "location-import": "mongoimport --db arriven --collection locations --jsonArray --drop --file location-demo-data.json"
   },
   "repository": {
     "type": "git",
