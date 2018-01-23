@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const httpStatus = require('http-status-codes')
 
 const SALT_WORK_FACTOR = 10
 const required = 'is required'
@@ -44,6 +45,65 @@ const userSchema = new mongoose.Schema({
   favourites: {
     type: Array,
   },
+})
+
+userSchema.static('userLogin', (req, res) => {
+  user.login(req.body.email, req.body.password, (err, user) => {
+    if (err || !user) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('wrong email or password')
+    } else {
+      res.status(httpStatus.OK).end()
+    }
+  })
+})
+
+userSchema.static('userInfo', (req, res) => {
+  user.findOne({ email: req.body.email }, (err, user) => {
+    if (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('error while getting user')
+    } else if (user) {
+      res.status(httpStatus.OK).send(JSON.stringify({
+        'email': user.email,
+        'username': user.username,
+        'admin': user.admin,
+        'favourites': user.favourites,
+      }))
+    }
+  })
+})
+
+userSchema.static('userFavourites', (req, res) => {
+  mongoose.model('User').update({email: req.body.email}, {
+    '$set': {'favourites': req.body.favourites},
+  }, (err) => {
+    if (err) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send('could not update favourites')
+    } else {
+      res.status(httpStatus.OK).end()
+    }
+  })
+})
+
+userSchema.static('userCreate', (req, res) => {
+  if (req.body.password === req.body.passwordConf) {
+    const userData = {
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password,
+      passwordConf: req.body.passwordConf,
+      admin: false,
+    }
+
+    user.create(userData, (err) => {
+      if (err) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message)
+      } else {
+        res.status(httpStatus.CREATED).send('user created successfully')
+      }
+    })
+  } else {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send('passwords do not match')
+  }
 })
 
 userSchema.statics.login = (email, password, callback) => {
