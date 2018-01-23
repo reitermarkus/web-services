@@ -92,18 +92,24 @@ describe('Number.prototype.clamp', () => {
 
 describe('Number.prototype.between', () => {
   expect((-100).between(-50, 50)).toBe(false)
+  expect((-50).between(-50, 50)).toBe(true)
   expect((0).between(-50, 50)).toBe(true)
+  expect((50).between(-50, 50)).toBe(true)
   expect((100).between(-50, 50)).toBe(false)
 })
 
 describe('Array.prototype.first', () => {
   it('returns the first element of an array', () => {
+    expect([].first).toBe(undefined)
+    expect([1].first).toBe(1)
     expect([1, 2, 3].first).toBe(1)
   })
 })
 
 describe('Array.prototype.last', () => {
   it('returns the last element of an array', () => {
+    expect([].last).toBe(undefined)
+    expect([1].last).toBe(1)
     expect([1, 2, 3].last).toBe(3)
   })
 })
