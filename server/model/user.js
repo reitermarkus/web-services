@@ -41,6 +41,9 @@ const userSchema = new mongoose.Schema({
   admin: {
     type: Boolean,
   },
+  favourites: {
+    type: Array,
+  },
 })
 
 userSchema.statics.login = (email, password, callback) => {

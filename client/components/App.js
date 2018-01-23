@@ -14,6 +14,7 @@ import Login from './Login'
 import Register from './Register'
 import BackgroundSwitcher from './BackgroundSwitcher'
 import Notification from './Notification'
+import Favourties from './Favourites'
 import '../style/App.scss'
 
 const Search = ({ match }) =>
@@ -82,6 +83,16 @@ export default class App extends Component {
             <Footer />
           </fragment>
         }/>
+        <Route exact path='/user/favourites' render={() =>
+          <fragment>
+            <Header />
+            <Notification />
+            <main>
+              <Favourties />
+            </main>
+            <Footer />
+          </fragment>
+        } />
         <Route render={() => {
           const status = HttpStatus.NOT_FOUND
 

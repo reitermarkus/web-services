@@ -28,6 +28,7 @@ export const getUserInfo = () => {
         'email' : res.data.email,
         'username': res.data.username,
         'admin': res.data.admin,
+        'favourites': res.data.favourites,
       }))
     })
   }
@@ -42,6 +43,7 @@ export const setUserInfo = (email, callback) => {
         'email' : res.data.email,
         'username': res.data.username,
         'admin': res.data.admin,
+        'favourites': res.data.favourites,
       }))
 
       if (callback) {
