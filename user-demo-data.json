@@ -1,0 +1,49 @@
+[{
+  "email" : "admin@admin.com",
+  "username" : "admin",
+  "password" : "$2a$10$CpB4xUSW3y66/ZgKtY1gA.CuSN8SN7eqprzk19PHg/3xAeCGeH1kq",
+  "admin" : true,
+  "favourites" : [
+      "brandenburger tor",
+      "hawaii",
+      "beach"
+  ],
+  "__v" : 0
+},
+{
+  "email" : "email@email.com",
+  "username" : "user1",
+  "password" : "$2a$10$iyenRa.zSrfZFJklSRHgjuRXhPy8WTcr4KzXNJWQAMaVQrSN4ssie",
+  "admin" : false,
+  "favourites" : [
+      "brandenburger tor",
+      "austria",
+      "france",
+      "relax"
+  ],
+  "__v" : 0
+},
+{
+  "email" : "email2@email2.com",
+  "username" : "user2",
+  "password" : "$2a$10$23OWSrPy1oKPfOOnHU/0MeaQwW7O8vT5YpniPJSMpbd9Rhj9uVZpK",
+  "admin" : false,
+  "favourites" : [
+      "brandenburger tor",
+      "austria",
+      "france"
+  ],
+  "__v" : 0
+},
+{
+  "email" : "email3@email3.com",
+  "username" : "user3",
+  "password" : "$2a$10$DRf3FWk2dALnDOEZ88Q6b.QrEcQ.M0Ki2UMobb/pUOrhc4rDemEi.",
+  "admin" : false,
+  "favourites" : [
+      "eiffel tower",
+      "alpines",
+      "america"
+  ],
+  "__v" : 0
+}]
