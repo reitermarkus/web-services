@@ -16,6 +16,7 @@ import Register from './Register'
 import BackgroundSwitcher from './BackgroundSwitcher'
 import Notification from './Notification'
 import Favourties from './Favourites'
+import Recommendation from './Recommendation'
 import '../style/App.scss'
 
 const Search = ({ match }) =>
@@ -25,6 +26,7 @@ const Search = ({ match }) =>
       <h1>Search location</h1>
       <p>We make sure you&#39;ll be arriven at your destination.</p>
       <SearchForm query={match.params.query}/>
+      <Recommendation/>
       <IPLocation/>
     </main>
     <Footer/>
