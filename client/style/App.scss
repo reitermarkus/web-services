@@ -58,6 +58,14 @@ main {
   @include lg-only {
     padding: 16px 15vw;
   }
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:not(:last-child) {
+    margin-bottom: 16px;
+  }
 }
 
 h1,
@@ -67,16 +75,14 @@ h3 {
 }
 
 h1 {
-  margin-bottom: 1em;
-
-  &:first-child {
-    margin-top: 0;
-  }
+  color: darken($green, 20%);
+  font-size: 48px;
+  font-weight: normal;
 }
 
 h2 {
   margin-bottom: 0.5em;
-  color: $green;
+  color: darken($green, 20%);
   font-weight: normal;
 }
 

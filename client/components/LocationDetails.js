@@ -30,10 +30,10 @@ class LocationDetails extends Component {
 
   render = () =>
     <fragment>
-      <IPLocation/>
       {this.state.data.map((e, i) => {
         return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid} countrycode={e.countrycode} currency={e.currency}/>
       })}
+      <IPLocation/>
     </fragment>
 }
 

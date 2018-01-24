@@ -9,6 +9,7 @@ import Header from './Header'
 import AdminLocationView from './admin/LocationView'
 import IPLocation from './IPLocation'
 import SearchForm from './SearchForm'
+import LocationDetails from './LocationDetails'
 import Footer from './Footer'
 import Login from './Login'
 import Register from './Register'
@@ -21,7 +22,8 @@ const Search = ({ match }) =>
   <fragment>
     <Header/>
     <main>
-      <h4>We make sure you&#39;ll be arriven at your destination.</h4>
+      <h1>Search location</h1>
+      <p>We make sure you&#39;ll be arriven at your destination.</p>
       <SearchForm query={match.params.query}/>
       <IPLocation/>
     </main>
@@ -29,6 +31,19 @@ const Search = ({ match }) =>
   </fragment>
 
 Search.propTypes = {
+  match: PropTypes.object.isRequired,
+}
+
+const Detail = ({ match }) =>
+  <fragment>
+    <Header/>
+    <main>
+      <LocationDetails id={match.params.id}/>
+    </main>
+    <Footer/>
+  </fragment>
+
+Detail.propTypes = {
   match: PropTypes.object.isRequired,
 }
 
@@ -55,6 +70,7 @@ export default class App extends Component {
         <Redirect exact from='/' to='/search'/>
         <Route exact path='/search' component={Search} />
         <Route path='/search/:query' component={Search}/>
+        <Route path='/detail/:id' component={Detail}/>
         <Route exact path='/login' render={() =>
           <fragment>
             <Notification />

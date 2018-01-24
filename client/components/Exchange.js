@@ -116,13 +116,17 @@ export default class Exchange extends Component {
   render = () =>
     <div className='exchange'>
       <h2>Exchange Rate</h2>
-      <input type='number' onChange={this.valueFromChanged} defaultValue={this.state.value}/>
-      <select onChange={this.currencyFromChanged} defaultValue={this.state.from}>
-        {Object.entries(this.availableCurrencies(this.state.base)).map(([sym, name], i) =>
-          <option key={i} value={sym}>{name}</option>
-        )}
-      </select>
-        = <b className='result'>{numeral(this.convertValue()).format('0,0.00')}</b> {this.state.base}
+      <div className='col'>
+        <input type='number' className='col-xs-6 col-md-4' onChange={this.valueFromChanged} defaultValue={this.state.value}/>
+        <select className='col-xs-6 col-md-4' onChange={this.currencyFromChanged} defaultValue={this.state.from}>
+          {Object.entries(this.availableCurrencies(this.state.base)).map(([sym, name], i) =>
+            <option key={i} value={sym}>{name}</option>
+          )}
+        </select>
+        <div className='result col-xs-12 col-md-4'>
+          = <b>{numeral(this.convertValue()).format('0,0.00')}</b> {this.state.base}
+        </div>
+      </div>
     </div>
 }
 
