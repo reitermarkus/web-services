@@ -48,7 +48,7 @@ export default class Login extends Component {
 
     return (
       <fragment>
-        <AuthenticationSkeleton height={'23.5em'} title={'login'}>
+        <AuthenticationSkeleton title={'login'}>
           <form>
             <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
             <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />

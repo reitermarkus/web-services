@@ -95,6 +95,7 @@ class SearchForm extends Component {
   showDetails = (event, path) => {
     event.preventDefault()
     let inp = this.state.input
+
     this.setState({
       showDetails: path + '/' + inp,
     })

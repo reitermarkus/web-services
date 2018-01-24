@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom'
 class LocationDetails extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
+    query: PropTypes.string,
   }
 
   constructor(props) {
@@ -34,6 +35,7 @@ class LocationDetails extends Component {
   pressBack = (event) => {
     event.preventDefault()
     let query = this.state.query
+
     this.setState({
       backLink: '/search/' + query,
     })
