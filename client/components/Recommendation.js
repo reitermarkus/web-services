@@ -4,6 +4,7 @@ import axios from 'axios'
 import 'regenerator-runtime/runtime'
 import { map, reduce } from 'p-iteration'
 import PropTypes from 'prop-types'
+import { getUserInfo } from '../jwt'
 
 class Recommendation extends Component {
   constructor(props) {
@@ -14,15 +15,17 @@ class Recommendation extends Component {
     }
   }
 
+  componentDidMount() {
+    getUserInfo()
+  }
+
   async componentWillReceiveProps(nextProps) {
-    if (nextProps.user.favourites) {
+    if (nextProps.user && nextProps.user.favourites) {
       const fetchLocations = await reduce(nextProps.user.favourites, async(acc, val) =>
         ({...acc, [val]: await axios(`/api/location/find/${encodeURIComponent(val)}`)}), {})
 
       const fetchPixabay = await reduce(Object.entries(fetchLocations), async(acc, [key, val]) =>
         ({...acc, [key]: await map(val.data, async i => await axios(`/api/pixabay/find/${encodeURIComponent(i.name)}`))}), {})
-
-      console.log(fetchPixabay)
 
       const results = await reduce(Object.entries(fetchPixabay), async(acc, [key, val]) => {
         const images = val.map(res => ({'_id': res.data._id, 'image': res.data.hits.filter((v) =>
@@ -32,6 +35,8 @@ class Recommendation extends Component {
       }, {})
 
       this.setState({recommendations: results})
+    } else {
+      this.setState({recommendations: null})
     }
   }
 
@@ -43,7 +48,7 @@ class Recommendation extends Component {
             <h2>Recommendations</h2>
             {Object.entries(this.state.recommendations).map(([recKey, recValue], key) => {
               return <div key={key}>
-                <h3>Because you are interessted in {recKey}</h3>
+                <h3>Because you are interessted in &quot;{recKey}&quot;</h3>
                 <div className='preview-cards col'>
                   {recValue.map((e, i) => {
                     return <a key={i} href={'/detail/' + e._id} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
