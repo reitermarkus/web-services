@@ -25,13 +25,16 @@ class Recommendation extends Component {
         ({...acc, [val]: await axios(`/api/location/find/${encodeURIComponent(val)}`)}), {})
 
       const fetchPixabay = await reduce(Object.entries(fetchLocations), async(acc, [key, val]) =>
-        ({...acc, [key]: await map(val.data, async i => await axios(`/api/pixabay/find/${encodeURIComponent(i.name)}`))}), {})
+        ({...acc, [key]: await map(val.data, async i => {
+          const pixaResult = await axios(`/api/pixabay/find/${encodeURIComponent(i.name)}`) // eslint-disable-line newline-after-var
+          return {'locId': i._id, ...pixaResult}
+        })}), {})
 
       const results = await reduce(Object.entries(fetchPixabay), async(acc, [key, val]) => {
-        const images = val.map(res => ({'_id': res.data._id, 'image': res.data.hits.filter((v) =>
-          (v.webformatWidth / v.webformatHeight) >= 1.0).randomElement.webformatURL.replace(/_640\.(\w+)$/, '_960.$1'), name: res.data.query}))
-
-        return {...acc, [key]: images}
+        return {...acc, [key]: val.map(res =>
+          ({'_id': res.locId, 'image': res.data.hits.filter((v) =>
+            (v.webformatWidth / v.webformatHeight) >= 1.0).randomElement.
+            webformatURL.replace(/_640\.(\w+)$/, '_960.$1'), name: res.data.query}))}
       }, {})
 
       this.setState({recommendations: results})
@@ -51,7 +54,7 @@ class Recommendation extends Component {
                 <h3>Because you are interessted in &quot;{recKey}&quot;</h3>
                 <div className='preview-cards col'>
                   {recValue.map((e, i) => {
-                    return <a key={i} href={'/detail/' + e._id} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
+                    return <a key={i} href={`/detail/${e._id}/${e.name}`} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
                       <div className='img' style={{backgroundImage: `url(${e.image})`}}></div>
                       <div className='txt'>{e.name}</div>
                     </a>
