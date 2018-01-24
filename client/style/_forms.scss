@@ -55,3 +55,15 @@ input {
     }
   }
 }
+
+.back-btn {
+  padding: 8px;
+  color: #fff;
+  background: darken($green, 20%);
+  border-radius: 4px;
+
+  &:before {
+    margin-right: 8px;
+    content: '⇠';
+  }
+}

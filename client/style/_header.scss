@@ -78,7 +78,7 @@
         }
       }
 
-      > a {
+      > .has-submenu {
         @extend %dropdown-arrow;
       }
     }

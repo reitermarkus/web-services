@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import axios from 'axios'
 import IPLocation from './IPLocation'
 import Article from './Article'
+import { Redirect } from 'react-router-dom'
 
 class LocationDetails extends Component {
   static propTypes = {
@@ -15,7 +16,9 @@ class LocationDetails extends Component {
 
     this.state = {
       id: this.props.id,
+      query: this.props.query,
       data: [],
+      backLink: null,
     }
   }
 
@@ -28,13 +31,30 @@ class LocationDetails extends Component {
       })
   }
 
-  render = () =>
-    <fragment>
-      {this.state.data.map((e, i) => {
-        return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid} countrycode={e.countrycode} currency={e.currency}/>
-      })}
-      <IPLocation/>
-    </fragment>
+  pressBack = (event) => {
+    event.preventDefault()
+    let query = this.state.query
+    this.setState({
+      backLink: '/search/' + query,
+    })
+  }
+
+  render = () => {
+    if (this.state.backLink !== null) {
+      return <Redirect to={this.state.backLink}/>
+    }
+
+    return (
+      <fragment>
+        <a href='' className='back-btn' onClick={(event) => this.pressBack(event)}>back</a>
+        {this.state.data.map((e, i) => {
+          return <Article key={i} name={e.name} lat={Number(e.lat)} lon={Number(e.lon)} weatherid={e.weatherid} countrycode={e.countrycode} currency={e.currency}/>
+        })}
+        <IPLocation/>
+      </fragment>
+    )
+  }
+
 }
 
 export default withRouter(LocationDetails)
