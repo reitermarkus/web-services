@@ -32,7 +32,7 @@ class HeaderMenu extends Component {
 
     const renderUserMenu = () =>
       <li>
-        <a href='#'>{this.props.user.username}</a>
+        <a className='has-submenu' href='#'>{this.props.user.username}</a>
         <ul className='sub-menu'>
           <li><a onClick={() => this.removeUserData()} target='_blank'>logout</a></li>
           {this.props.user.admin ?

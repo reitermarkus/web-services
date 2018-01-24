@@ -24,7 +24,7 @@ export default class Login extends Component {
     }
   }
 
-  login = () => {
+  login = (event) => {
     event.preventDefault()
 
     axios.post('/login', {
@@ -52,7 +52,7 @@ export default class Login extends Component {
           <form>
             <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
             <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
-            <button type='button' onClick={this.login}>login</button>
+            <button type='submit' onClick={this.login}>login</button>
           </form>
         </AuthenticationSkeleton>
       </fragment>

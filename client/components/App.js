@@ -38,7 +38,7 @@ const Detail = ({ match }) =>
   <fragment>
     <Header/>
     <main>
-      <LocationDetails id={match.params.id}/>
+      <LocationDetails id={match.params.id} query={match.params.query}/>
     </main>
     <Footer/>
   </fragment>
@@ -70,7 +70,7 @@ export default class App extends Component {
         <Redirect exact from='/' to='/search'/>
         <Route exact path='/search' component={Search} />
         <Route path='/search/:query' component={Search}/>
-        <Route path='/detail/:id' component={Detail}/>
+        <Route path='/detail/:id/:query' component={Detail}/>
         <Route exact path='/login' render={() =>
           <fragment>
             <Notification />
