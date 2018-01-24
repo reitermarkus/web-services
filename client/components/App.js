@@ -74,18 +74,18 @@ export default class App extends Component {
         <Route exact path='/login' render={() =>
           <fragment>
             <Notification />
-            <main>
-              <Login />
+            <main className='center-vert'>
               <BackgroundSwitcher timeout={6000} />
+              <Login />
             </main>
           </fragment>
         } />
         <Route exact path='/register' render={() =>
           <fragment>
             <Notification />
-            <main>
-              <Register />
+            <main className='center-vert'>
               <BackgroundSwitcher timeout={6000} />
+              <Register />
             </main>
           </fragment>
         } />

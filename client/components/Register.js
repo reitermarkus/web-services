@@ -26,7 +26,7 @@ export default class Register extends Component {
     }
   }
 
-  register = () => {
+  register = (event) => {
     event.preventDefault()
 
     axios.post('/user', {
@@ -59,13 +59,13 @@ export default class Register extends Component {
 
     return (
       <fragment>
-        <AuthenticationSkeleton height={'31em'} title={'Register'}>
+        <AuthenticationSkeleton title={'Register'}>
           <form>
             <input type='text' value={this.state.username} onChange={(e) => { this.setState({username: e.target.value}) }} placeholder='username' />
             <input type='text' value={this.state.email} onChange={(e) => { this.setState({email: e.target.value}) }} placeholder='email' />
             <input type='password' value={this.state.password} onChange={(e) => { this.setState({password: e.target.value}) }} placeholder='password' />
             <input type='password' value={this.state.passwordConf} onChange={(e) => { this.setState({passwordConf: e.target.value}) }} placeholder='confirm password' />
-            <button type='button' onClick={this.register}>register</button>
+            <button type='submit' onClick={(event) => this.register(event)}>register</button>
           </form>
         </AuthenticationSkeleton>
       </fragment>

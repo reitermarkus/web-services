@@ -62,7 +62,7 @@ input {
   background: darken($green, 20%);
   border-radius: 4px;
 
-  &:before {
+  &::before {
     margin-right: 8px;
     content: '⇠';
   }

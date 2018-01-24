@@ -1,75 +1,35 @@
 @import 'vars';
 
 .login-form {
-  width: 100%;
-  overflow: hidden;
-  left: 50%;
-  position: relative;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
-  display: grid;
-  grid-template-rows: 7em 2.2em auto;
-
-  @include md-up {
-    width: 22em;
-  }
-
-  @media (min-height: 800px) {
-    position: fixed;
-  }
-
-  .top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(114, 114, 114, 0.7);
-
-    .logo {
-      height: 25px;
-    }
-  }
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 
   .title {
-    background: $green;
-    color: white;
+    padding: 8px 0;
+    color: #fff;
     font-size: 24px;
-    font-weight: 400;
     text-align: center;
   }
 
-  .wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(53, 53, 53, 0.98);
+  form {
+    min-width: 250px;
 
-    form {
-      text-align: center;
-      width: 80%;
+    input,
+    button {
+      display: block;
+    }
 
-      input:not([type=submit]):not([type=button]) {
-        font-size: 18px;
-        padding: 10px 10px 10px 5px;
-        display: block;
-        border: none;
-        border-bottom: 2px solid #757575;
-        background: transparent;
-        color: white;
-        border-radius: 0;
-        width: 100%;
-        margin-bottom: 0.8em;
+    input {
+      width: 100%;
+    }
 
-        &:focus {
-          box-shadow: none;
-        }
-      }
+    button {
+      margin: 0 auto;
+    }
 
-      button {
-        height: 2.5em;
-        width: 100%;
-        margin-top: 2em;
-      }
+    > *:not(:last-child) {
+      margin-bottom: 16px;
     }
   }
 }
