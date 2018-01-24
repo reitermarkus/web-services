@@ -16,16 +16,16 @@ class Recommendation extends Component {
 
   async componentWillReceiveProps(nextProps) {
     if (nextProps.user.favourites) {
-      const locationPromises = nextProps.user.favourites.map(i => axios(`/api/location/find/${encodeURIComponent(i)}`))
-      const resolvedLocationPromises = await Promise.all(locationPromises)
-      const locations = nextProps.user.favourites.reduce((acc, val, i) => ({...acc, [val]: resolvedLocationPromises[i].data}), {})
+      const fetchLocations = await reduce(nextProps.user.favourites, async(acc, val) =>
+        ({...acc, [val]: await axios(`/api/location/find/${encodeURIComponent(val)}`)}), {})
 
-      const pixabayPromises = Object.entries(locations).
-        reduce((acc, [key, val]) => ({...acc, [key]: map(val, i => axios(`/api/pixabay/find/${encodeURIComponent(i.name)}`))}), {})
+      const fetchPixabay = await reduce(Object.entries(fetchLocations), async(acc, [key, val]) =>
+        ({...acc, [key]: await map(val.data, async i => await axios(`/api/pixabay/find/${encodeURIComponent(i.name)}`))}), {})
 
-      const results = await reduce(Object.entries(pixabayPromises), async(acc, [key, val]) => {
-        const pixaResponse = await val
-        const images = pixaResponse.map(res => ({'_id': res.data._id, 'image': res.data.hits.filter((v) =>
+      console.log(fetchPixabay)
+
+      const results = await reduce(Object.entries(fetchPixabay), async(acc, [key, val]) => {
+        const images = val.map(res => ({'_id': res.data._id, 'image': res.data.hits.filter((v) =>
           (v.webformatWidth / v.webformatHeight) >= 1.0).randomElement.webformatURL.replace(/_640\.(\w+)$/, '_960.$1'), name: res.data.query}))
 
         return {...acc, [key]: images}
