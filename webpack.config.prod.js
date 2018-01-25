@@ -5,15 +5,16 @@ const baseConfig = require('./webpack.config.base.js')
 const fs = require('fs-extra')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const rootBuildPath = path.resolve(__dirname, 'dist')
 
 fs.existsSync(rootBuildPath) || fs.mkdirSync(rootBuildPath)
 
-fs.copy(path.resolve(__dirname, 'server', 'serve'), path.resolve(rootBuildPath), (err) => {
-  if (err) {
-    throw err
-  }
-})
+fs.copy(path.resolve(__dirname, 'server', 'serve'), path.resolve(rootBuildPath))
+fs.copy(path.resolve(__dirname, 'server', 'model'), path.resolve(rootBuildPath, 'model'))
+fs.copy(path.resolve(__dirname, 'server', 'express-routes.js'), path.resolve(rootBuildPath, 'express-routes.js'))
+fs.copy(path.resolve(__dirname, 'server', 'key.pem'), path.resolve(rootBuildPath, 'key.pem'))
+fs.copy(path.resolve(__dirname, 'server', 'cert.pem'), path.resolve(rootBuildPath, 'cert.pem'))
 
 const prodConfig = {
   devtool: 'cheap-module-source-map',
@@ -45,22 +46,8 @@ const prodConfig = {
     new ExtractTextPlugin({
       filename: 'style.css',
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      output: {
-        comments: false,
-      },
+    new UglifyJSPlugin({
+      parallel: true,
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
