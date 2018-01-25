@@ -9,7 +9,6 @@ class Favourites extends Component {
     super(props)
 
     this.state = {
-      timeout: null,
       input: '',
     }
   }
@@ -18,33 +17,17 @@ class Favourites extends Component {
     this.setState({
       input: event.target.value,
     })
-
-    this.clearTimeout()
-
-    this.setState({
-      timeout: setTimeout(() => {
-        this.addFavourite()
-      }, 1000),
-    })
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    this.clearTimeout()
     this.performSearch()
   }
 
-  clearTimeout = () => {
-    if (this.state.timeout) {
-      clearTimeout(this.state.timeout)
-      this.setState({
-        timeout: null,
-      })
-    }
-  }
+  addFavourite = (event) => {
+    event.preventDefault()
 
-  addFavourite = () => {
-    if (this.state.input !== '') {
+    if (this.state.input !== '' && !this.props.user.favourites.includes(this.state.input)) {
       this.updateFavourites([this.state.input, ...this.props.user.favourites])
     }
   }
@@ -59,18 +42,25 @@ class Favourites extends Component {
   }
 
   render = () =>
-    <div className='fav-wrapper'>
-      <input type='text' placeholder='Enter new favourite' onChange={this.handleChange} defaultValue={this.state.input}/>
-      {this.props.user && this.props.user.favourites ?
-        <ul>
-          {this.props.user.favourites.map((fav, key) =>
-            <li key={key}>
-              <span />
-              <div>{fav}</div>
-              <span onClick={() => this.updateFavourites(this.props.user.favourites.filter(i => i !== fav))}>✕</span>
-            </li>)}
-        </ul> : null}
-    </div>
+    <fragment>
+      <h1>Edit favourites</h1>
+      <p>Enter some keywords to describe what interests you have.</p>
+      <div className='fav-wrapper col'>
+        <form className='col col-xs-12'>
+          <input type='text' className='col-xs-10 col-sm-11' placeholder='Enter new favourite' onChange={this.handleChange} defaultValue={this.state.input}/>
+          <button type='submit' className='col-xs-2 col-sm-1' onClick={this.addFavourite}>+</button>
+        </form>
+        {this.props.user && this.props.user.favourites ?
+          <ul className='col col-xs-12'>
+            {this.props.user.favourites.map((fav, key) =>
+              <li key={key} className='col-xs-12 col-sm-4'>
+                <span />
+                <div>{fav}</div>
+                <span className='close' onClick={() => this.updateFavourites(this.props.user.favourites.filter(i => i !== fav))}>✕</span>
+              </li>)}
+          </ul> : null}
+      </div>
+    </fragment>
 }
 
 const mapStateToProps = (store) => {
