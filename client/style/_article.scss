@@ -20,8 +20,19 @@ article {
 
     .title {
       color: #fff;
-      padding: 32px;
-      font-size: 4em;
+      padding: 16px;
+      font-size: 1.5em;
+
+      @include md-up {
+        padding: 24px;
+        font-size: 2.5em;
+      }
+
+      @include xlg-up {
+        padding: 32px;
+        font-size: 4em;
+      }
+
       font-weight: 300;
       margin: 0;
       word-break: break-word;
@@ -72,7 +83,7 @@ article + article {
     padding: 2px 4px;
     border-radius: 4px;
     color: #fff;
-    background: $green;
+    background: darken($green, 20%);
     font-size: 12px;
     z-index: 1;
   }
