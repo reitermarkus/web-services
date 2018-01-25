@@ -49,6 +49,7 @@
   "dependencies": {
     "asyncro": "^3.0.0",
     "axios": "^0.17.0",
+    "asyncro": "^3.0.0",
     "babel-core": "^6.26.0",
     "babel-plugin-jsx-fragment": "^4.0.3",
     "bcrypt": "^1.0.3",
