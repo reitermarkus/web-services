@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import 'regenerator-runtime/runtime'
-import { map, reduce } from 'p-iteration'
+import { map, reduce } from 'asyncro'
 import PropTypes from 'prop-types'
 import { getUserInfo } from '../jwt'
 
