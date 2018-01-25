@@ -20,7 +20,7 @@ class Recommendation extends Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    if (nextProps.user && nextProps.user.favourites) {
+    if (nextProps.user && nextProps.user.favourites && nextProps.user.favourites.length > 0) {
       const fetchLocations = await reduce(nextProps.user.favourites, async(acc, val) =>
         ({...acc, [val]: await axios(`/api/location/find/${encodeURIComponent(val)}`)}), {})
 
