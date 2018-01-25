@@ -47,6 +47,7 @@
     "not ie < 11"
   ],
   "dependencies": {
+    "asyncro": "^3.0.0",
     "axios": "^0.17.0",
     "babel-core": "^6.26.0",
     "babel-plugin-jsx-fragment": "^4.0.3",
@@ -66,7 +67,6 @@
     "mongoose": "^4.13.0",
     "node-sass": "^4.5.3",
     "numeral": "^2.0.6",
-    "p-iteration": "^1.1.5",
     "path": "^0.12.7",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
