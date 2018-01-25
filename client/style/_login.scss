@@ -2,7 +2,7 @@
 
 .login-form {
   padding: 16px;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(114, 114, 114, 0.75);
   border-radius: 4px;
 
   .title {
@@ -14,6 +14,7 @@
 
   form {
     min-width: 250px;
+    margin-top: 0.8em;
 
     input,
     button {
@@ -22,10 +23,13 @@
 
     input {
       width: 100%;
+      font-size: 14px;
     }
 
     button {
-      margin: 0 auto;
+      margin-top: 1.75em;
+      width: 100%;
+      cursor: pointer;
     }
 
     > *:not(:last-child) {
