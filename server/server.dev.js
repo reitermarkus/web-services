@@ -17,6 +17,7 @@ const path = require('path')
 
 const PORT = process.env.PORT || 3000
 const SSL_PORT = process.env.SSL_PORT || 3043
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/arriven'
 
 const sslOptions = {
   key: fs.readFileSync(path.join(__dirname, 'key.pem')),
@@ -26,7 +27,7 @@ const sslOptions = {
 // Configure .env
 require('dotenv').config()
 
-mongoose.connect('mongodb://localhost/arriven')
+mongoose.connect(MONGODB_URI)
 const db = mongoose.connection
 
 db.once('open', () => {
