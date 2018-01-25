@@ -15,9 +15,9 @@
     "mongodb": "mongod --dbpath ./db",
     "server": "node ./server/server.dev.js",
     "user-export": "mongoimport --db arriven --collection users --jsonArray --pretty --out --file user-demo-data.json",
-    "user-import": "mongoimport --db arriven --collection users --jsonArray --drop --file user-demo-data.json",
+    "user-import": "bash -c \"mongoimport --host \\\"\\${MONGO_HOST:-localhost:27017}\\\" --db \\\"\\${MONGO_DB:-arriven}\\\" --collection users --jsonArray --drop --file user-demo-data.json\"",
     "location-export": "mongoexport --db arriven --collection locations --jsonArray --pretty --out location-demo-data.json",
-    "location-import": "mongoimport --db arriven --collection locations --jsonArray --drop --file location-demo-data.json"
+    "location-import": "bash -c \"mongoimport --host \\\"\\${MONGO_HOST:-localhost:27017}\\\" --db \\\"\\${MONGO_DB:-arriven}\\\" --collection locations --jsonArray --drop --file location-demo-data.json\""
   },
   "repository": {
     "type": "git",
