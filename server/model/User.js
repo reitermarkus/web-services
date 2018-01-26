@@ -8,6 +8,7 @@ const required = 'is required'
 
 const emailValidators = [
   {
+    isAsync: true,
     validator: (v, cb) => {
       user.find({email: v}, (err, user) => cb(user.length === 0))
     }, message: 'email already in use',
