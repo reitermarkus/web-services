@@ -20,6 +20,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transform: translate(0, 0);
+
+  &.owf-pull-left {
+    margin-right: 0.3em;
+  }
+
+  &.owf-pull-right {
+    margin-left: 0.3em;
+  }
 }
 
 /* makes the font 33% larger relative to the icon container */
@@ -85,16 +93,6 @@
 
 .owf-pull-left {
   float: left;
-}
-
-.owf {
-  &.owf-pull-left {
-    margin-right: 0.3em;
-  }
-
-  &.owf-pull-right {
-    margin-left: 0.3em;
-  }
 }
 
 /* owfont uses the Unicode Private Use Area (PUA) to ensure screen
