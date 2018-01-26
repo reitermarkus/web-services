@@ -12,8 +12,13 @@
     text-align: center;
   }
 
+  .logo,
   form {
     min-width: 250px;
+    max-width: 300px;
+  }
+
+  form {
     margin-top: 0.8em;
 
     input,
