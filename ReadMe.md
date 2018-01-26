@@ -19,8 +19,10 @@ yarn install
 
 ## Run Development Server
 
+To start the server and database, run
+
 ```shell
-yarn server
+yarn start
 ```
 
 ## Import Demo Users and Locations
@@ -39,3 +41,6 @@ yarn location-import
 | `admin@admin.com`   | `admin`  | `passwd` |
 | `email@email.com`   | `user1`  | `passwd` |
 | `email2@email2.com` | `user2`  | `passwd` |
+
+**Admins** can access the backend by using the top-right menu, where you can
+edit all stored locations.
