@@ -32,7 +32,7 @@ mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DB}`)
 const db = mongoose.connection
 
 db.once('open', () => {
-  console.log('connected to db: arriven') // eslint-disable-line no-console
+  console.log(`connected to db: ${MONGO_DB}`) // eslint-disable-line no-console
 })
 
 app.use(cors())
