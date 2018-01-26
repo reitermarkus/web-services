@@ -11,6 +11,8 @@ const fs = require('fs')
 const ServerRenderer = require(path.resolve(__dirname, 'serverRenderer.js')).default
 const PORT = process.env.PORT || 3000
 const SSL_PORT = process.env.SSL_PORT || 3043
+const MONGO_HOST = process.env.MONGO_HOST || 'localhost'
+const MONGO_DB = process.env.MONGO_DB || 'arriven'
 
 app.use(express.static(path.resolve(__dirname, '../dist')))
 app.use(ServerRenderer())
@@ -23,11 +25,11 @@ const sslOptions = {
 // Configure .env
 require('dotenv').config()
 
-mongoose.connect('mongodb://localhost/arriven')
+mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DB}`)
 const db = mongoose.connection
 
 db.once('open', () => {
-  console.log('connected to db: arriven') // eslint-disable-line no-console
+  console.log(`connected to db: ${MONGO_DB}`) // eslint-disable-line no-console
 })
 
 app.use(cors())
