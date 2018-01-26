@@ -9,20 +9,33 @@
 
 <br/>
 
-## Install dependencies
+## Install Dependencies
+
+First, install NodeJS (>= 9.3), MongoDB (>= 3.6) and Yarn (>= 1.3), then run
 
 ```shell
 yarn install
 ```
 
-## Run development server
+## Run Development Server
 
 ```shell
 yarn server
 ```
 
-## Build website
+## Import Demo Users and Locations
+
+First, start the development server, then run
 
 ```shell
-yarn run build
+yarn user-import
+yarn location-import
 ```
+
+### Demo Users
+
+| email               | username | password |
+|---------------------|----------|----------|
+| `admin@admin.com`   | `admin`  | `passwd` |
+| `email@email.com`   | `user1`  | `passwd` |
+| `email2@email2.com` | `user2`  | `passwd` |
