@@ -94,8 +94,7 @@ export default class IPLocation extends Component {
       return (
         <fragment>
           <div className='iplocation'>
-            <h2>IP location</h2>
-            <h3>We track every step you&#39;re going ...</h3>
+            <h2>Location</h2>
             You are here: {this.prettyLocationName()} ({this.state.lat}, {this.state.lon})
           </div>
           <OpenStreetMap lat={this.state.lat} lon={this.state.lon}/>
