@@ -51,7 +51,7 @@ class Recommendation extends Component {
             <h2>Recommendations</h2>
             {Object.entries(this.state.recommendations).map(([recKey, recValue], key) => {
               return <div key={key}>
-                <h3>Because you are interessted in &quot;{recKey}&quot;</h3>
+                <h3>Because you are interested in “{recKey}”</h3>
                 <div className='preview-cards col'>
                   {recValue.map((e, i) => {
                     return <a key={i} href={`/detail/${e._id}/${e.name}`} className='col-xs-12 col-sm-12 col-md-6 col-lg-4'>
