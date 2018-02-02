@@ -25,6 +25,12 @@ To start the server and database, run
 yarn start
 ```
 
+and access the service by navigating with your favourite browser to
+
+```shell
+http://localhost:3000
+```
+
 ## Import Demo Users and Locations
 
 First, start the development server, then run
